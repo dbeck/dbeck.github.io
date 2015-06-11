@@ -2,6 +2,9 @@
 layout: post
 title: About
 permalink: /about/
+category: me
+tags:
+ - dbeck
 ---
 
 Thoughts about IT topics I am interested in: C++, Linux, Unix, High performance, Big data, anything
