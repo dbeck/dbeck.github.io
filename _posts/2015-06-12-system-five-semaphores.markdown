@@ -118,15 +118,16 @@ On Linux there is a non standard GNU extension to the System V interface that co
     key_t semkey = ftok("/tmp/whatever", 1);
     int semaphore_id = semget(semkey, 2, 0600 );
     
-    // wait for the counter to be greater than previous_value
+    // initialize prev values
     uint32_t previous_value = 9998;
     short previous_value_set[2] = {
       previous_value%1000,
       previous_value/1000
     };
     
+    // wait for the counter
     while( (previous_value_set[0]+
-            10000*previous_value_set[1]) < previous_value )
+            10000*previous_value_set[1]) <= previous_value )
     {
       
       // timed wait on the least significant value only
