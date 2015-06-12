@@ -71,7 +71,7 @@ Nothing special so far. Let's look at the subscriber code. It opens the counter 
     
     semop(semaphore_id,ops,2);
 
-This is the power of atomic operations. I can wait for the value to be _previous_value+1_ in the first operation. This first operation decreases the value but that doesn't bother me much, because I know I can add it back in the next operation.
+This is the power of atomic operations. I can wait for the value to be _previous_value+1_ in the first operation. This first operation decreases the value but that doesn't bother me much, because I know I can add it back in the next operation, so the subscriber won't visibly change the counter's value but still it could wait for it to reach at least _previous_value+1_.
 
 This is the plus over POSIX semaphores. However there is a not so minor issue here. The maximum value of this counter is 32767. Fortunately this can be solved by the set nature of the semaphore and the atomic operations.
 
