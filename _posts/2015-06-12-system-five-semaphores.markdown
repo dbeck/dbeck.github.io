@@ -33,4 +33,46 @@ An item in the semaphore set can only hold up to 32767 values which is not very 
 
 ### Simple counter
 
+As a demonstration of the atomic operations let's create a simple counter that always increases and others can wait for these to happen. 
+
+The publisher creates the semaphore, resets to zero and increases the value.
+
+    // create the semaphore
+    key_t semkey = ftok("/tmp/whatever", 1);
+    int semaphore_id = semget(semkey, 1, 0600|IPC_CREAT );
+    
+    // reset initial value
+    short zero = 0;
+    semctl(semaphore_id,0,SETALL,&zero);
+    
+    // increase the counter by 1
+    struct sembuf ops[1];
+    ops[0].sem_num  = 0;
+    ops[0].sem_op   = 1;
+    ops[0].sem_flg  = 0;
+    semop(semaphore_id,ops,1);
+    
+Nothing special so far. Let's look at the subscriber code. It opens the counter and wait for its increase.
+
+    // open semaphore
+    key_t semkey = ftok("/tmp/whatever", 1);
+    int semaphore_id = semget(semkey, 1, 0600 );
+    
+    // wait for the counter to be greater than previous_value
+    short previous_value = 0;
+    
+    struct sembuf ops[2];
+    ops[0].sem_num  = 0;
+    ops[0].sem_op   = -1*(previous_value+1);
+    ops[0].sem_flg  = 0;
+    ops[1].sem_num  = 0;
+    ops[1].sem_op   = (previous_value+1);
+    ops[1].sem_flg  = 0;
+    
+    semop(semaphore_id,ops,2);
+
+This is the power of atomic operations. I can wait for the value to be _previousvalue+1_ in the first operation. This first operation decreases the value but that doesn't bother me much, because I know I can add it back in the next operation.
+
+This is the plus over POSIX semaphores. However there is a not so minor issue here. The maximum value of this counter is 32767. Fortunately this can be solved by the set nature of the semaphore and the atomic operations.
+
 ### Counter with overflow
