@@ -9,8 +9,9 @@ published: true
 ---
 
 
-### About me
+
+### ... me
 I am a C++ and Unix programmer. During my daytime job I spend time with other topics too, but I beleive this is where I am best. I work on [VirtDB](http://www.virtdb.com)
 
-### About this blog
+### ... this blog
 This is a notebook or information store about topics I think worst sharing.
