@@ -144,7 +144,7 @@ On Linux there is a non standard GNU extension to the System V interface that co
       struct timespec ts = { 0, 20*1000000 };
       semtimedop(semaphore_id(),ops,2,&ts);
     
-      ::semctl(semaphore_id(),0,GETALL,previous_value_set);
+      semctl(semaphore_id(),0,GETALL,previous_value_set);
     }
 
 It is fairly easy to extend this counter to larger values by adding more values into the semaphore set and do more semaphore operations in the sembuf array.
