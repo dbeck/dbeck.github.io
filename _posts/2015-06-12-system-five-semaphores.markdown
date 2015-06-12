@@ -11,6 +11,7 @@ keywords: "C++, Linux, Unix, Semaphores"
 
 
 
+
 ### Interesting beast
 
 System V semaphores are here for decades. Few days ago when I was looking for options for inter process communication I bumped into it again. Fortunately enough I picked up [Stevens' Unix Network Programming Vol #2](http://www.kohala.com/start/unpv22e/unpv22e.html) from the bookshelf rather then relying on a search engine. Stevens does a great job at explaining what they are and what is their API and this explanation is badly needed.
@@ -135,6 +136,9 @@ On Linux there is a non standard GNU extension to the System V interface that co
     {
       
       // timed wait on the least significant value only
+      // because the semaphore operation is atomic (="all or nothing")
+      // we cannot say that any values in the semaphore set to be greater
+      // than before
       struct sembuf ops[2];
       ops[0].sem_num  = 0;
       ops[0].sem_op   = -1*(previous_value_set[0]+1);
