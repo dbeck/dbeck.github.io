@@ -107,7 +107,7 @@ The trick is in the publisher part. I will use the set's values as a base 10.000
       semop(semaphore_id,ops,1);
     }
 
-I presume I have one single publisher and noone else changes the value so there is no race condition between the overflow and non-overflow part. The reason this works is that the semaphore operation is atomic. The _IPC_NOWAIT_ flag tells the system to reduce the least significant counter if theres is an overflow over 10000 if possible. Otherwise it returns an error which leads to the _no overflow case_. Shiny.
+I presume I have one single publisher and noone else changes the value so there is no race condition between the overflow and non-overflow part. The reason this works is that the semaphore operation is atomic. The _IPC_NOWAIT_ flag tells the system to reduce the least significant counter if theres is an overflow over 10000 if possible. Otherwise it returns an error which leads to the _no_overflow case_. Shiny.
 
 The subscriber part is not as shiny as the publisher. The problem with this solution is that the subscriber neeeds to know what is the value to wait for. For example if the subscriber thinks the counter is 9998 and waits for it to be 9999, but the publisher is lot faster and the value became 10002 at the meantime then the subsciber will wait for long.
 
