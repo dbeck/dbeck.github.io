@@ -1,12 +1,10 @@
 ---
-published: false
+published: true
 layout: post
 category: programming
 tags: 
   - semaphore
 ---
-
-## System V semaphores
 
 ### Why
 
