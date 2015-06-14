@@ -8,10 +8,6 @@ desc: System V Semaphores
 keywords: "C++, Linux, Unix, Semaphores"
 ---
 
-
-
-
-
 ### Interesting beast
 
 System V semaphores are here for decades. Few days ago when I was looking for options for inter process communication I bumped into it again. Fortunately enough I picked up [Stevens' Unix Network Programming Vol #2](http://www.kohala.com/start/unpv22e/unpv22e.html) from the bookshelf rather then relying on a search engine. Stevens does a great job at explaining what they are and what is their API and this explanation is badly needed.
