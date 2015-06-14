@@ -1,5 +1,11 @@
 ---
 published: true
+layout: post
+category: programming
+tags: 
+  - semaphore
+desc: System V Semaphores
+keywords: "C++, Linux, Unix, Semaphores"
 ---
 
 ### A New Post
