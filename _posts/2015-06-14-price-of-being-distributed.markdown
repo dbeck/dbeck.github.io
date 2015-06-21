@@ -8,12 +8,13 @@ desc: Price of Being Distributed
 keywords: "C++, Linux, Unix, Queue, Kafka, BigData, Hadoop, Apache, SlowData, Performance"
 ---
 
+
 ### BigData
 I am watching how new and new BigData projects came from nowhere and slowly changing the whole computing landscape. I see a great value in this and I see great ideas coming from these projects. One of my personal favourite is [Kafka](http://kafka.apache.org). I like its simplicity and the way they found a balance between having a good abstraction over queues and still being fast and scalable. 
 The other good outcome of these projects is distributed computing became easy. Now everyone can imagine a new kind of scalable service by selecting a few projects and putting these pieces together. This is also great. Sometimes however I feel there may be too many people designing new distributed systems.
-### Lambda architecture
-Let's pick Lambda architecture as an example. The idea is great. Let's use a scalable queue to store high volume incoming data. Then use a distributed processor to post process the data and use a scalable distributed storage to sink the data into a data lake. We have ticking, streaming data and historical data at the same time. Isn't that great? I think it is.
-I notice all components are scalable, fault-tolerant and distributed here. What can go wrong then? Nothing in fact. I still question how good this is.
+### Streaming + Batch architecture
+More and more people feel the high latency of Hadoop + MapReduce family too limiting and new designs are cropping up. A typical way of thought is to use a scalable queue to store high volume incoming data. Then use a distributed stream processor to post process the data and use a scalable distributed storage to sink the data into a data lake in parallel to the stream processing. We have ticking, streaming data and historical data at the same time. Typical building blocks are Kafka / RabitMQ, Storm, Hadoop/HDFS, Redis, Cassandra, Hive, etc...
+I notice all components are scalable, fault-tolerant and distributed here. What can go wrong then? Nothing in fact.
 ### Distributed queue performance
 I am very much interested in the performance of these systems and my approach was to see the performance of each stage. When I looked into the distributed queue performance I stopped looking further. Few people published comparisons between distributed and persistent queues and the results were shocking to me. [Here is one](http://www.warski.org/blog/2014/07/evaluating-persistent-replicated-message-queues/) for example. I found most measurements do 1-10k messages per second for a distributed queue on a single computer and they start scaling by adding new computers. I believe these are great results and I am sure there are use-cases when these are fine.
 ### Local persistent queue performance
