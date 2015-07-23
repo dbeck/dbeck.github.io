@@ -7,7 +7,7 @@ tags:
   - distributed
 desc: Dream of a nice distributed system in Elixir
 keywords: "Erlang, Elixir, Distributed, Portable Native Executable"
-twcardtype: summary 
+twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/elixirpexe.png
 ---
 
