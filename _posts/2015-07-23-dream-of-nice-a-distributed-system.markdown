@@ -8,7 +8,7 @@ tags:
 desc: Dream of a nice distributed system in Elixir
 keywords: "Erlang, Elixir, Distributed, Portable Native Executable"
 twcardtype: summary 
-twimage: http://x.y/z
+twimage: http://dbeck.github.io/images/elixirpexe.png
 ---
 
 ### Ruby
@@ -34,4 +34,5 @@ Putting these altogether. Let's suppose I want to write a distributed system tha
 
 The distributed system I am designing should process large amount of data in a cluster while the processing steps should be dynamic. For example the user may want to add a processing step downloaded from our web store. This should be scalable, load balanced, cloud ready, fast and secure. With this tools in place it is a lot easier. Oh yes, I forgot to mention that the Portable Native Executable is heavliy guarded, which would save me a lot of headache on the security front.
 
+![Elixir and Portable Native Executables](/images/elixirpexe.png "Elixir with Portable Native Executables")
 
