@@ -27,8 +27,11 @@ I did try Erlang few years ago because I read the nice features of the Erlang VM
 ### Portable Native Executable
 So now I am deeply in love with Elixir but as with other relations I am affraid to jump in full heartedly because of previous frustrations. My main fear is that I am going to invest a lot and at some point it is going to be slow. Or too slow for the actual task I want to use it for. Then I will have to find workarounds to achieve an acceptable level of performance.
 
+Few weeks ago I met the Portable Native Executable solution that is used by Google Chrome browser. This allows someone to write code in C++ which will be compiled to an intermediate format. This intermediate format is still platform independent. This format can be distributed to other machines and they can run it by first translating to their architecture and then pasing this into a secured execution environment. The translation can be fast or optimized. According to the Google publications the code after the optimized translation is around 5-10% slower than if the same code would have been natively compiled from C++. This is fine for me.
 
+### Idea
+Putting these altogether. Let's suppose I want to write a distributed system that builds on runtime code upgrades feature on the Erlang VM and also want to distribute processing tasks across Erlang nodes I can still write these processig tasks in C++ and send them over the network. Suppose I have a mixed system that has ARM, MIPS and X86/64 machines I can still do that it with Portable Native Executables.
 
-
+The distributed system I am designing should process large amount of data in a cluster while the processing steps should be dynamic. For example the user may want to add a processing step downloaded from our web store. This should be scalable, load balanced, cloud ready, fast and secure. With this tools in place it is a lot easier. Oh yes, I forgot to mention that the Portable Native Executable is heavliy guarded, which would save me a lot of headache on the security front.
 
 
