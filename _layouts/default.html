@@ -49,13 +49,11 @@
       woopra.track();
     </script>
 
-    <script>
     {% if page.woopra %}
+    <script>
       woopra.track( "{{ page.woopra }}", { displayed: true } );
-    {% else %}
-      woopra.track( "untracked", { displayed: true } );
-    {% endif %}
     </script>
+    {% endif %}
     <!-- End of Woopra Code -->
 
     <!--[if lt IE 9]>
