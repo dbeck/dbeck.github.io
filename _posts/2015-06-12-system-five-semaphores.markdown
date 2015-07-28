@@ -6,6 +6,7 @@ tags:
   - semaphore
 desc: System V Semaphores
 keywords: "C++, Linux, Unix, Semaphores"
+woopra: semaphores
 ---
 
 ### Interesting beast

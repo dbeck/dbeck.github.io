@@ -9,6 +9,7 @@ desc: Dream of a nice distributed system in Elixir
 keywords: "Erlang, Elixir, Distributed, Portable Native Client"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/elixirpexe.png
+woopra: elixirpexe
 ---
 
 A bit of my history around Ruby and C++, and my future could be Elixir?

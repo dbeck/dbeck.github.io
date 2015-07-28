@@ -6,6 +6,7 @@ tags:
   - slowdata
 desc: Price of Being Distributed
 keywords: "C++, Linux, Unix, Queue, Kafka, BigData, Hadoop, Apache, SlowData, Performance"
+woopra: distribprice
 ---
 
 
