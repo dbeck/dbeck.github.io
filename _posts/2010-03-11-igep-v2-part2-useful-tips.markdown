@@ -5,10 +5,10 @@ category: IoT
 tags: 
   - IoT
   - IGEP
-desc: A few usefule tips for using the IGEP-V2 device
-keywords: "IGEPv2, IoT, ARM"
+desc: A few useful tips for using the IGEP-V2 device
+keywords: "IGEPv2, IoT, ARM, Ubuntu, Poky, Linux"
 twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 
+twimage: http://dbeck.github.io/images/977/P1010891-large.JPG 
 woopra: igep2
 ---
 
