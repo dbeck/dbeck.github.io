@@ -8,7 +8,7 @@ tags:
 desc: Getting started with my SmartQ V7
 keywords: "SmartQ, IoT, ARM"
 twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 
+twimage: http://dbeck.github.io/images/1157/P1020036-large.JPG
 woopra: smartq
 ---
 

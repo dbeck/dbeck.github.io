@@ -9,7 +9,7 @@ tags:
 desc: Hacing Gentoo onto my HawkBoard
 keywords: "Hawkboard, IoT, ARM, Linux, Gentoo"
 twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 
+twimage: http://dbeck.github.io/images/1091/P1020018-large.JPG
 woopra: hawkboard3
 ---
 

@@ -8,7 +8,7 @@ tags:
 desc: Getting started using my HawkBoard
 keywords: "Hawkboard, IoT, ARM"
 twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 
+twimage: http://dbeck.github.io/images/1097/P1020019-large.JPG
 woopra: hawkboard1
 ---
 
