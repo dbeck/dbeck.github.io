@@ -53,9 +53,9 @@ What is very interesting to see how much my mentality has changed with respect t
 When I think about IoT devices I include the ones I mentioned and more in my picture. I didn't mention my smart TV, mobile phone, tablets and all the _things_ I have. I don't yet have sensors and controllers, intelligent fridge, central heating and such things. As it stands it is not likely that I'll invest in those because I am a consumer. I don't want to spend time configuring these and hacking them in any ways.
 
 ### The definition of the things in the IoT
-When I first heard this IoT term it didn't understand what is this about. The term doesn't describe what is it about. The _Internet_ part suggests that it is about connecting _things_. Which may be OK, but the story doesn't stop there. We actually want _things_ to understand each other. I also want to control _things_.
+When I first heard this IoT term I didn't understand what is this about. The term doesn't describe it very well. The _Internet_ part suggests that it is about connecting _things_. Which may be OK, but the story doesn't stop there. We actually want _things_ to understand each other. I also want to control _things_. I may want information from these _things_. 
 
-Almost all my friends has _things_ in their homes. A common one is Raspberry PI. Not so many articles mention this device in the IoT literature even though this is a smart one. Many people automate the process of downloading films from the Internet. Fetch subtitles for them. Organize TV series into folders. Make sure no one to miss any episode.
+Almost all my friends has _things_ in their homes. A common one is Raspberry PI. Not so many articles mention this device in the IoT literature even though this is a smart one. Many people automate the process of downloading films from the Internet. Fetch subtitles for them. Organize TV series into folders. Make sure no one to miss an episode.
 
 Is Raspberry PI a _thing_ in IoT? I would argue it is. It is intelligent and connected. It does things for us. The only problem with that is a Raspberry PI doesn't need vendors to push down so called _standards_ on our throat. Neither it needs any startups or big company's assistance to operate. Thus it is pretty much ignored.
 
@@ -72,7 +72,7 @@ The (not so big) problem is that another customer may have a different type of s
 I used Android as a cross platform example. I don't really think my friends will install Android on their PIs. 
 
 ### Google Portable Native Client to the rescue
-Very recently I bumped into Google Native Client which allows users to create applications to be run on different architectures including MIPS, ARM, X86_32 and 64. These happen to cover most tablets, phones, PCs, NAS', Media Boxes and intelligent thingies. 
+Very recently I bumped into Google Native Client which allows users to create applications to be run on different architectures including MIPS, ARM, X86-32 and 64. These happen to cover most tablets, phones, PCs, NAS', Media Boxes and intelligent thingies. 
 
 To make this happen someone needs to setup this app market and create the framework to distribute the apps. Not rocket science.
 
