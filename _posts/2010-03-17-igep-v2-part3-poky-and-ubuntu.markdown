@@ -9,7 +9,7 @@ desc: Third part of my Igep V2 advanture on Poky and Ubuntu land
 keywords: "IGEPv2, IoT, ARM, Poky, Ubuntu, Linux"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 
-woopra: igep2
+woopra: igep3
 ---
 
 In this article I collect some insights about the factory installed Poky distribution and my experiences installing Ubuntu. Poky has apparent limitations for being used as a desktop Linux. Ubuntu is much closer, but it takes quite some efforts to create a bootable Micro SD card and Install Ubuntu on that. Here I describe how I created a bootable Micro SD card with Ubuntu and how I tried to make the factory supplied Poky install more comfortable.
