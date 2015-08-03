@@ -5,6 +5,7 @@ category: IoT
 tags: 
   - IoT
   - IGEP
+  - Gentoo
 desc: Fourth part of my Igep V2 advanture on Gentoo
 keywords: "IGEPv2, IoT, ARM, Gentoo, Linux"
 twcardtype: summary_large_image 

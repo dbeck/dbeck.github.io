@@ -6,7 +6,7 @@ tags:
   - IoT
   - HawkBoard
   - Gentoo
-desc: Hacing Gentoo onto my HawkBoard
+desc: Hacking Gentoo onto my HawkBoard
 keywords: "Hawkboard, IoT, ARM, Linux, Gentoo"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/1091/P1020018-large.JPG
