@@ -12,11 +12,11 @@ twimage: http://dbeck.github.io/images/appmkt.jpg
 woopra: iotecosystem
 ---
 
-Every time I hear that, this and that company came up with a new IoT standard I feel a shiver in my back. There are variations when single or multiple ones hide themselves behind a so called non-profit organization. There seems to be a whole lot of different companies tring to take advantage which has a few aspects I don't like.
+Every time I hear that, this and that company came up with a new IoT standard I feel a shiver in my back. There are variations when single or multiple ones hide themselves behind a so called non-profit organization. There seems to be a whole lot of different companies trying to take advantage which has a few aspects I don't like.
 
 1. manufacturers want to sell new devices even if most houses are already packed with intelligent devices
 2. telecom companies are trying to bind users to their services
-3. consultancy firms want to sell integration
+3. consultancy firms want to sell integration but at the same time trying to influence standards to fit their business needs
 4. startups cover a few selected segments of making IoT a system because of limited resources
 
 I feel that the participants in this game either reluctant or not able to see the IoT landscape as a convergent system. 
@@ -31,6 +31,7 @@ Let's take a look around a typical networked home. Here is a list of devices I e
 * Raspberry PI or similar
 * Tablet
 * Smart phones
+* PCs and Laptops
 
 These are fairly strong computers that could be used for controlling dumb sensors. Some of these may have means to extend their functionality. The problem is that all are different.
 
@@ -57,14 +58,14 @@ There are few things missing, but I believe this is not rocket science:
 
 * the code that manages these native codes (download, start, stop, schecdule, etc...)
 * definition of how these apps interact with the environment
-* management of security
+* management of security settings
 * app market
 
 ### Other options
 Android apps already solved this for the mobile phones and tablets. There is also a huge variety of devices, may be not as big as for IoT. I still don't think Android is the way to go because:
 
 * it is too heavy for many devices
-* the app runner framework may need coexist with the original software supplied by the intelligent device
+* the app runner framework may need to coexist with the original software supplied by the intelligent device
 
 ### More business opportunities
 There is obviously a business opportunity for the one who makes the app market and also for the app contributors. I believe this model would also allow other (or the same) players to create online services to:
