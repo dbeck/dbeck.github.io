@@ -60,7 +60,7 @@ Almost all my friends has _things_ in their homes. A common one is Raspberry PI.
 Is Raspberry PI a _thing_ in IoT? I would argue it is. It is intelligent and connected. It does things for us. The only problem with that is a Raspberry PI doesn't need vendors to push down so called _standards_ on our throat. Neither it needs any startups or big company's assistance to operate. Thus it is pretty much ignored.
 
 ### Ecosystem
-I believe the biggest issue with IoT is the ecosystem. Companies try to carve as huge chunks as possible from the market without actually checking what a customer would want. History repeats itself. I remember a big company had a popular OS and office suite that did all measures to invent standards and technologies to tie people to their ecosystem. (Then Linux and the Open Source movement pretty much killed this.)
+I believe the biggest issue with IoT is the ecosystem. Companies try to carve as huge chunks as possible from the market without actually checking what a customer would want. History repeats itself. I remember a big company had a popular OS and office suite that did all measures to invent standards and technologies to tie/bind people to their ecosystem. (Then Linux and the Open Source movement pretty much killed this.)
 
 There are good examples too. Google's and Apple's app stores are good ones. I imagine an IoT app store where people can share pieces of codes and download them on their _things_. This would encourage standalone developers to participate and share their apps.
 
