@@ -10,8 +10,8 @@ tags:
   - IGEP
 desc: The IOT system I want
 keywords: "IOT, Ecosystem, EndUser"
-twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/IoT.jpg
+twcardtype: summary_large_image
+twimage: http://dbeck.github.io/images/iot2.jpg
 woopra: iotiwant
 ---
 
