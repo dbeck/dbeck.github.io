@@ -56,5 +56,7 @@ The default message size limit is 64MB for protocol buffers. This can be changed
 
 ### 5. Protocol Buffers Enums
 
-One often advertised feature of protobuf is that it is easy to extend by new messages. We created a wrapper message with an enum to tell what kind of optional message follows. This allowed us to occasionally add new message types into the outer wrapper. We realized afterwards that different language bindings have different tolerance for this approach. Hint: C++ and Javascript differs significantly.
+One often advertised feature of protobuf is that it is easy to extend by new messages. We created a wrapper message with an enum to tell what kind of optional message follows. This allowed us to occasionally add new message types into the outer wrapper. We realized afterwards that different language bindings have different tolerance for this approach. 
+
+Hint: C++ and Javascript differs significantly.
 
