@@ -26,7 +26,7 @@ This topic is about a few of our experiences that we earnt the hard way.
 
 ### 1. ZeroMQ Request Reply
 
-If I were creating the ZeroMQ docs I would start with "Don't use REQ-REP because there is very little chance that it does what you need". What I found instead is that it starts describing REQ-REP as a showcase of how easy to use ZeroMQ.
+If I were creating the ZeroMQ docs I would start with "Don't use REQ-REP because there is very little chance that it does what you need". What I found instead is that it starts describing REQ-REP as a showcase of how easy it is to use ZeroMQ.
 
 The issue with REQ-REP is that it allows one request to be served in parallel and due to the fact that it requires to send a reply for every request it is very fragile. 
 
