@@ -38,7 +38,7 @@ Advice: use REQ-ROUTER sockets all the time because REP sockets are pretty usele
 
 When I read the docs I was happy to see that ZeroMQ has many language bindings so this is pretty portable. In other places I read that it is secure thanks to the developments introduced in 4.x and upwards. What people forgot to mention is that these two don't happen at the same time.
 
-Even if there is a security model in 4.x, it is not available in many language bindings that I was interested in. These are minor languages that very few people use like [Java](http://zeromq.org/bindings:java) that has no support for 4.x. Other less common choices like Erlang, Elixir are also unavailable if you want security.
+Even if there is a security model in 4.x, it is not available in many language bindings that I was interested in. These are niche languages that very few people use like [Java](http://zeromq.org/bindings:java) that has no support for 4.x. Other less common choices like Erlang, Elixir are also unavailable if you want security.
 
 ### 3. Protocol Buffers Performance
 
