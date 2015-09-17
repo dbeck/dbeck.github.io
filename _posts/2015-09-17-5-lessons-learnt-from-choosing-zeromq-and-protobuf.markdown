@@ -9,7 +9,7 @@ desc: 5 lessons learnt from choosing ZeroMQ + Protocol Buffers
 keywords: "Distributed, ZeroMQ, Protocol Buffers, Programming, Performance"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6937.JPG
-woopra: iotecosystem
+woopra: zeromqprotobuf
 ---
 
 We implemented a new distributed system from scratch. One of the goals was to make this extendible by adding new components easily in different programming languages. I was looking for a solution to pass serialized data between them without worrying too much about performance and cross language compatibility. This practically ruled out a few popular options at square one, like HTTP, Json, XML, Web Services. Fortunately there were quite some others:
