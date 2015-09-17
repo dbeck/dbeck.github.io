@@ -22,7 +22,7 @@ Originally these options didn't look like very different. All have efficient ser
 
 I liked ZeroMQ + Protobuf option better than the others because it sounded like well optimized transport with Publish-Subscribe built in.
 
-This topis is about a few of our experiences that we earnt the hard way.
+This topic is about a few of our experiences that we earnt the hard way.
 
 ### 1. ZeroMQ Request Reply
 
@@ -42,11 +42,11 @@ Even if there is a security model in 4.x, it is not available in many language b
 
 ### 3. Protocol Buffers Performance
 
-I trusted protobuf quite a lot at the beginning of the project even to the point when we ran into a performance issue I was rather looking at very unlikely places than protobuf. When I analyzed the issue further it slowly became clear that protobuf has a few weaknesses. Memory allocation is the biggest. In our use-case we passed values in arrays. 
+I trusted protobuf quite a lot at the beginning of the project even to the point when we ran into a performance issue I was rather looking at very unlikely places than protobuf. When I analyzed the issue further it slowly became clear that protobuf has a few weaknesses. Memory allocation is the biggest. 
 
-It turned out that passing string arrays is hopelessly slow and passing numeric types in arrays is about twice as slow as it could be.
+In our case we passed values in arrays. It turned out that passing string arrays is hopelessly slow and passing numeric types in arrays is about twice as slow as it could be. The reason is memory allocation. Protobuf allocates a string object for each string item it receives. A typical message in our system has 25.000 strings or numerics in the array we pass. 
 
-In our case I chose to write a deserializer for this one message that reuses the tag bytes as zero terminator between the elements in the string array and for the numeric types I preallocated a large enough buffer in one step to place my items into that. Ther result is 20x faster for strings and twice as fast for numeric types.
+I chose to write a deserializer for this one message type that reuses the tag bytes as zero terminator between the elements in the string array. For the numeric types I preallocated a large enough buffer in one step to place my items into that. Ther result is 20x faster for strings and twice as fast for numeric types.
 
 Advice: look at [flatbuffers](https://google.github.io/flatbuffers/md__benchmarks.html)
 
