@@ -52,7 +52,7 @@ Advice: look at [flatbuffers](https://google.github.io/flatbuffers/md__benchmark
 
 ### 4. Protocol Buffers Size Constraints
 
-The default message size limit is 64MB for protocol buffers. This can be changed. In our case at every different language that we want to support. Not very convenient.
+The default message size limit is 64MB for protocol buffers. This can be changed. In our case, for every single programming language that we want to support. Not very convenient.
 
 ### 5. Protocol Buffers Enums
 
