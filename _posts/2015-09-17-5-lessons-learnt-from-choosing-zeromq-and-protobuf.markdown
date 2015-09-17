@@ -30,7 +30,7 @@ If I were creating the ZeroMQ docs I would start with "Don't use REQ-REP because
 
 The issue with REQ-REP is that it allows one request to be served in parallel and due to the fact that it requires to send a reply for every request it is very fragile. 
 
-Example: I have a third party service that I want to wrap in a ZeroMQ interface. I am receiving ZeroMQ requests that I translate into a native request to this third party service. If this external service becomes slow or stops responding than it becomes very unconvenient to handle this on the ZeroMQ side.
+Example: I have a third party service that I want to wrap in a ZeroMQ interface. I am receiving ZeroMQ requests that I translate into a native request to this third party service. If this external service becomes slow or stops responding than it becomes very inconvenient to handle this on the ZeroMQ side.
 
 Advice: use REQ-ROUTER sockets all the time because REP sockets are pretty useless for any real world application.
 
