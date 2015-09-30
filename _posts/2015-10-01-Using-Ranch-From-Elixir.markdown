@@ -3,10 +3,10 @@ published: true
 layout: post
 category: Elixir
 tags: 
-  - Elixir
+  - elixir
   - ranch
   - TCP
-  - Erlang
+  - erlang
 desc: Using Ranch From Elixir
 keywords: "Elixir, Ranch, Erlang, TCP"
 twcardtype: summary_large_image
