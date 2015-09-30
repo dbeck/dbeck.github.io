@@ -4,8 +4,9 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - HawkBoard
-  - Gentoo
+  - hawkboard
+  - gentoo
+  - linux
 desc: Hacking Gentoo onto my HawkBoard
 keywords: "Hawkboard, IoT, ARM, Linux, Gentoo"
 twcardtype: summary_large_image 

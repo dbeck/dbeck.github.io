@@ -4,7 +4,7 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - IGEP
+  - igep
 desc: A few useful tips for using the IGEP-V2 device
 keywords: "IGEPv2, IoT, ARM, Ubuntu, Poky, Linux"
 twcardtype: summary_large_image 

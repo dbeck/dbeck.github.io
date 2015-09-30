@@ -4,8 +4,9 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - HawkBoard
-  - Gentoo
+  - hawkboard
+  - gentoo
+  - linux
 desc: My HawkBoard starts using a SATA disk
 keywords: "Hawkboard, IoT, ARM, SATA, Disk, Gentoo, Linux"
 twcardtype: summary_large_image 

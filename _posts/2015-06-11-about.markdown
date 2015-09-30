@@ -5,6 +5,7 @@ permalink: /about/
 category: me
 tags: 
   - dbeck
+  - about
 published: true
 woopra: about
 ---

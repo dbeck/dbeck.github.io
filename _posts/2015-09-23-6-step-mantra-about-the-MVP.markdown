@@ -3,8 +3,9 @@ published: true
 layout: post
 category: Startup
 tags: 
-  - Startup
+  - startup
   - MVP
+  - minimum-viable-product
 desc: 6 step mantra about the MVP for software developers
 keywords: "Startup, opinion, MVP"
 twcardtype: summary_large_image

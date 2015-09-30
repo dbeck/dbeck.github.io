@@ -4,7 +4,7 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - Ecosystem
+  - ecosystem
 desc: Building up an IoT community and ecosystem
 keywords: "IOT, Ecosystem, EndUser, Community"
 twcardtype: summary_large_image

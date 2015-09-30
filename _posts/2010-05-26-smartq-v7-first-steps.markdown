@@ -4,7 +4,7 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - SmartQ
+  - smartq
 desc: Getting started with my SmartQ V7
 keywords: "SmartQ, IoT, ARM"
 twcardtype: summary_large_image 

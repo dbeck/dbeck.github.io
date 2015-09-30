@@ -4,10 +4,10 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - Ecosystem
-  - SheevaPlug
-  - HawkBoard
-  - IGEP
+  - ecosystem
+  - sheevaplug
+  - hawkboard
+  - igep
 desc: The IOT system I want
 keywords: "IOT, Ecosystem, EndUser"
 twcardtype: summary_large_image

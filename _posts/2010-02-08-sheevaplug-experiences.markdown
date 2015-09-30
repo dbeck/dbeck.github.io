@@ -4,7 +4,7 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - SheevaPlug
+  - sheevaplug
 desc: How I started using SheevaPlug as a desktop
 keywords: "SheevaPlug, IoT, ARM"
 twcardtype: summary_large_image 

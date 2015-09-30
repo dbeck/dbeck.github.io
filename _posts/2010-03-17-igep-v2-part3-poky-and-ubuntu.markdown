@@ -4,7 +4,7 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - IGEP
+  - igep
 desc: Third part of my Igep V2 advanture on Poky and Ubuntu land
 keywords: "IGEPv2, IoT, ARM, Poky, Ubuntu, Linux"
 twcardtype: summary_large_image 

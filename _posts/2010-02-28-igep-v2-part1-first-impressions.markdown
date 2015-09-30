@@ -4,8 +4,8 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - SheevaPlug
-  - IGEP
+  - sheevaplug
+  - igep
 desc: First impressions with the IGEP-V2 platform
 keywords: "IGEPv2, IoT, ARM"
 twcardtype: summary_large_image 

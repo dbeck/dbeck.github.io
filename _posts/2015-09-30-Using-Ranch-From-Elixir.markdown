@@ -74,7 +74,6 @@ First I created my application with mix like this:
 
 Then I added the ranch dependency to the mix.exs:
 
-``` ```
 
 Finally I started aligning the ranch's hello world example with the Elixir syntax. I ended up with the following files:
 

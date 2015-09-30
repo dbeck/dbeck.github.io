@@ -4,7 +4,7 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - HawkBoard
+  - hawkboard
 desc: Getting started using my HawkBoard
 keywords: "Hawkboard, IoT, ARM"
 twcardtype: summary_large_image 

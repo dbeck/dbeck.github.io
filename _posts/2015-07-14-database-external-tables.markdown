@@ -5,6 +5,9 @@ category: database
 tags: 
   - database
   - integration
+  - impala
+  - greenplum
+  - postgres
 desc: External tables in database systems
 keywords: "PostgreSQL, GreenPlum, Cloudera, Impala, Drizzle"
 woopra: exttables
