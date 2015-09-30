@@ -22,7 +22,7 @@ This is the result of my experiment. A TCP echo server in Elixir that uses the E
 
 I used ```mix new testme2 --sup --module TestMe2``` to generate the project.
 
-Then I added ranch into the dependencies and to the OTP applications. The resulting mix.exs looks like this:
+Then I added ranch into the dependencies and to the OTP applications. The resulting ```mix.exs``` looks like this:
 
 ``` elixir
 defmodule TestMe2.Mixfile do
@@ -50,6 +50,65 @@ defmodule TestMe2.Mixfile do
 end
 
 ```
+
+Then I integrated my application into OTP in ```lib/testme2.ex```:
+
+``` elixir
+defmodule TestMe2 do
+  use Application
+
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+    
+    children = [
+      worker(TestMe2.Worker, [])
+    ]
+
+    opts = [strategy: :one_for_one, name: TestMe2.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+end
+```
+
+Added a Worker like this in ```lib/testme2_worker.ex```:
+
+``` elixir
+defmodule TestMe2.Worker do
+  def start_link do
+    opts = [port: 8000]
+    {:ok, pid} = :ranch.start_listener(:Testme2, 100, :ranch_tcp, opts, TestMe2.Handler, [])
+    {:ok, pid}
+  end
+end
+```
+
+Finally we need a handler to actually talk TCP in ```lib/testme2_handler.ex```:
+
+``` elixir
+defmodule TestMe2.Handler do
+
+  def start_link(ref, socket, transport, opts) do
+    pid = spawn_link(__MODULE__, :init, [ref, socket, transport, opts])
+    {:ok, pid}
+  end
+         
+  def init(ref, socket, transport, _Opts = []) do
+    :ok = :ranch.accept_ack(ref)
+    loop(socket, transport)
+  end
+
+  def loop(socket, transport) do
+    case transport.recv(socket, 0, 5000) do
+      {:ok, data} ->
+        transport.send(socket, data)
+        loop(socket, transport)
+      _ ->
+        :ok = transport.close(socket)
+    end
+  end
+end
+```
+
 
 
 This post is about my first steps in Elixir land. I have no Erlang or Elixir experience, though I have read Dave Thomas' Programming in Elixir. I have looked at Erlang for long and always wanted to use the BEAM Virtual Machine for a real project. 
