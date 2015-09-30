@@ -16,7 +16,7 @@ woopra: usingranchex
 
 This post goes reverse order. Results and conclusion first. Background and motivation last. I keep my random ramblings to the end so you can save yourself earlier.
 
-### TestMe2 
+### TestMe2 - the result
 
 This is the result of my experiment. A TCP echo server in Elixir that uses the Erlang [ranch library](https://github.com/ninenines/ranch).
 
@@ -76,8 +76,7 @@ Added a Worker like this in ```lib/testme2_worker.ex```:
 defmodule TestMe2.Worker do
   def start_link do
     opts = [port: 8000]
-    {:ok, pid} = :ranch.start_listener(:Testme2, 100, :ranch_tcp, opts, TestMe2.Handler, [])
-    {:ok, pid}
+    {:ok, _} = :ranch.start_listener(:Testme2, 100, :ranch_tcp, opts, TestMe2.Handler, [])
   end
 end
 ```
@@ -108,6 +107,50 @@ defmodule TestMe2.Handler do
   end
 end
 ```
+
+That's about it. If you do the same you should have a fast TCP echo server.
+
+### The conclusion
+
+The conclusion is simple: if you are new to both Elixir and Erlang, it is not a good idea to start by integrating an Erlang lib into Elixir. I made a very silly mistake and the result compiled without a warning. It was running without any warnings. It was listening to the port I specified. Only that my telnet connection was closed immediately after it had beed connected. No debug log, nothing.
+
+Even though I like Elixir a lot and respect Erlang VM a whole other lot, it was very annoying. Making no mistakes, let me emphasize again: I made the mistake. It was just bad that it didn't bark even a bit at me.
+
+### Testme1 - the bad code
+
+``` elixir
+defmodule Testme1.Handler do
+
+  def start_link(Ref, Socket, Transport, Opts) do
+    Pid = spawn_link(__MODULE__, :init, [Ref, Socket, Transport, Opts])
+    {:ok, Pid}
+  end
+         
+  def init(Ref, Socket, Transport, _Opts = []) do
+    :ok = :ranch.accept_ack(Ref)
+    loop(Socket, Transport)
+  end
+
+  def loop(Socket, Transport) do
+    case :Transport.recv(Socket, 0, 5000) do
+      {:ok, Data} ->
+        :Transport.send(Socket, Data)
+        loop(Socket, Transport)
+      _ ->
+        :ok = :Transport.close(Socket)
+    end
+  end
+end
+
+```
+
+I guess any seasoned Elixir folk would immediately recognize the problem. If you don't then compare this to the handler above in ```lib/testme2_handler.ex```. The difference is subtle. The function parameters are capitalized. No one would do such a mistake except me when I copied and adapted the ranch Erlang TCP echo example from [here](https://github.com/ninenines/ranch/blob/master/examples/tcp_echo/src/echo_protocol.erl).
+
+I fixed all the Erlang and Elixir syntax differences but somehow overlooked these capitalized variable names. Too bad.
+
+### Motivation
+
+### Background
 
 
 
