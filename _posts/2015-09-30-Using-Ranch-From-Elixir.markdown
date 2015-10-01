@@ -81,7 +81,7 @@ defmodule TestMe2.Worker do
 end
 ```
 
-Finally we need a handler to actually talk TCP in ```lib/testme2_handler.ex```:
+Finally I needed a handler to actually talk TCP in ```lib/testme2_handler.ex```:
 
 ``` elixir
 defmodule TestMe2.Handler do
@@ -144,50 +144,18 @@ end
 
 ```
 
-I guess any seasoned Elixir folk would immediately recognize the problem. If you don't then compare this to the handler above in ```lib/testme2_handler.ex```. The difference is subtle. The function parameters are capitalized. No one would do such a mistake except me when I copied and adapted the ranch Erlang TCP echo example from [here](https://github.com/ninenines/ranch/blob/master/examples/tcp_echo/src/echo_protocol.erl).
+I guess any seasoned Elixir folk would immediately recognize the problem. If you don't then compare this to the handler above in ```lib/testme2_handler.ex```. The difference is subtle. The function parameters are capitalized. No one would do such a mistake, except me when I copied and adapted the ranch Erlang TCP echo example from [here](https://github.com/ninenines/ranch/blob/master/examples/tcp_echo/src/echo_protocol.erl).
 
-I fixed all the Erlang and Elixir syntax differences but somehow overlooked these capitalized variable names. Too bad.
+I fixed all the Erlang and Elixir syntax differences but somehow overlooked these capitalized names.
 
 ### Motivation
 
-### Background
-
-
-
-This post is about my first steps in Elixir land. I have no Erlang or Elixir experience, though I have read Dave Thomas' Programming in Elixir. I have looked at Erlang for long and always wanted to use the BEAM Virtual Machine for a real project. 
-
-One great plus on the Elixir side is the possibility to use Erlang libraries. I read that this should be easy. For further preparation I also read the Little Elixir and & OTP Guidebook from Benjamin Tan Wei Hao. I always liked the OTP concepts and expected that most Erlang and Elixir libs will use it.
-
-### TCP Server
-
-The reason I am looking at Elixir is to do a distributed service with TCP. I did a lot of BSD socket programming in C++ so I know the options there. I started my research to see what people say about fast TCP servers in Elixir and Erlang. Cowboy and Ranch came out quite fast and I also found mentions about the default OTP TCP might not be fast enough.  
+The reason I am looking at Elixir is to do a distributed service with TCP. I did a lot of BSD socket programming in C++ so I know the options there. I started my research to see what people say about fast TCP servers in Elixir and Erlang. Cowboy and Ranch came out quite fast and I also found mentions about the default OTP TCP might not be fast enough to accept large number of connections.
 
 Then I spent quite some time looking for an Elixir alternative to Ranch. What I found was either gen_tcp based or advertised that it is not for production.
 
-Again these are my naive attempts, I was just looking for a reasonable good test to see how easy it is to use Elixir. Combined with something chosen from Erlang for a good reason.
+### Background
 
-#### Testme 1
+I have no Erlang or Elixir experience. I have read Dave Thomas' Programming in Elixir. I have looked at Erlang for long and always wanted to use the BEAM Virtual Machine for a real project. 
 
-The "Hello world" in the TCP land is an echo server for me. There are lots of examples how to do it and even Ranch has example code for it.
-
-First I created my application with mix like this:
-
-```mix new testme1 --sup```
-
-Then I added the ranch dependency to the mix.exs:
-
-
-Finally I started aligning the ranch's hello world example with the Elixir syntax. I ended up with the following files:
-
-Everything looked OK to me except that it didn't work. There was no compile time or runtime errors. When I connected my telnet to the app I found that the port is open, but it closed the connection immediately. Still no errors. This was very disappointing.
-
-### TestMe2
-
-At my first disappointment, I decided to look for another alternative: barrel http://php-hackers.com/p/benoitc/barrel . I realized quite fast that it has no hex.pm support and it uses OTP 15 which is incompatible with my Elixir. At least I have no idea how to make these OTPs  work together.
-
-Then I went back to hack ranch to work with Elixir. The solution was pretty easy. The parameter names from the Erlang example was all capitalized. From this point on my TCP acceptor worked like a breeze:
-
-
-### Conclusion
-
-I guess I learned the Elixir naming convention the hard way. Still I find annoying that I got no errors at compile time or runtime that I am doing something wrong. I envy people when I hear how much fun it is to learn a new programming language.
+One great plus on the Elixir side is the possibility to use Erlang libraries. I read that this should be easy. For further preparation I also read the Little Elixir and & OTP Guidebook from Benjamin Tan Wei Hao. I always liked the OTP concepts and expected that most Erlang and Elixir libs will use it.
