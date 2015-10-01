@@ -152,7 +152,7 @@ I fixed all the Erlang and Elixir syntax differences but somehow overlooked thes
 
 The reason I am looking at Elixir is to do a distributed service with TCP. I did a lot of BSD socket programming in C++ so I know the options there. I started my research to see what people say about fast TCP servers in Elixir and Erlang. Cowboy and Ranch came out quite fast and I also found mentions about the default OTP TCP might not be fast enough to accept large number of connections.
 
-Then I spent quite some time looking for an Elixir alternative to Ranch. What I found was either gen_tcp based or advertised that it is not for production.
+Then I spent quite some time looking for an Elixir alternative to Ranch. What I found was either [gen_tcp based](https://github.com/meh/reagent) or advertised that it is [not for production](https://github.com/slogsdon/pool).
 
 ### Background
 
