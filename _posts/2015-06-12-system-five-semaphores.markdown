@@ -40,39 +40,43 @@ As a demonstration of the atomic operations let's create a simple counter that a
 
 The publisher creates the semaphore, resets to zero and increases the value.
 
-    // create the semaphore
-    key_t semkey = ftok("/tmp/whatever", 1);
-    int semaphore_id = semget(semkey, 1, 0600|IPC_CREAT );
-    
-    // reset initial value
-    short zero = 0;
-    semctl(semaphore_id,0,SETALL,&zero);
-    
-    // increase the counter by 1
-    struct sembuf ops[1];
-    ops[0].sem_num  = 0;
-    ops[0].sem_op   = 1;
-    ops[0].sem_flg  = 0;
-    semop(semaphore_id,ops,1);
-    
+``` c++
+// create the semaphore
+key_t semkey = ftok("/tmp/whatever", 1);
+int semaphore_id = semget(semkey, 1, 0600|IPC_CREAT );
+
+// reset initial value
+short zero = 0;
+semctl(semaphore_id,0,SETALL,&zero);
+
+// increase the counter by 1
+struct sembuf ops[1];
+ops[0].sem_num  = 0;
+ops[0].sem_op   = 1;
+ops[0].sem_flg  = 0;
+semop(semaphore_id,ops,1);
+```
+
 Nothing special so far. Let's look at the subscriber code. It opens the counter and wait for its increase.
 
-    // open semaphore
-    key_t semkey = ftok("/tmp/whatever", 1);
-    int semaphore_id = semget(semkey, 1, 0600 );
-    
-    // wait for the counter to be greater than previous_value
-    short previous_value = 0;
-    
-    struct sembuf ops[2];
-    ops[0].sem_num  = 0;
-    ops[0].sem_op   = -1*(previous_value+1);
-    ops[0].sem_flg  = 0;
-    ops[1].sem_num  = 0;
-    ops[1].sem_op   = (previous_value+1);
-    ops[1].sem_flg  = 0;
-    
-    semop(semaphore_id,ops,2);
+``` c++
+// open semaphore
+key_t semkey = ftok("/tmp/whatever", 1);
+int semaphore_id = semget(semkey, 1, 0600 );
+
+// wait for the counter to be greater than previous_value
+short previous_value = 0;
+
+struct sembuf ops[2];
+ops[0].sem_num  = 0;
+ops[0].sem_op   = -1*(previous_value+1);
+ops[0].sem_flg  = 0;
+ops[1].sem_num  = 0;
+ops[1].sem_op   = (previous_value+1);
+ops[1].sem_flg  = 0;
+
+semop(semaphore_id,ops,2);
+```
 
 This is the power of atomic operations. I can wait for the value to be _previous_value+1_ in the first operation. This first operation decreases the value but that doesn't bother me much, because I know I can add it back in the next operation, so the subscriber won't visibly change the counter's value but still it could wait for it to reach at least _previous_value+1_.
 
@@ -84,30 +88,32 @@ To overcome the limitation of my previous counter I will use a semaphore with tw
 
 The trick is in the publisher part. I will use the set's values as a base 10.000 integer. The first value in the set is the least significant and the second is the most significant value.
 
-    // create the semaphore
-    key_t semkey = ftok("/tmp/whatever", 1);
-    int semaphore_id = semget(semkey, 2, 0600|IPC_CREAT );
-    
-    // reset initial value
-    short zeros[2] = {0, 0};
-    semctl(semaphore_id,0,SETALL,zeros);
-    
-    // increase the counter by 1 and handle overflow in one step
-    struct sembuf ops[3];
-    ops[0].sem_num  = 0;
-    ops[0].sem_op   = 1;
-    ops[0].sem_flg  = 0;
-    ops[1].sem_num  = 0;
-    ops[1].sem_op   = -10000;
-    ops[1].sem_flg  = IPC_NOWAIT;    
-    ops[2].sem_num  = 1;
-    ops[2].sem_op   = 1;
-    ops[2].sem_flg  = 0;
-    if( semop(semaphore_id,ops,3) < 0 )
-    {
-      // no overflow needed
-      semop(semaphore_id,ops,1);
-    }
+``` c++
+// create the semaphore
+key_t semkey = ftok("/tmp/whatever", 1);
+int semaphore_id = semget(semkey, 2, 0600|IPC_CREAT );
+
+// reset initial value
+short zeros[2] = {0, 0};
+semctl(semaphore_id,0,SETALL,zeros);
+
+// increase the counter by 1 and handle overflow in one step
+struct sembuf ops[3];
+ops[0].sem_num  = 0;
+ops[0].sem_op   = 1;
+ops[0].sem_flg  = 0;
+ops[1].sem_num  = 0;
+ops[1].sem_op   = -10000;
+ops[1].sem_flg  = IPC_NOWAIT;    
+ops[2].sem_num  = 1;
+ops[2].sem_op   = 1;
+ops[2].sem_flg  = 0;
+if( semop(semaphore_id,ops,3) < 0 )
+{
+  // no overflow needed
+  semop(semaphore_id,ops,1);
+}
+```
 
 I presume I have one single publisher and noone else changes the value so there is no race condition between the overflow and non-overflow part. The reason this works is that the semaphore operation is atomic. The NOWAIT flag tells the system to reduce the least significant counter if theres is an overflow over 10000 if possible. Otherwise it returns an error which leads to the _no overflow case_. Shiny.
 
@@ -117,39 +123,41 @@ The 10002 in our example is {2,1} in my semaphore value terms.
 
 On Linux there is a non standard GNU extension to the System V interface that comes handy in this case called _semtimedop_. On other systems like Mac OSX this is not available.
 
-    // open semaphore
-    key_t semkey = ftok("/tmp/whatever", 1);
-    int semaphore_id = semget(semkey, 2, 0600 );
-    
-    // initialize prev values
-    uint32_t previous_value = 9998;
-    short previous_value_set[2] = {
-      previous_value%1000,
-      previous_value/1000
-    };
-    
-    // wait for the counter
-    while( (previous_value_set[0]+
-            10000*previous_value_set[1]) <= previous_value )
-    {
-      
-      // timed wait on the least significant value only
-      // because the semaphore operation is atomic (="all or nothing")
-      // we cannot say that any values in the semaphore set to be greater
-      // than before
-      struct sembuf ops[2];
-      ops[0].sem_num  = 0;
-      ops[0].sem_op   = -1*(previous_value_set[0]+1);
-      ops[0].sem_flg  = 0;
-      ops[1].sem_num  = 0;
-      ops[1].sem_op   = previous_value_set[0]+1;
-      ops[1].sem_flg  = 0;
+``` c++
+// open semaphore
+key_t semkey = ftok("/tmp/whatever", 1);
+int semaphore_id = semget(semkey, 2, 0600 );
 
-      // 20 ms
-      struct timespec ts = { 0, 20*1000000 };
-      semtimedop(semaphore_id,ops,2,&ts);
-    
-      semctl(semaphore_id,0,GETALL,previous_value_set);
-    }
+// initialize prev values
+uint32_t previous_value = 9998;
+short previous_value_set[2] = {
+  previous_value%1000,
+  previous_value/1000
+};
+
+// wait for the counter
+while( (previous_value_set[0]+
+        10000*previous_value_set[1]) <= previous_value )
+{
+
+  // timed wait on the least significant value only
+  // because the semaphore operation is atomic (="all or nothing")
+  // we cannot say that any values in the semaphore set to be greater
+  // than before
+  struct sembuf ops[2];
+  ops[0].sem_num  = 0;
+  ops[0].sem_op   = -1*(previous_value_set[0]+1);
+  ops[0].sem_flg  = 0;
+  ops[1].sem_num  = 0;
+  ops[1].sem_op   = previous_value_set[0]+1;
+  ops[1].sem_flg  = 0;
+
+  // 20 ms
+  struct timespec ts = { 0, 20*1000000 };
+  semtimedop(semaphore_id,ops,2,&ts);
+
+  semctl(semaphore_id,0,GETALL,previous_value_set);
+}
+```
 
 It is fairly easy to extend this counter to larger values by adding more values into the semaphore set and do more semaphore operations in the sembuf array.
