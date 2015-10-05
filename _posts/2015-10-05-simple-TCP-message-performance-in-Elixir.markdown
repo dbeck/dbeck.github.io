@@ -34,7 +34,7 @@ I am interested to see how many messages will go through this setup per second o
 
 I will use the [ranch](http://ninenines.eu/docs/en/ranch/1.1/) Erlang library for this experiment, although the default gen_tcp module would work perfectly here. I want to build on my [previous experiments](http://dbeck.github.io/Using-Ranch-From-Elixir/).
 
-I created the project by ```mix new --sup --module EchoPerf1```.
+I created the project by ```mix new EchoPerf1 --sup --module EchoPerf1```.
 
 The mix.exs file has:
 
@@ -268,10 +268,10 @@ elapsed usec=448915 avg(usec/call)=44.8915 avg(call/msec)=22.2759 avg(call/sec)=
 elapsed usec=451250 avg(usec/call)=45.125 avg(call/msec)=22.1607 avg(call/sec)=22160.7
 ```
 
-Roughly 22k messages roundtrips per second.
+Roughly 22k message roundtrips per second.
 
 ### Conclusion
 
-Being honest I was hoping that this is going to be faster. But I am not disappointed by the results. My next experiment will optimize the protocol because I suspect this lock step order is not a good fit for Elixir.
+Being honest I was hoping that this is going to be faster. But I am not disappointed by the results. My next experiment will optimize the protocol because I suspect this lock step order is not a good fit for Elixir. Message throttling and asynch acknowledgement would help a lot, but yet to be tested.
 
 For a few observations about local messaging performance here is an [older post](http://dbeck.github.io/price-of-being-distributed/).
