@@ -13,7 +13,7 @@ twimage: http://dbeck.github.io/images/DSCF4993.JPG
 woopra: mvpthoughts
 ---
 
-For me MVP is part of the startup business strategy rather than a pure technical issue. That is we know a very specific problem that a set of customers have, who are willing to pay an expected amount of money for this solution. Part of the business strategy is that we also know how to reach these customers, so for instance I can do a Linkedin search and find customers with at least 5% chance them become paying customers.
+For me MVP is part of the startup business strategy rather than a pure technical issue. That is we know a very specific problem that a set of customers have, who are willing to pay an expected amount of money for this solution. Part of the business strategy is that we also know how to reach these customers. For instance I can do a Linkedin search and find customers with at least 5% chance them become paying customers.
 
 This is the theory at least.
 
