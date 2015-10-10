@@ -113,7 +113,7 @@ And the statistics:
 100k small messages per second is not bad on the loopback network but compared to the [10 million persistent local messages](http://dbeck.github.io/price-of-being-distributed/) in my local queue experiment is not so good. I have a few ideas where to improve this, but let's leave them for other posts. I only collect facts here:
 
  1. If I don't send any ACKs back to the client and neither do any processing on the Elixir side the numbers are roughly the same. Around 110k messages per second. Again, without sending back data to the client.
- 2. In the final version, that sends back periodic ACKs, the Elixir server takes a whole CPU core (100%) and the C++ client takes around 15% of another core.
+ 2. When I am sending back the periodic ACKs, the Elixir server takes a whole CPU core (100%) and the C++ client takes around 15% of another core.
  3. Both the Elixir server and the C++ client calls the OS for every single message in my code. In fact the Elixir server reads every message in two parts, the {ID, Size} first and the Data second. This puts too much and unnecessary pressure on the OS.
  4. The C++ side should also batch the writes at least to reach the IP packet size, so the IP and TCP packet wrapping, checksum, context switch, OS costs ... would be amortized over multiple messages. 
 
