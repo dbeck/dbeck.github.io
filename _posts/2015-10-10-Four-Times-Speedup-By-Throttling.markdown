@@ -16,9 +16,9 @@ twimage: http://dbeck.github.io/images/DSCF4696.JPG
 woopra: throttlemsgex
 ---
 
-In my [previous naive experiment](http://dbeck.github.io/simple-TCP-message-performance-in-Elixir/) I realized 22k small messages per second to my Elixir based small message TCP server. I treat the old post as a baseline and in my new posts I will experiment with different factors to make this faster.
+In my [previous naive experiment](http://dbeck.github.io/simple-TCP-message-performance-in-Elixir/) I realized 22k small messages per second to my Elixir based small message TCP server. I treat the old post as a baseline and, in my new posts I will experiment with different factors to make this faster.
 
-These posts are not about the Elixir language or its performance. These are about a way to find a good messaging pattern and setup where I can use Elixir in a distributed server environment. Over the years I did this a few times in other languages like Ruby, Lua and C++. I really want to use Elixir for a number of reasons so I just need to know what is feasible here.
+These posts are not about the Elixir language or its performance. These are about a way to find a good messaging pattern and setup where I can use Elixir in a distributed server environment. Over the years I did this a few times in other languages like Ruby, Lua and C++. I really want to use Elixir on the server side for a number of reasons so I just need to know what is feasible here.
 
 ### Lock step messaging
 
@@ -90,21 +90,21 @@ Here is the output of ```:observer.start```:
 
 When I start two clients at the same time the aggregate performance slightly increases to about 120k messages per second. Here is the output of ```:observer.start```:
 
-![Single Client Stats](/images/DoubleClient.png)
+![Double Client Stats](/images/DoubleClient.png)
 
 And the statistics:
 
-![Single Client Stats](/images/DoubleClientPerf.png)
+![Double Client Stats](/images/DubleClientPerf.png)
 
 #### Triple client stats
 
-Starting the thrid client will cause contention somewhere because the aggregate performance starts dropping below 100k msg/sec. My gut feeling is that my codes are too badly written and they cause too much pressure on the OS. Here is the output of ```:observer.start```:
+Starting 3 clients in parallel causes contention somewhere because the aggregate performance starts dropping below 100k msg/sec. My gut feeling is that my codes are too badly written and they cause too much pressure on the OS. Here is the output of ```:observer.start```:
 
-![Single Client Stats](/images/TripleClient.png)
+![Triple Client Stats](/images/TripleClient.png)
 
 And the statistics:
 
-![Single Client Stats](/images/TripleClientPerf.png)
+![Triple Client Stats](/images/TripleClientPerf.png)
 
 ### Who is slow?
 
