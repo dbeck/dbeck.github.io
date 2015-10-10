@@ -78,7 +78,9 @@ It is roughly 4x more than it was [previously](http://dbeck.github.io/simple-TCP
 
 ### Does this scale to multiple cores?
 
-Unfortunately, no. My purpose is not to measure the maximum Elixir performance, neither to squeeze as much from my PC as possible. I want to understand what practices lead to a feasible solution if I want to my server code to use Elixir. 
+Unfortunately, no. Check the figures below. The aggregate performance slightly increases with a second parallel client and starts dropping at the thrird client.
+
+My purpose is not to measure the maximum Elixir performance, neither to squeeze as much from my PC as possible. I want to understand what practices lead to a feasible solution if I want to my server code to use Elixir. 
 
 #### Single client stats
 
