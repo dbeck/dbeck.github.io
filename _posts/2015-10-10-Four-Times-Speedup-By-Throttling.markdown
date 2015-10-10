@@ -82,21 +82,31 @@ Unfortunately, no. My purpose is not to measure the maximum Elixir performance, 
 
 #### Single client stats
 
-Here is the output of ```:observer.start```
+Here is the output of ```:observer.start```:
 
 ![Single Client Stats](/images/SingleClient.png)
 
+#### Double client stats
+
+When I start two clients at the same time the aggregate performance slightly increases to about 120k messages per second. Here is the output of ```:observer.start```:
+
 ![Single Client Stats](/images/DoubleClient.png)
+
+And the statistics:
+
 ![Single Client Stats](/images/DoubleClientPerf.png)
 
+#### Triple client stats
+
+Starting the thrid client will cause contention somewhere because the aggregate performance starts dropping below 100k msg/sec. My gut feeling is that my codes are too badly written and they cause too much pressure on the OS. Here is the output of ```:observer.start```:
+
 ![Single Client Stats](/images/TripleClient.png)
+
+And the statistics:
+
 ![Single Client Stats](/images/TripleClientPerf.png)
 
-
-
-
-
-### Who is slow
+### Who is slow?
 
 100k small messages per second is not bad on the loopback network but compared to the [10 million persistent local messages](http://dbeck.github.io/price-of-being-distributed/) in my local queue experiment is not so good. I have a few ideas where to improve this, but let's leave them for other posts. I only collect facts here:
 
