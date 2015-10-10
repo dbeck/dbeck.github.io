@@ -43,7 +43,7 @@ In the original protocol I only sent back the 8 byte ID I received in the reques
  - ID
  - Number of skipped ACKs
 
-So I allow the server to send back ACKs whenever it wants, the only thing I require is to tell how many ACKs it has omitted. The ID field is the latest ID that is not skipped.
+I allow the server to send back ACKs whenever it wants, the only thing I require is to tell how many ACKs it has omitted. The ID field is the latest ID that is not skipped.
 
 Using this ACK throttling I let the client decide how much it wants to continue without acknowledgement and decide what to do if the ACKs are not to its taste. If the client detects an error it can close the connection and resend the unacknowledged messages. 
 
@@ -94,7 +94,7 @@ When I start two clients at the same time the aggregate performance slightly inc
 
 And the statistics:
 
-![Double Client Stats](/images/DubleClientPerf.png)
+![Double Client Stats](/images/DoubleClientPerf.png)
 
 #### Triple client stats
 
@@ -464,4 +464,4 @@ int main(int argc, char ** argv)
 
 ### Conclusion
 
-The tradeoff is the additional complexity in error handling and code in exchange for 4x speed improvement.
+The tradeoff is the additional complexity in error handling and code in exchange for 4x speed improvement. I still need to rationalize both the client and server side to do larger reads and writes in order to put less pressure on the OS.
