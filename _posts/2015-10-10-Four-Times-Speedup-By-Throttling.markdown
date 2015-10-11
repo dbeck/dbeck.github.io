@@ -16,9 +16,14 @@ twimage: http://dbeck.github.io/images/TripleClient.png
 woopra: throttlemsgex
 ---
 
-In my [previous naive experiment](http://dbeck.github.io/simple-TCP-message-performance-in-Elixir/) I realized 22k small messages per second to my Elixir based small message TCP server. I treat the old post as a baseline and, in my new posts I will experiment with different factors to make this faster.
+In my [previous naive experiment](/simple-TCP-message-performance-in-Elixir/) I realized 22k small messages per second to my Elixir based small message TCP server. I treat the old post as a baseline and, in my new posts I will experiment with different factors to make this faster.
 
 These posts are not about the Elixir language or its performance. These are about a way to find a good messaging pattern and setup where I can use Elixir in a distributed server environment. Over the years I did this a few times in other languages like Ruby, Lua and C++. I really want to use Elixir on the server side for a number of reasons so I just need to know what is feasible here.
+
+**Update**: you may be also interested in the next two posts in this series:
+
+ - [250k messages per second](/Over-Two-Times-Speedup-By-Better-Elixir-Code/) achieved by better use of Elixir pattern matching
+ - [over 2M messages per second](/Passing-Millions-Of-Small-TCP-Messages-in-Elixir/) achieved by removing the usage of the Task module
 
 ### Lock step messaging
 
