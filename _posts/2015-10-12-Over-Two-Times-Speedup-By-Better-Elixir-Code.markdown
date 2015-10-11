@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 layout: post
 category: Elixir
 tags: 
@@ -8,215 +8,59 @@ tags:
   - TCP
   - socket
   - network
-  - throttling
-desc: Four times speedup gained by simple redesign of how I communicate with the Elixir TCP server
+desc: Two and a half times speedup gained by writing better Elixir code in the critical path of my TCP server
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/TripleClient.png
-woopra: throttlemsgex
+woopra: batchmsgex
 ---
 
-In my [previous naive experiment](http://dbeck.github.io/simple-TCP-message-performance-in-Elixir/) I realized 22k small messages per second to my Elixir based small message TCP server. I treat the old post as a baseline and, in my new posts I will experiment with different factors to make this faster.
+This is the third episode of my experiments with Elixir TCP programming. My goal is to improve my Elixir programming skills by choosing a problem that I am interested in. That is how to handle large number of small messages in a TCP server program.
 
-These posts are not about the Elixir language or its performance. These are about a way to find a good messaging pattern and setup where I can use Elixir in a distributed server environment. Over the years I did this a few times in other languages like Ruby, Lua and C++. I really want to use Elixir on the server side for a number of reasons so I just need to know what is feasible here.
+My [first attempt](/simple-TCP-message-performance-in-Elixir/) gave **22k messages per second** on a single connection. This used a traditional Request/Reply pattern that is not the best for small messages because we pay too much overhead for each message.
 
-### Lock step messaging
+In the [second attempt](/Four-Times-Speedup-By-Throttling/) I changed the pattern and allowed the client to slightly run ahead of the server by allowing the server to batch the replies. With this change I arrived to the **100k messages per second** range. However this was still not looking good because the test did around 2MB/second on the loopback network which is slow. The server also didn't scale by CPU cores.
 
-The original approach used the conventional Request/Reply pattern. The C++ client sent a small message and it waited for a reply. When the messages are large, this approach is not so bad because the OS overhead and the message roundtrip time is amortized by the data transfer time. In my case when I want to experiment with small messages this doesn't work very well.
+My gut feeling was that I am doing a mistake in the Elixir program that needs to be fixed. The whole server seemed to be CPU heavy. The other thing I didn't like is that I am doing OS calls for each message on the client side and two OS calls on the server side. This is asking for trouble in my books.
 
-Everytime I send a small message on the loopback network to another process at least these will happen:
+This experiment improved both the OS call issues and the Elixir code improved quite a bit. The result is roughly **250k messages per second**.
 
- 1. the data gets copied to the kernel space
- 2. a context switch happens from the user to the kernel
- 3. the receiver gets notified by the arrival of the new data
- 4. the data gets copied to the user space
- 5. another context switch to the user program
- 6. the user program processes the data and generates a reply
- 7. ... plus steps 1-6 again when sending back the reply
-
-### Async acknowledgement with throttling
-
-I have the freedom to relax the protocol, so I will not require to send an immedate acknowledgement to the client. I also change the reply structure to be able to batch the ACKs.
-
-In the original protocol I only sent back the 8 byte ID I received in the request. Now I am going to send this instead:
-
- - ID
- - Number of skipped ACKs
-
-I allow the server to send back ACKs whenever it wants, the only thing I require is to tell how many ACKs it has omitted. The ID field is the latest ID that is not skipped.
-
-Using this ACK throttling I let the client decide how much it wants to continue without acknowledgement and decide what to do if the ACKs are not to its taste. If the client detects an error it can close the connection and resend the unacknowledged messages. 
-
-On the server side I periodically collect the messages waiting for acknowledgement, pick the latest's ID and count the other messages. I send this every 5 milliseconds.
-
-### Results
+### The results
 
 ```
-elapsed usec=1003507 avg(usec/call)=10.0351 avg(call/msec)=99.6505 avg(call/sec)=99650.5
-elapsed usec=1001873 avg(usec/call)=10.0187 avg(call/msec)=99.8131 avg(call/sec)=99813.1
-elapsed usec=1002957 avg(usec/call)=10.0296 avg(call/msec)=99.7052 avg(call/sec)=99705.2
-elapsed usec=1013812 avg(usec/call)=10.1381 avg(call/msec)=98.6376 avg(call/sec)=98637.6
-elapsed usec=1022114 avg(usec/call)=10.2211 avg(call/msec)=97.8364 avg(call/sec)=97836.4
-elapsed usec=1292082 avg(usec/call)=12.9208 avg(call/msec)=77.3945 avg(call/sec)=77394.5
-elapsed usec=968613 avg(usec/call)=9.68613 avg(call/msec)=103.24 avg(call/sec)=103240
-elapsed usec=971822 avg(usec/call)=9.71822 avg(call/msec)=102.9 avg(call/sec)=102900
-elapsed usec=979073 avg(usec/call)=9.79073 avg(call/msec)=102.137 avg(call/sec)=102137
-elapsed usec=1003730 avg(usec/call)=10.0373 avg(call/msec)=99.6284 avg(call/sec)=99628.4
-elapsed usec=989953 avg(usec/call)=9.89953 avg(call/msec)=101.015 avg(call/sec)=101015
-elapsed usec=1070109 avg(usec/call)=10.7011 avg(call/msec)=93.4484 avg(call/sec)=93448.4
-elapsed usec=1020841 avg(usec/call)=10.2084 avg(call/msec)=97.9584 avg(call/sec)=97958.4
-elapsed usec=994713 avg(usec/call)=9.94713 avg(call/msec)=100.532 avg(call/sec)=100532
-elapsed usec=1000015 avg(usec/call)=10.0001 avg(call/msec)=99.9985 avg(call/sec)=99998.5
-elapsed usec=1009947 avg(usec/call)=10.0995 avg(call/msec)=99.0151 avg(call/sec)=99015.1
-elapsed usec=997890 avg(usec/call)=9.9789 avg(call/msec)=100.211 avg(call/sec)=100211
-elapsed usec=1055865 avg(usec/call)=10.5587 avg(call/msec)=94.7091 avg(call/sec)=94709.1
-elapsed usec=991912 avg(usec/call)=9.91912 avg(call/msec)=100.815 avg(call/sec)=100815
-elapsed usec=1023854 avg(usec/call)=10.2385 avg(call/msec)=97.6702 avg(call/sec)=97670.2
+elapsed usec=729471 avg(usec/call)=3.64736 avg(call/msec)=274.171 avg(call/sec)=274171
+elapsed usec=786650 avg(usec/call)=3.93325 avg(call/msec)=254.243 avg(call/sec)=254243
+elapsed usec=780018 avg(usec/call)=3.90009 avg(call/msec)=256.404 avg(call/sec)=256404
+elapsed usec=780898 avg(usec/call)=3.90449 avg(call/msec)=256.115 avg(call/sec)=256115
+elapsed usec=780172 avg(usec/call)=3.90086 avg(call/msec)=256.354 avg(call/sec)=256354
+elapsed usec=773731 avg(usec/call)=3.86865 avg(call/msec)=258.488 avg(call/sec)=258488
+elapsed usec=811105 avg(usec/call)=4.05553 avg(call/msec)=246.577 avg(call/sec)=246577
+elapsed usec=780474 avg(usec/call)=3.90237 avg(call/msec)=256.255 avg(call/sec)=256255
+elapsed usec=824067 avg(usec/call)=4.12033 avg(call/msec)=242.699 avg(call/sec)=242699
+elapsed usec=786796 avg(usec/call)=3.93398 avg(call/msec)=254.195 avg(call/sec)=254195
+elapsed usec=762324 avg(usec/call)=3.81162 avg(call/msec)=262.356 avg(call/sec)=262356
+elapsed usec=785777 avg(usec/call)=3.92889 avg(call/msec)=254.525 avg(call/sec)=254525
+elapsed usec=767962 avg(usec/call)=3.83981 avg(call/msec)=260.43 avg(call/sec)=260430
+elapsed usec=810479 avg(usec/call)=4.05239 avg(call/msec)=246.768 avg(call/sec)=246768
+elapsed usec=788926 avg(usec/call)=3.94463 avg(call/msec)=253.509 avg(call/sec)=253509
+elapsed usec=788894 avg(usec/call)=3.94447 avg(call/msec)=253.519 avg(call/sec)=253519
+elapsed usec=768952 avg(usec/call)=3.84476 avg(call/msec)=260.094 avg(call/sec)=260094
+elapsed usec=763300 avg(usec/call)=3.8165 avg(call/msec)=262.02 avg(call/sec)=262020
+elapsed usec=757870 avg(usec/call)=3.78935 avg(call/msec)=263.898 avg(call/sec)=263898
+elapsed usec=749668 avg(usec/call)=3.74834 avg(call/msec)=266.785 avg(call/sec)=266785
 ```
 
-It is roughly 4x more than it was [previously](http://dbeck.github.io/simple-TCP-message-performance-in-Elixir/). I saved a lot on the OS overhead and a bit on the processing part too.
+The 2.5x speedup is good at first sight, however I am still not happy. The Elixir code has too high CPU utilization, and it also doesn't scale with cores when I start multiple clients. I have a few other ideas to speed this up by improving my Elixir code.
 
-### Does this scale to multiple cores?
+### Elixir server changes
 
-Unfortunately, no. Check the figures below. The aggregate performance slightly increases with a second parallel client and starts dropping at the thrird client.
+I have renamed all **ThrottlePerf** references to **Batch**. The real changes is in ```lib/batch_handler.ex```. I include the source code below.
 
-My purpose is not to measure the maximum Elixir performance, neither to squeeze as much from my PC as possible. I want to understand what practices lead to a feasible solution if I want to my server code to use Elixir. 
+Instead of doing two ```transport.recv``` calls for each message I try to read everything available in a single step and parse the buffer.
 
-#### Single client stats
-
-Here is the output of ```:observer.start```:
-
-![Single Client Stats](/images/SingleClient.png)
-
-#### Double client stats
-
-When I start two clients at the same time the aggregate performance slightly increases to about 120k messages per second. Here is the output of ```:observer.start```:
-
-![Double Client Stats](/images/DoubleClient.png)
-
-And the statistics:
-
-![Double Client Stats](/images/DoubleClientPerf.png)
-
-#### Triple client stats
-
-Starting 3 clients in parallel causes contention somewhere because the aggregate performance starts dropping below 100k msg/sec. My gut feeling is that my codes are too badly written and they cause too much pressure on the OS. Here is the output of ```:observer.start```:
-
-![Triple Client Stats](/images/TripleClient.png)
-
-And the statistics:
-
-![Triple Client Stats](/images/TripleClientPerf.png)
-
-### Who is slow?
-
-100k small messages per second is not bad on the loopback network but compared to the [10 million persistent local messages](http://dbeck.github.io/price-of-being-distributed/) in my local queue experiment is not so good. I have a few ideas where to improve this, but let's leave them for other posts. I only collect facts here:
-
- 1. If I don't send any ACKs back to the client and neither do any processing on the Elixir side the numbers are roughly the same. Around 110k messages per second. Again, without sending back data to the client.
- 2. When I am sending back the periodic ACKs, the Elixir server takes a whole CPU core (100%) and the C++ client takes around 15% of another core.
- 3. Both the Elixir server and the C++ client calls the OS for every single message in my code. In fact the Elixir server reads every message in two parts, the {ID, Size} first and the Data second. This puts too much and unnecessary pressure on the OS.
- 4. The C++ side should also batch the writes at least to reach the IP packet size, so the IP and TCP packet wrapping, checksum, context switch, OS costs ... would be amortized over multiple messages. 
-
-### The code
-
-The code is roughly the same as in the [previous experiment](http://dbeck.github.io/simple-TCP-message-performance-in-Elixir/). I only changed the module name in these files:
-
- - mix.exs
- - lib/throttle_perf.ex
- - lib/throttle_worker.ex
- 
-#### ThrottlePerf.Container
-
-I added a ThrottlePerf.Container module in ```lib/throttle_perf_container.ex```:
+The old ```ThrottlePerf``` code has:
 
 ``` elixir
-defmodule ThrottlePerf.Container do
-  
-  def start_link do
-    Agent.start_link(fn -> [] end)
-  end
-  
-  def stop(container) do
-    Agent.stop(container)
-  end
-  
-  def flush(container) do
-    Agent.get_and_update(container, fn list -> {list, []} end)
-  end
-  
-  def push(container, id, data) do
-    Agent.update(container, fn list -> [{id, data}| list] end)
-  end
-  
-  defp generate([]) do
-    {}
-  end
-  
-  defp generate( [{id, _}] ) do
-    {id, 0}
-  end
-  
-  defp generate( [{id, _} | tail] ) do
-    tail_len = List.foldl(tail, 0, fn (_, acc) -> 1 + acc end)
-    {id, tail_len}
-  end
-  
-  def generate_ack(list) do
-    generate(list)
-  end
-end
-```
-
-I am still an Elixir beginner, so forgive my bad practices. The ```push``` function stores the incoming message ID and Data into a list and ```flush``` function replaces the container with an empty one and returns the accumulated data. The ```generat_ack``` function is a helper to transform the flushed list to an ACK message.
-
-#### ThrottlePerf.Handler
-
-The Handler module in ```lib/throttle_perf_handler.ex``` is responsible for the conversation:
-
-``` elixir
-defmodule ThrottlePerf.Handler do
-
-  def start_link(ref, socket, transport, opts) do
-    pid = spawn_link(__MODULE__, :init, [ref, socket, transport, opts])
-    {:ok, pid}
-  end
-
-  def init(ref, socket, transport, _Opts = []) do
-    :ok = :ranch.accept_ack(ref)
-    {:ok, container} = ThrottlePerf.Container.start_link
-    timer_pid = spawn_link(__MODULE__, :timer, [socket, transport, container])
-    loop(socket, transport, container, timer_pid)
-  end
-  
-  def flush(socket, transport, container) do
-    list = ThrottlePerf.Container.flush(container)
-    case ThrottlePerf.Container.generate_ack(list) do  
-      {id, skipped} ->
-        packet = << id :: binary-size(8), skipped :: little-size(32) >>
-        transport.send(socket, packet)
-      {} ->
-        IO.puts "empty data, everything flushed already"
-    end
-  end
-  
-  def timer(socket, transport, container) do
-    flush(socket, transport, container)
-    receive do
-      {:stop} ->
-        IO.puts "stop command arrived"
-        :stop
-    after
-      5 ->
-        timer(socket, transport, container)
-    end
-  end
-  
-  def shutdown(socket, transport, container, timer_pid) do
-    ThrottlePerf.Container.stop(container)
-    :ok = transport.close(socket)
-    send timer_pid, {:stop}
-  end
-  
   def loop(socket, transport, container, timer_pid) do
     case transport.recv(socket, 12, 5000) do
       {:ok, id_sz_bin} ->
@@ -235,12 +79,132 @@ defmodule ThrottlePerf.Handler do
         shutdown(socket, transport, container, timer_pid)
     end
   end
-end
 ```
 
-I start a linked timer process that waits for being stopped, otherwise it collects the messages waiting for acknowledgement and sends an ACK, every 5 milliseconds. The ```flush``` function does the actual message sending. The ```loop``` function is the one who controls the flow.
+The new code in contrast introduces a more Elixirish recursive call ```process``` to handle the incoming data:
 
-#### The C++ client
+``` elixir
+  def loop(socket, transport, container, timer_pid, yet_to_parse) do
+    case transport.recv(socket, 0, 5000) do
+      {:ok, packet} ->
+        not_yet_parsed = process(container, yet_to_parse <> packet)
+        loop(socket, transport, container, timer_pid, not_yet_parsed)
+      {:error, :timeout} ->
+        flush(socket, transport, container)
+        shutdown(socket, transport, container, timer_pid)
+      _ ->
+        shutdown(socket, transport, container, timer_pid)
+    end    
+  end
+  
+  defp process(_container, << >> ) do
+    << >>
+  end
+  
+  defp process(container, packet) do
+    case packet do
+      << id :: binary-size(8), sz :: little-size(32) , data :: binary-size(sz) >> ->
+        Batch.Container.push(container, id, data)
+        << >>
+      << id :: binary-size(8), sz :: little-size(32) , data :: binary-size(sz) , rest :: binary >> ->
+        Batch.Container.push(container, id, data)
+        process(container, rest)
+      unparsed ->
+        unparsed
+      end
+  end
+```
+
+The point when I made this change was when the 2.5x speedup arrived.
+
+### C++ client changes
+
+The change in the C++ client is that now I am batching multiple writes into a single ```writev()``` call by piling up IOV structures. This allows the OS to combine multiple writes into less writes. This seemed to be a great idea but in practice if I used the older C++ client without this change the difference was small. Only the CPU utilization of the C++ client has dropped to half (5%).
+
+I still like this idea so I'll keep it. The protocol has not changed, so I can use either clients to test with. You can find the source code at the end of this post.
+
+### Elixir server source
+
+``` elixir
+defmodule Batch.Handler do
+
+  def start_link(ref, socket, transport, opts) do
+    pid = spawn_link(__MODULE__, :init, [ref, socket, transport, opts])
+    {:ok, pid}
+  end
+
+  def init(ref, socket, transport, _Opts = []) do
+    :ok = :ranch.accept_ack(ref)
+    {:ok, container} = Batch.Container.start_link
+    timer_pid = spawn_link(__MODULE__, :timer, [socket, transport, container])
+    transport.setopts(socket, [nodelay: :true])
+    loop(socket, transport, container, timer_pid, << >>)
+  end
+  
+  def flush(socket, transport, container) do
+    list = Batch.Container.flush(container)
+    case Batch.Container.generate_ack(list) do  
+      {id, skipped} ->
+        packet = << id :: binary-size(8), skipped :: little-size(32) >>
+        transport.send(socket, packet)
+      {} ->
+        :ok
+    end
+  end
+  
+  def timer(socket, transport, container) do
+    flush(socket, transport, container)
+    receive do
+      {:stop} -> :stop
+    after
+      5 -> timer(socket, transport, container)
+    end
+  end
+    
+  def loop(socket, transport, container, timer_pid, yet_to_parse) do
+    case transport.recv(socket, 0, 5000) do
+      {:ok, packet} ->
+        not_yet_parsed = process(container, yet_to_parse <> packet)
+        loop(socket, transport, container, timer_pid, not_yet_parsed)
+      {:error, :timeout} ->
+        flush(socket, transport, container)
+        shutdown(socket, transport, container, timer_pid)
+      _ ->
+        shutdown(socket, transport, container, timer_pid)
+    end    
+  end
+  
+  defp shutdown(socket, transport, container, timer_pid) do
+    Batch.Container.stop(container)
+    :ok = transport.close(socket)
+    send timer_pid, {:stop}
+  end
+  
+  defp process(_container, << >> ) do
+    << >>
+  end
+  
+  defp process(container, packet) do
+    case packet do
+      << id :: binary-size(8), sz :: little-size(32) , data :: binary-size(sz) >> ->
+        Batch.Container.push(container, id, data)
+        << >>
+      << id :: binary-size(8), sz :: little-size(32) , data :: binary-size(sz) , rest :: binary >> ->
+        Batch.Container.push(container, id, data)
+        process(container, rest)
+      unparsed ->
+        unparsed
+      end
+  end
+end
+
+```
+
+### The C++ client source
+
+The single biggest change in the C++ code is the introduction of ```buffer<MAX_ITEMS>``` structure that allows me to batch a **MAX_ITEMS** messages together to write in a single step.
+
+I also experimented with the ```setsockopt(TCP_NODELAY)``` option but this didn't make any difference.
 
 ``` C++
  #include <sys/types.h>
@@ -248,6 +212,7 @@ I start a linked timer process that waits for being stopped, otherwise it collec
  #include <sys/uio.h>
  #include <sys/select.h>
  #include <netinet/in.h>
+ #include <netinet/tcp.h>
  #include <arpa/inet.h>
  #include <string.h>
  #include <unistd.h>
@@ -268,9 +233,9 @@ namespace
   {
     std::function<void()> fun_;
     on_destruct(std::function<void()> fun) : fun_(fun) {}
-    ~on_destruct() { fun_(); }
+    ~on_destruct() { if( fun_ ) fun_(); }
   };
-
+  
   //
   // for measuring ellapsed time and print statistics
   //
@@ -281,16 +246,16 @@ namespace
     
     timepoint  start_;
     uint64_t   iteration_;
-
+    
     timer(uint64_t iter) : start_{highres_clock::now()}, iteration_{iter} {}
-
+    
     int64_t spent_usec()
     {
       using namespace std::chrono;
       timepoint now{highres_clock::now()};
       return duration_cast<microseconds>(now-start_).count();
     }
-
+      
     ~timer()
     {
       using namespace std::chrono;
@@ -300,12 +265,69 @@ namespace
       double    call_per_ms   = iteration_*1000.0     / ((double)usec_diff);
       double    call_per_sec  = iteration_*1000000.0  / ((double)usec_diff);
       double    us_per_call   = (double)usec_diff     / (double)iteration_;
-
+      
       std::cout << "elapsed usec=" << usec_diff
                 << " avg(usec/call)=" << us_per_call
                 << " avg(call/msec)=" << call_per_ms
                 << " avg(call/sec)=" << call_per_sec
                 << std::endl;
+    }
+  };
+  
+  template <size_t MAX_ITEMS>
+  struct buffer
+  {
+    // each packet has 3 parts:
+    // - 64 bit ID
+    // - 32 bit size
+    // - data
+    struct iovec   items_[MAX_ITEMS*3];
+    uint64_t       ids_[MAX_ITEMS];
+    size_t         n_items_;
+    uint32_t       len_;
+    char           data_[5];
+    
+    buffer() : n_items_{0}, len_{5}
+    {
+      memcpy(data_, "hello", 5);
+      
+      for( size_t i=0; i<MAX_ITEMS; ++i )
+      {
+        // I am cheating with the packet content to be fixed
+        // to "hello", but for the purpose of this test app
+        // it is OK.
+        //
+        ids_[i] = 0;
+        // the ID
+        items_[i*3].iov_base = (char*)(ids_+i);
+        items_[i*3].iov_len  = sizeof(*ids_);
+        // the size
+        items_[(i*3)+1].iov_base = (char*)(&len_);
+        items_[(i*3)+1].iov_len  = sizeof(len_);
+        // the data
+        items_[(i*3)+2].iov_base = data_;
+        items_[(i*3)+2].iov_len  = len_;
+      }
+    }
+    
+    void push(uint64_t id)
+    {
+      ids_[n_items_++] = id; 
+    }
+    
+    bool needs_flush() const
+    {
+      return (n_items_ >= MAX_ITEMS);
+    }
+    
+    void flush(int sockfd)
+    {
+      if( !n_items_ ) return;
+      if( writev(sockfd, items_, (n_items_*3)) != (17*n_items_) )
+      {
+        throw "failed to send data";
+      }
+      n_items_ = 0;
     }
   };
 }
@@ -322,34 +344,35 @@ int main(int argc, char ** argv)
       throw "can't create socket";
     }
     on_destruct close_sockfd( [sockfd](){ close(sockfd); } );
-
+    
     // server address (127.0.0.1:8000)
     struct sockaddr_in server_addr;
     ::memset(&server_addr, 0, sizeof(server_addr));
-
+    
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
     server_addr.sin_port = htons(8000);  
-
+    
     // connect to server
     if( connect(sockfd, (struct sockaddr *)&server_addr, sizeof(struct sockaddr)) == -1 )
     {
       throw "failed to connect to server at 127.0.0.1:8000";
     }
-
-    // prepare data
-    char      data[]        = "Hello";
-    uint64_t  id            = 0;
-    uint32_t  len           = 5;
-    int64_t   last_ack      = -1;
-
-    struct iovec data_iov[3] = {
-      { (char *)&id,   8 }, // id
-      { (char *)&len,  4 }, // len
-      { data,          5 }  // data
-    };
-
-
+    
+    {
+      int flag = 1;
+      if( setsockopt( sockfd, IPPROTO_TCP, TCP_NODELAY, (void *)&flag, sizeof(flag)) == -1 )
+      {
+        throw "failed to set TCP_NODELAY on the socket";
+      }
+    }
+    
+    // the buffer template parameter tells how many messages shall
+    // we batch together
+    buffer<50>   data;
+    uint64_t     id            = 0;
+    int64_t      last_ack      = -1;
+    
     //
     // this lambda function checks if we have received a new ACK.
     // if we did then it checks the content and returns the max
@@ -362,24 +385,24 @@ int main(int argc, char ** argv)
       FD_ZERO(&fdset);
       FD_SET(sockfd, &fdset);
       
-      // give 1 ms to the acks to arrive
-      struct timeval tv { 0, 1000 };
+      // give 10 msec to the acks to arrive
+      struct timeval tv { 0, 10000 };
       int select_ret = select( sockfd+1, &fdset, NULL, NULL, &tv );
       if( select_ret < 0)
       {
         throw "failed to select, socket error?";
       }
-      if( select_ret > 0 && FD_ISSET(sockfd,&fdset) )
+      else if( select_ret > 0 && FD_ISSET(sockfd,&fdset) )
       {
         // max 2048 acks that we handle in one check
         size_t alloc_bytes = 12 * 2048;
         std::unique_ptr<uint8_t[]> ack_data{new uint8_t[alloc_bytes]};
-
+        
         //
         // let's receive what has arrived. if there are more than 2048
         // ACKs waiting, then the next loop will take care of them
         //
-
+        
         auto recv_ret = recv(sockfd, ack_data.get(), alloc_bytes, 0);
         if( recv_ret < 0 )
         {
@@ -391,7 +414,9 @@ int main(int argc, char ** argv)
           {
             uint64_t id = 0;
             uint32_t skipped = 0;
+            
             // copy the data to the variables above
+            //
             memcpy(&id, ack_data.get()+pos, sizeof(id) );
             memcpy(&skipped, ack_data.get()+pos+sizeof(id), sizeof(skipped) );
             
@@ -409,16 +434,17 @@ int main(int argc, char ** argv)
     
     for( int i=0; i<20; ++i )
     {
-      size_t iter = 100000;
+      size_t iter = 200000;
       timer t(iter);
       int64_t checked_at_usec = 0;
       
       // send data in a loop
       for( size_t kk=0; kk<iter; ++kk )
       {
-        if( writev(sockfd, data_iov, 3) != 17 )
+        data.push(id);
+        if( data.needs_flush() )
         {
-          throw "failed to send data";
+          data.flush(sockfd);
         }
         
         //
@@ -436,10 +462,13 @@ int main(int argc, char ** argv)
           {
             last_ack = check_ack(last_ack);
             checked_at_usec = spent_usec;
-          }          
+          }
         }
         ++id;
       }
+      
+      // flush all unflushed items
+      data.flush(sockfd);
       
       // wait for all outstanding ACKs
       while( last_ack < (id-1) )
@@ -463,7 +492,3 @@ int main(int argc, char ** argv)
   return 0;
 }
 ```
-
-### Conclusion
-
-The tradeoff is the additional complexity in error handling and code in exchange for 4x speed improvement. I still need to rationalize both the client and server side to do larger reads and writes in order to put less pressure on the OS.
