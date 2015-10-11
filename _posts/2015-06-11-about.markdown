@@ -10,10 +10,12 @@ published: true
 woopra: about
 ---
 
+### Me
 
+I am an open minded thinker with lots of CPU cycles spent on programming. I am very much interested in backend programming where I have spent around 20 years by now. Most of it in C++ on different Unix flavours. Over half of it on Linux. If there are no constraints I would still choose FreeBSD for any new projects for many reasons.
 
-### ... me
-I am a C++ and Unix programmer. During my daytime job I spend time with other topics too, but I beleive this is where I am best. I work on [VirtDB](http://www.virtdb.com)
+I am deeply interested in Economics, Econometrics, Statistics and Financial markets as well. And of course very much interested in bitcoin and blockchain technologies. I see great potential and caveats there.
 
-### ... this blog
-This is a notebook or information store about topics I think worst sharing.
+At my daytime job I work on [VirtDB](http://www.virtdb.com) which is another area of my interests. Databases and data integration.
+
+If you want to know more about me, [my LinkedIn page](https://hu.linkedin.com/in/davidbeckhungary) would give you more details.
