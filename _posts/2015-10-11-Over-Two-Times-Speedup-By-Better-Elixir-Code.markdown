@@ -11,7 +11,7 @@ tags:
 desc: Two and a half times speedup gained by writing better Elixir code in the critical path of my TCP server
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
-twimage: http://dbeck.github.io/images/TripleClient.png
+twimage: http://dbeck.github.io/images/BatchPerf.png
 woopra: batchmsgex
 ---
 
