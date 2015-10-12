@@ -25,6 +25,10 @@ My gut feeling was that I am doing a mistake in the Elixir program that needs to
 
 This experiment improved both the OS call issues and the Elixir code improved quite a bit. The result is roughly **250k messages per second**.
 
+**Update**: you may be also interested in the last post in this series:
+
+ - [over 2M messages per second](/Passing-Millions-Of-Small-TCP-Messages-in-Elixir/) achieved by removing the usage of the Task module
+
 ### The results
 
 ```
