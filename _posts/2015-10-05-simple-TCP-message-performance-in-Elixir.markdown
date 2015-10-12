@@ -26,6 +26,12 @@ I am interested in distributed, networked problems where Elixir is said to be go
 
 I expect my TCP server to send back the message ID as an acknowledgement. I will create a C++ client to send the messages and check the ACKs. They will operate in lock-step, so the C++ client will send the new message when it verified the acknowledgment. 
 
+**Update**: you may be also interested in the next three posts in this series:
+
+ - [100k messages per second](/Four-Times-Speedup-By-Throttling/) achieved by the introduction of reply throttling
+ - [250k messages per second](/Over-Two-Times-Speedup-By-Better-Elixir-Code/) achieved by better use of Elixir pattern matching
+ - [over 2M messages per second](/Passing-Millions-Of-Small-TCP-Messages-in-Elixir/) achieved by removing the usage of the Task module
+
 ### Measurement
 
 I am interested to see how many messages will go through this setup per second on average. I don't want to create any scientific measurement, neither want to compare this with other languages or solutions. I already know that this solution is not good. I only want a rough figure how would this perform on my laptop's loopback network.
