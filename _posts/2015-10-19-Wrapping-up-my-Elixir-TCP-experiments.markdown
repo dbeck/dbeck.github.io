@@ -11,8 +11,8 @@ tags:
 desc: Wrapping up my Elixir TCP experiments
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
-twimage: http://dbeck.github.io/images/ThrottledReply.png
-woopra: syncmsgex
+twimage: http://dbeck.github.io/images/observer-wrap-single-client.png
+woopra: asyncmsgex
 ---
 
 In this post I close my TCP small message experiment series in Elixir. Since my last post I further improved the small message server both in terms of performance and it became more Elixir-ish.
