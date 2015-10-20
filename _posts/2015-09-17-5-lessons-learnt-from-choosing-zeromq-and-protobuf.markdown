@@ -1,7 +1,7 @@
 ---
 published: true
 layout: post
-category: ZeroMQ
+category: Other
 tags: 
   - 0mq
   - protobuf

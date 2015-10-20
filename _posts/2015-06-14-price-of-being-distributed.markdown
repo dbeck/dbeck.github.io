@@ -1,7 +1,7 @@
 ---
 published: true
 layout: post
-category: programming
+category: Other
 tags: 
   - slowdata
   - bigdata

@@ -1,7 +1,7 @@
 ---
 published: true
 layout: post
-category: database
+category: Other
 tags: 
   - database
   - integration

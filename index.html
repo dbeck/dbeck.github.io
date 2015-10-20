@@ -1,13 +1,60 @@
 ---
 layout: default
 title: dbeck blog
+woopra: mainpage
 ---
 
-<div id="home">
-  <h1>Blog Posts</h1>
+<div id="about" style="float: none">
+  <span><img src="/images/DSCF5591.JPG" alt="Me" width="40%" style="float: left; padding-right: 10px"></span>
+  <span>
+    <p>
+      I am an open minded thinker with lots of CPU cycles spent on programming. I am a software developer by trade, interested in a wide range of topics including economics, maths, statistics and financial markets.
+    </p>
+    <p>
+      I am very much interested in backend programming where I have spent around 20 years. Most of it in C++ on different Unix flavours. Over half of it on Linux.
+    </p>
+    <p>
+      I am leading the development of <a href="http://virtdb.com">VirtDB</a> during may daytime job and learning Elixir for fun in my sparetime. If you want to know more about me, I am on <a href="https://hu.linkedin.com/in/davidbeckhungary">LinkedIn</a> too.
+    </p>
+  </span>
+</div>
+
+<div id="home" style="float: left">
+ 
+  <h1>Elixir</h1>
   <ul class="posts">
     {% for post in site.posts %}
+      {% if post.category == 'Elixir' %}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
     {% endfor %}
   </ul>
+  
+  <h1>IoT</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      {% if post.category == 'IoT' %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  
+  <h1>Startup</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      {% if post.category == 'Startup' %}
+        <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  
+  <h1>Other</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      {% if post.category != 'Elixir' and post.category != 'IoT' and post.category != 'Startup' %}
+        <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  
 </div>

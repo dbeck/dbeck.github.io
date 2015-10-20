@@ -2,7 +2,7 @@
 layout: post
 title: About
 permalink: /about/
-category: me
+category: Other
 tags: 
   - dbeck
   - about

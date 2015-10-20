@@ -1,7 +1,7 @@
 ---
 published: true
 layout: post
-category: distributed
+category: Other
 tags: 
   - elixir
   - distributed

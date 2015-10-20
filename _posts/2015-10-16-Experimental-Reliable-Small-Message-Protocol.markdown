@@ -1,7 +1,7 @@
 ---
 published: true
 layout: post
-category: Elixir
+category: Other
 tags: 
   - reliable
   - performance
