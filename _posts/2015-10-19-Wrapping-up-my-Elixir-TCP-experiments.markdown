@@ -28,7 +28,7 @@ In this post I recap what caused performance loss in my code and what made possi
 
 ### Github repo
 
-Previously I inlined the codes into my posts which I believe is not very convenient if you want to experiment. The github repo is available [here](https://github.com/dbeck/tcp_ex_playground). Feel free to clone.
+Previously I inlined the codes into my posts which I believe is not very convenient if you want to experiment. The github repo is available [here](https://github.com/dbeck/tcp_ex_playground). Feel free to clone or fork.
 
 I slightly renamed the files and the modules:
 
