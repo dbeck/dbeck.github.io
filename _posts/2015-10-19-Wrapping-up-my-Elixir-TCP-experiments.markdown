@@ -92,3 +92,79 @@ The message structure in this experiment has three parts:
 At my first naive attempt I did two reads to receive messages. First I read the two fixed length fields and then, based on the ```Payload size``` I read the payload. [This was very slow](https://github.com/dbeck/tcp_ex_playground/blob/master/lib/throttle_ack_handler.ex#L44-L62).
 
 Then I decided to do as big reads as available from the network and try to parse whatever I had. This can be tricky because the data may be split between subsequent reads. [Solving this in Elixir](https://github.com/dbeck/tcp_ex_playground/blob/master/lib/head_rest_handler.ex#L55-L71) turned out to be very easy.
+
+### UPDATE: Linux performance
+
+I only tested on my Macbook Air which I thought is OK as long as my goal is to improve my Elixir skills by polishing this experiment. Thanks to Panagiotis PJ Papadomitsos' comments I checked this on a spare Linux box too. This is around 7 years old box running Linux non-virtualized. I have a few other boxes at work but they all running VMware VMs, so as per Panagiotis' suggestion may not be the best for these test.
+
+**Here are the results:**
+
+ 
+| XX                                  | RequestReply | Throttle | HeadRest | SyncAck | AsyncAck |
+| ----------------------------------- | ------------ | -------- | -------- | ------- | -------- |
+| Deafult Settings                    |          20k |      30k |      78k |   1380k |     780k |
+| +K true                             |          19k |      30k |      78k |   1380k |     780k |
+| +K false +sbwt none                 |          20k |      30k |      80k |   1400k |     790k |
+| +K false +sbwt none +swt very_high  |          20k |      30k |      78k |   1380k |     790k |
+| +K false +sbwt none +swt very_low   |          20k |      30k |      82k |   1390k |     810k |
+
+
+**Here is the cpuinfo for this Linux machine:**
+
+```
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 23
+model name	: Genuine Intel(R) CPU           U2300  @ 1.20GHz
+stepping	: 10
+microcode	: 0xa04
+cpu MHz		: 1199.990
+cache size	: 1024 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc arch_perfmon pebs bts rep_good nopl aperfmperf pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm xsave lahf_lm dtherm tpr_shadow vnmi flexpriority
+bogomips	: 2399.98
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 23
+model name	: Genuine Intel(R) CPU           U2300  @ 1.20GHz
+stepping	: 10
+microcode	: 0xa04
+cpu MHz		: 1199.990
+cache size	: 1024 KB
+physical id	: 0
+siblings	: 2
+core id		: 1
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc arch_perfmon pebs bts rep_good nopl aperfmperf pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm xsave lahf_lm dtherm tpr_shadow vnmi flexpriority
+bogomips	: 2399.98
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+```
+
+This CPU is way slower than my Mac's so I don't want to comppare the absolut numbers. The main takeway for me is that the performance is dominated by the relation of the network performance versus the CPU power. This could have been obvious but the actual numbers are very interesting. My latest AsyncAck code that performs best on Mac becomes second on the slow Linux box. The Erlang VM settings on the other hand made little difference, I guess because the CPU power was too slow for these settings to actually matter.
+
+I start to have the feeling that writing performant Elixir code, one also need to think about the hardware where it is going to run. At least for this kind of networking code. I am saying this because the only difference between the SyncAck and AsyncAck code is that I have put the Ack processing on a separate process for which the CPU was not enough in this box. So to max out this Linux box I'd need to make a software architecture decision too. This is pretty much in contrast to what I expected. My naive feeling was that a well written Elixir code would run equally well on any computer / OS, only that the relative performance of the boxes would differ.
