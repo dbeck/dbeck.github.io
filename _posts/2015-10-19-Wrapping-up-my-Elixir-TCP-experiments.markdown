@@ -99,15 +99,23 @@ I only tested on my Macbook Air which I thought is OK as long as my goal is to i
 
 **Here are the results:**
 
- 
-| XX                                  | RequestReply | Throttle | HeadRest | SyncAck | AsyncAck |
-| ----------------------------------- | ------------ | -------- | -------- | ------- | -------- |
-| Deafult Settings                    |          20k |      30k |      78k |   1380k |     780k |
-| +K true                             |          19k |      30k |      78k |   1380k |     780k |
-| +K false +sbwt none                 |          20k |      30k |      80k |   1400k |     790k |
-| +K false +sbwt none +swt very_high  |          20k |      30k |      78k |   1380k |     790k |
-| +K false +sbwt none +swt very_low   |          20k |      30k |      82k |   1390k |     810k |
-
+<p>
+<table>
+  <tr>
+    <th>&nbsp;</th>
+    <th>RequestReply</th>
+    <th>Throttle</th>
+    <th>HeadRest</th>
+    <th>SyncAck</th>
+    <th>AsyncAck</th>
+  </tr>
+  <tr><td>Deafult Settings</td><td>20k</td><td>30k</td><td>78k</td><td>1380k</td><td>780k</td></tr>
+  <tr><td>+K true</td><td>19k</td><td>30k</td><td>78k</td><td>1380k</td><td>780k</td></tr>
+  <tr><td>+K false +sbwt none</td><td>20k</td><td>30k</td><td>80k</td><td>1400k</td><td>790k</td></tr>
+  <tr><td>+K false +sbwt none +swt very_high</td><td>20k</td><td>30k</td><td>78k</td><td>1380k</td><td>790k</td></tr>
+  <tr><td>+K false +sbwt none +swt very_low</td><td>20k</td><td>30k</td><td>82k</td><td>1390k</td><td>810k</td></tr>
+</table>
+</p>
 
 **Here is the cpuinfo for this Linux machine:**
 
