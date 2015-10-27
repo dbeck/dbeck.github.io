@@ -176,3 +176,72 @@ power management:
 This CPU is way slower than my Mac's so I don't want to compare the absolute numbers. The main takeway for me is that the performance is dominated by the relation of the network performance versus the CPU power. This could have been obvious but the actual numbers are very interesting. My latest AsyncAck code that performs best on Mac becomes second on the slow Linux box. The Erlang VM settings on the other hand made little difference, I guess because the CPU power was too slow for these settings to actually matter.
 
 I start to have the feeling that writing performant Elixir code, one also need to think about the hardware where it is going to run. At least for this kind of networking code. I am saying this because the only difference between the SyncAck and AsyncAck code is that I have put the Ack processing on a separate process for which the CPU was not enough in this box. So to max out this Linux box I'd need to make a software architecture decision too. This is pretty much in contrast to what I expected. My naive feeling was that a well written Elixir code would run equally well on any computer / OS, only that the relative performance of the boxes would differ.
+
+### UPDATE2: FreeBSD on EC2
+
+I couldn't resist to do another experiment on a c4.large EC2 instance, running FreeBSD 10. Here are the numbers:
+
+<p>
+<table>
+  <tr>
+    <th>&nbsp;</th>                   
+    <th>RequestReply</th> 
+    <th>Throttle</th> 
+    <th>HeadRest</th>
+    <th>SyncAck</th>
+    <th>AsyncAck</th>
+  </tr>
+  <tr>
+    <td>Deafult Settings</td>
+    <td>26k</td>
+    <td>150k</td>   
+    <td>302k</td>
+    <td>2600k</td>
+    <td>2400k</td>
+  </tr>
+  <tr>
+    <td>+K true</td>
+    <td>26k</td>
+    <td>155k</td>
+    <td>305k</td>
+    <td>2600k</td>
+    <td>2200k</td>
+  </tr>
+  <tr>
+    <td>+K false</td>
+    <td>26k</td>
+    <td>154k</td>
+    <td>305k</td>
+    <td>2500k</td>
+    <td>2180k</td>
+  </tr>
+  <tr>
+    <td>+K false +sbwt none</td>
+    <td>26k</td>
+    <td>154k</td>
+    <td>305k</td>
+    <td>2500k</td>
+    <td>2400k</td>
+  </tr>
+  <tr>
+    <td>+K false +sbwt none +swt very_high</td>
+    <td>26k</td>
+    <td>154k</td>
+    <td>308k</td>
+    <td>2500k</td>
+    <td>2200k</td>
+  </tr>
+  <tr>
+    <td>+K false +sbwt none +swt very_low</td>
+    <td>26k</td>
+    <td>155k</td>
+    <td>308k</td>
+    <td>2550k</td>
+    <td>2300k</td>
+  </tr>
+</table>
+</p>
+
+Interesting to see how a faster CPU and a different OS impacts the numbers. Just like on Linux, my separate ACK process that worked well in Mac OSX, hurts performance here.
+
+uname -a: ```FreeBSD ip-172-30-0-199 10.2-RELEASE FreeBSD 10.2-RELEASE #0 r286666: Wed Aug 12 15:26:37 UTC 2015 root@releng1.nyi.freebsd.org:/usr/obj/usr/src/sys/GENERIC```
