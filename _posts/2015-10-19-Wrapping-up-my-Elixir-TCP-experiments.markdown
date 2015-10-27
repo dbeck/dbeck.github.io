@@ -95,7 +95,7 @@ Then I decided to do as big reads as available from the network and try to parse
 
 ### UPDATE: Linux performance
 
-I only tested on my Macbook Air which I thought is OK as long as my goal is to improve my Elixir skills by polishing this experiment. Thanks to Panagiotis PJ Papadomitsos' comments I checked this on a spare Linux box too. This is around 7 years old box running Linux non-virtualized. I have a few other boxes at work but they all running VMware VMs, so as per Panagiotis' suggestion may not be the best for these test.
+I only tested on my Macbook Air which I thought is OK as long as my goal is to improve my Elixir skills by polishing this experiment. Thanks to Panagiotis PJ Papadomitsos' comments I checked this on a spare Linux box too. This is around 7 years old box running Linux non-virtualized. I have a few other boxes at work but they all running VMware VMs, so as per Panagiotis' suggestion may not be the best for these tests.
 
 **Here are the results:**
 
@@ -173,6 +173,6 @@ address sizes	: 36 bits physical, 48 bits virtual
 power management:
 ```
 
-This CPU is way slower than my Mac's so I don't want to comppare the absolut numbers. The main takeway for me is that the performance is dominated by the relation of the network performance versus the CPU power. This could have been obvious but the actual numbers are very interesting. My latest AsyncAck code that performs best on Mac becomes second on the slow Linux box. The Erlang VM settings on the other hand made little difference, I guess because the CPU power was too slow for these settings to actually matter.
+This CPU is way slower than my Mac's so I don't want to compare the absolute numbers. The main takeway for me is that the performance is dominated by the relation of the network performance versus the CPU power. This could have been obvious but the actual numbers are very interesting. My latest AsyncAck code that performs best on Mac becomes second on the slow Linux box. The Erlang VM settings on the other hand made little difference, I guess because the CPU power was too slow for these settings to actually matter.
 
 I start to have the feeling that writing performant Elixir code, one also need to think about the hardware where it is going to run. At least for this kind of networking code. I am saying this because the only difference between the SyncAck and AsyncAck code is that I have put the Ack processing on a separate process for which the CPU was not enough in this box. So to max out this Linux box I'd need to make a software architecture decision too. This is pretty much in contrast to what I expected. My naive feeling was that a well written Elixir code would run equally well on any computer / OS, only that the relative performance of the boxes would differ.
