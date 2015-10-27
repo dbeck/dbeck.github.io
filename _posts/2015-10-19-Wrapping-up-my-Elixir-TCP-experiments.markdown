@@ -8,6 +8,8 @@ tags:
   - TCP
   - socket
   - network
+  - Linux
+  - FreeBSD
 desc: Wrapping up my Elixir TCP experiments
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
