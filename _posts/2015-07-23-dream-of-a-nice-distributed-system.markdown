@@ -23,7 +23,7 @@ Ruby was a big disappontment there. I knew it is going to be slow just didn’t 
 Before and after this Ruby experience I spent all my career writing programs in C++. This is my preferred programming language because I know it and I am productive in C++. When C++11 and co. came out I was very excited and still am excited, BTW. I started using all the great new features like the new threading primitives and most notably I used more and more Lambda expressions. Finally I found myself that I do rapid prototyping with Lambdas and then I tend to reorganize the code I have written in classes because that is what I am used to.
 
 ### Elixir
-This was the point when I heard about Elixir and I was fortunate enough to have the time to read the [Elixir book]((https://pragprog.com/book/elixir/programming-elixir). Than everything clicked in. I realized that I should have written things in a functional language since ages.
+This was the point when I heard about Elixir and I was fortunate enough to have the time to read the [Elixir book](https://pragprog.com/book/elixir/programming-elixir). Than everything clicked in. I realized that I should have written things in a functional language since ages.
 
 I did try Erlang few years ago because I read the nice features of the Erlang VM and I saw how useful these would be in the distributed systems I worked on. The Erlang language on the other hand was not to my taste. I could write programs in it but I didn’t enjoy it. It was also well before my Lambda experiences so I didn’t feel the need to struggle with Erlang.
 
