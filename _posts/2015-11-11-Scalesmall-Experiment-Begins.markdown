@@ -68,11 +68,13 @@ I want to play around with a model similar to blockchain.
 
 ### Combine Merkle Tree and Vector Clock
 
-The purpose of [Vector Clock](https://en.wikipedia.org/wiki/Vector_clock) is to reason about causality. Blockchain reaches an agreement about events with the help of [Merkle Trees](https://en.wikipedia.org/wiki/Merkle_tree). I was wondering how cool it would be to create a vector clock that ticks hashes. It would distribute the hash of the node's view about the shared state, rather then a single counter. States would be represented in a Merkle Tree and the actual state would be represented by the actual hash value of the tree.
+The purpose of [Vector Clock](https://en.wikipedia.org/wiki/Vector_clock) is to reason about causality. Blockchain reaches an agreement about events with the help of [Merkle Trees](https://en.wikipedia.org/wiki/Merkle_tree). I was wondering how cool it would be to create a vector clock that ticks hashes. It would distribute the hash of the node's view about the shared state, rather than a single counter. States would be represented in a Merkle Tree and the actual state would be represented by the actual hash value of the tree.
 
 Example state tree would be:
 
 ```
+version: hash:
+-------- --------------------------------------
      00: b026324c6904b2a9cb4b88d6d61c81d1 ->
      01: 26ab0db90d72e28ad0ba1e22ee510510 ->
      02: 6d7fce9fee471194aa8b5b6e47267f03 ->
@@ -86,6 +88,8 @@ fork:  04A: 31d30eea8d0968d6458e0ad0027c9f80 ->
 So the Vector Clock would be like:
 
 ```
+node:    hash:                              version:
+------   --------------------------------   ------------
 NodeA:   1dcca23355272056f04fe8bf20edfce0   // @ 04
 NodeB:   1dcca23355272056f04fe8bf20edfce0   // @ 04
 NodeC:   1dcca23355272056f04fe8bf20edfce0   // @ 04
