@@ -11,7 +11,7 @@ desc: ScaleSmall Experiment Begins
 keywords: "Elixir, Distributed, Erlang, Consistent hashing, Riak-Core, Dynamo, Replicated state machine, Kafka, Scalable"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142409.JPG
-woopra: conrange1ex
+woopra: scalesmall1
 ---
 
 This is a beginning of a new Elixir experiment series. I want to play with a distributed, scalable small-message server. I firmly believe that it should be possible to reach an average of 1M small messages per server in a fault tolerant distributed setup with typical commodity hardware. Well, this means nothing, unless I tell what guarantees this system provides, constraints, etc...
@@ -60,7 +60,7 @@ Paxos and Raft are popular for solving the problem.
 
 There is a twist though. I want to use a state machine for handling node states, joins and leaves. The events are Join(Node) and Leave(Node). If we distribute these events in the same order then all nodes will have the same idea about who is in and who has left the group. 
 
-This particular case has a few interesting properties. If a node joins and leaves the group immediately then we can merge the two events, may be even omit them? The other thing is the node events are independent of each other so they can be merged. For example one node detects that NodeA left and another node detects NodeB left, then these events can be merged. So I could allow the nodes to either see a different sequence of events or transform the event sequence to an equivalent other one.
+My particular case has a few interesting properties. If a node joins and leaves the group immediately then we can merge the two events, may be even omit them? The other thing is the node events are independent of each other so they can be merged. For example one node detects that NodeA left and another node detects NodeB left, then these events can be merged. So I could allow the nodes to either see a different sequence of events or transform the event sequence to an equivalent other one.
 
 This reminds me the blockchain where people send transactions and these gets merged into a new block by the miners. In the blockchain there is no leader election but participants can still agree on a ledger which is the same at every node.
 
@@ -70,7 +70,7 @@ I want to play around with a model similar to blockchain.
 
 The purpose of [Vector Clock](https://en.wikipedia.org/wiki/Vector_clock) is to reason about causality. Blockchain reaches an agreement about events with the help of [Merkle Trees](https://en.wikipedia.org/wiki/Merkle_tree). I was wondering how cool it would be to create a vector clock that ticks hashes. It would distribute the hash of the node's view about the shared state, rather than a single counter. States would be represented in a Merkle Tree and the actual state would be represented by the actual hash value of the tree.
 
-Example state tree would be:
+**Example state tree would be**:
 
 ```
 version: hash:
@@ -85,7 +85,7 @@ fork:  04A: 31d30eea8d0968d6458e0ad0027c9f80 ->
      05: 7c5aba41f53293b712fd86d08ed5b36e ->
 ```
 
-So the Vector Clock would be like:
+**So the Vector Clock would be like**:
 
 ```
 node:    hash:                              version:
@@ -122,7 +122,7 @@ Round2: N1 (M) -> N3, N2 (M) -> N4
 Round3: N1 (M) -> N5, N2 (M) -> N6, N3 (M) -> N7, N4 (M) -> N8
 ```
 
-The idea is that when N1 sends the M message to N2 it would pass along a list of nodes that N2 is supposed to forward M. N2 would do the same, when it sends M to N4.
+The idea is when N1 sends the M message to N2 it would pass along a list of nodes that N2 is supposed to forward M to. N2 would do the same, when it sends M to N4.
 
 The algorithm would be simple. When N1 has the list of nodes, in each round it would half the node list and pass the remainder to a new node.
 
@@ -141,7 +141,7 @@ I think the guarantees a client want could be very different, depending on the u
 
 The point is that I want to delegate this decision to the client who sends the data on a per session bases rather then making this as a system wide parameter.
 
-A first sketch of this protocol is available [here](/Scalesmall-Experiment-Begins/).
+A first sketch of this protocol is available [here](/Experimental-Reliable-Small-Message-Protocol/).
 
 ### Github repo
 
