@@ -7,6 +7,7 @@ tags:
   - distributed
   - scalable
   - small-message-server
+  - scalesmall
 desc: ScaleSmall Experiment Begins
 keywords: "Elixir, Distributed, Erlang, Consistent hashing, Riak-Core, Dynamo, Replicated state machine, Kafka, Scalable"
 twcardtype: summary_large_image
