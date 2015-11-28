@@ -12,7 +12,7 @@ tags:
 desc: ScaleSmall Experiment Week Two / First Redesign w/ CRDTs
 keywords: "Elixir, Distributed, Erlang, Testing, High-performance, Scalable, CRDT"
 twcardtype: summary_large_image
-twimage: http://dbeck.github.io/images/XXX.jpg
+twimage: http://dbeck.github.io/images/DSCF5761.JPG
 woopra: scalesmallw2
 ---
 
@@ -21,6 +21,8 @@ This week I made progress by getting rid of bad ideas. I started implementing th
 Very influential talks that reinforced my feeling that I need to go back designing the shared state of ```scalesmall``` and the messaging. Let's see why.
 
 (It is worth having a look at the other videos of [StrangeLoop 2015](http://www.thestrangeloop.com/2015/sessions.html). They are great.)
+
+![CRDT](/images/DSCF5761.JPG)
 
 ### CRDTs
 
