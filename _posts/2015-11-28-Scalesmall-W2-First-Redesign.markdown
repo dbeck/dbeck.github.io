@@ -55,7 +55,7 @@ This is what I want to achieve with the messages:
 
 [Originally I thought](/Scalesmall-W1-Combininig-Events/) that sending these messages would make this happen:
 
-- agreeing what the subranges are by (```Split```)-ing these
+- agreeing what the subranges are by ```Split```-ing the subranges
 - start and stop serving a subrange (```Register``` and  ```Release```)
 - agreeing the priority list for a subrange (```Promote``` and ```Demote```)
 
