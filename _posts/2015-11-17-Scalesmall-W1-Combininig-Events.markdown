@@ -200,3 +200,9 @@ May be when this experiment progresses further, I will know more about that. Wit
 ### Plan for the next week
 
 I would like to progress with the Log structure of the shared state.
+
+### Update
+
+New episode in this experiment series:
+
+- **[Week #2: ](/Scalesmall-W2-First-Redesign/)** getting rid of bad ideas

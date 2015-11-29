@@ -150,4 +150,9 @@ I started a new MIT licensed project for this experiment at [github](https://git
 
 The first I want to implement is the facility that allows nodes join and leave the group dynamically. This will be implemented in the [group_manager application](https://github.com/dbeck/scalesmall/tree/master/apps/group_manager).
 
+### Update
 
+New episodes in this experiment series:
+
+- **[Week #1: ](Scalesmall-W1-Combininig-Events/)** combining events
+- **[Week #2: ](/Scalesmall-W2-First-Redesign/)** getting rid of bad ideas
