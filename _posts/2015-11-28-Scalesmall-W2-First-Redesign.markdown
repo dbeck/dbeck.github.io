@@ -55,11 +55,11 @@ This is what I want to achieve with the messages:
 
 [Originally I thought](/Scalesmall-W1-Combininig-Events/) that sending these messages would make this happen:
 
-- agreeing what the subranges are (```Split```)
+- agreeing what the subranges are by (```Split```)-ing these
 - start and stop serving a subrange (```Register``` and  ```Release```)
 - agreeing the priority list for a subrange (```Promote``` and ```Demote```)
 
-Now I think differently because the subrange ```Split``` intermixes very badly with the other messages. It makes a big difference to ```Split``` a subrange and then nodes ```Register``` for the subrange or first ```Register``` and then join. The same applies to ```Split``` and ```Promote```/```Demote```. On top of this ```Promote``` and ```Demote``` are not Idempotent. 
+Now I think differently because the subrange ```Split``` intermixes very badly with the other messages. It makes a big difference to ```Split``` a subrange and then nodes ```Register``` for the subrange or first ```Register``` and then ```Split```. The same applies to ```Split``` and ```Promote```/```Demote```. On top of all these ```Promote``` and ```Demote``` are not Idempotent. 
 
 ### The new protocol
 
