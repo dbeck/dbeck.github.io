@@ -17,7 +17,7 @@ twimage: http://dbeck.github.io/images/DSCF6125.JPG
 woopra: scalesmallw3
 ---
 
-I guess I am still carrying a lot from my C++ baggage and not fully grasped the idiomatic Elixir thing. Hope you will correct me and suggest better options. While implementing the CRDT for my group messages I had the feeling that I am still doing what I practiced for OO for long:
+I guess I am still carrying a lot of my C++ baggage and not fully grasped the idiomatic Elixir thing. Hope you will correct me and suggest better options. While implementing the CRDT for my group messages I had the feeling that I am still doing what I practiced for OO for long:
 
 - I model the problem space based on objects
 - These objects became Elixir modules
