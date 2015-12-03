@@ -201,8 +201,10 @@ May be when this experiment progresses further, I will know more about that. Wit
 
 I would like to progress with the Log structure of the shared state.
 
-### Update
+### Episodes
 
-New episode in this experiment series:
+- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
+- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
+- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
+- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
 
-- **[Week #2: ](/Scalesmall-W2-First-Redesign/)** getting rid of bad ideas

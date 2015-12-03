@@ -90,7 +90,9 @@ The other option would be to write a similar thing on my own. I believe there ar
 - I need to check how much history a node keeps about the map
 - the nodes who don't participate in a subrange may not want to keep too much history about it
 
-### Previous episodes
+### Episodes
 
 - [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
 - [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
+- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
+- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros

@@ -150,9 +150,10 @@ I started a new MIT licensed project for this experiment at [github](https://git
 
 The first I want to implement is the facility that allows nodes join and leave the group dynamically. This will be implemented in the [group_manager application](https://github.com/dbeck/scalesmall/tree/master/apps/group_manager).
 
-### Update
+### Episodes
 
-New episodes in this experiment series:
+- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
+- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
+- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
+- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
 
-- **[Week #1: ](Scalesmall-W1-Combininig-Events/)** combining events
-- **[Week #2: ](/Scalesmall-W2-First-Redesign/)** getting rid of bad ideas
