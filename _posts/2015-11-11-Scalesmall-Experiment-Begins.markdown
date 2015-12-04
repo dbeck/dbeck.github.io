@@ -19,7 +19,7 @@ This is a beginning of a new Elixir experiment series. I want to play with a dis
 
 The good thing is that it is an experiment. I only want to play around and share my thoughts, I don't want to plan too much ahead. My only goal is to keep my eyes open and see what I find, and try to be as unbiased as possible. This alone is not an easy task for a hardcore C++ programmer.
 
-If you look closely you may find similarities to [riak](http://docs.basho.com/riak/latest/) and [Dynamo](www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf).
+If you look closely you may find similarities to [riak](http://docs.basho.com/riak/latest/) and [Dynamo](http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf).
 
 **I want a system where**:
 
