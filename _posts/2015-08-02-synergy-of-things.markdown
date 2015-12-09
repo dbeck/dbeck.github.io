@@ -4,7 +4,6 @@ layout: post
 category: IoT
 tags: 
   - IoT
-  - synergy-of-things
   - ecosystem
 desc: How I imagine a flourishing IoT ecosystem
 keywords: "Erlang, Elixir, Distributed, Portable Native Client"

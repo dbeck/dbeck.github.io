@@ -6,8 +6,6 @@ tags:
   - reliable
   - performance
   - TCP
-  - socket
-  - network
   - reliability
 desc: Experimental protocol for passing large number of small messages reliably
 keywords: "TCP, Network, Performance, socket, experiment"

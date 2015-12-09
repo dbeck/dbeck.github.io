@@ -4,7 +4,7 @@ layout: post
 category: Other
 tags: 
   - semaphore
-  - linux
+  - Linux
 desc: System V Semaphores
 keywords: "C++, Linux, Unix, Semaphores"
 woopra: semaphores

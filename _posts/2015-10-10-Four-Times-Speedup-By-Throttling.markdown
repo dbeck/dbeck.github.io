@@ -6,9 +6,6 @@ tags:
   - elixir
   - performance
   - TCP
-  - socket
-  - network
-  - throttling
 desc: Four times speedup gained by simple redesign of how I communicate with the Elixir TCP server
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image

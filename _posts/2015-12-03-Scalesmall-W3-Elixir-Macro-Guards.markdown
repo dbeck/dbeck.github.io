@@ -5,11 +5,8 @@ category: Elixir
 tags: 
   - elixir
   - distributed
-  - scalable
-  - small-message-server
   - scalesmall
   - macro
-  - CRDT
 desc: ScaleSmall Experiment Week Three / Started Implementing the CRDTs
 keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, CRDT"
 twcardtype: summary_large_image
@@ -233,6 +230,7 @@ If you look at the code you will find instances where I check other invariants l
 - [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
 - [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
 - [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
+- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
 
 ### Need help
 

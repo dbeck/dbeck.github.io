@@ -5,8 +5,6 @@ category: Elixir
 tags: 
   - elixir
   - distributed
-  - scalable
-  - small-message-server
   - scalesmall
 desc: ScaleSmall Experiment Week One / Combining Events
 keywords: "Elixir, Distributed, Erlang, Replicated state machine, Scalable"
@@ -207,4 +205,4 @@ I would like to progress with the Log structure of the shared state.
 - [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
 - [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
 - [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-
+- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents

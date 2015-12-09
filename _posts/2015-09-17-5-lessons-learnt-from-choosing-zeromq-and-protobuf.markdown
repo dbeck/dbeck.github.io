@@ -5,7 +5,6 @@ category: Other
 tags: 
   - 0mq
   - protobuf
-  - protocol-buffers
 desc: 5 lessons learnt from choosing ZeroMQ + Protocol Buffers
 keywords: "Distributed, ZeroMQ, Protocol Buffers, Programming, Performance"
 twcardtype: summary_large_image

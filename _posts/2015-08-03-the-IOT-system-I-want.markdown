@@ -6,7 +6,6 @@ tags:
   - IoT
   - ecosystem
   - sheevaplug
-  - hawkboard
   - igep
 desc: The IOT system I want
 keywords: "IOT, Ecosystem, EndUser"

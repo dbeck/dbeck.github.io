@@ -6,8 +6,6 @@ tags:
   - elixir
   - performance
   - TCP
-  - socket
-  - network
   - Linux
   - FreeBSD
 desc: Wrapping up my Elixir TCP experiments

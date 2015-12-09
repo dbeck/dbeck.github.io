@@ -5,8 +5,6 @@ category: Elixir
 tags: 
   - elixir
   - distributed
-  - scalable
-  - small-message-server
   - scalesmall
   - CRDT
 desc: ScaleSmall Experiment Week Two / First Redesign w/ CRDTs
@@ -96,3 +94,4 @@ The other option would be to write a similar thing on my own. I believe there ar
 - [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
 - [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
 - [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
+- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents

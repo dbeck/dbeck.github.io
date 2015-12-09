@@ -6,8 +6,6 @@ tags:
   - elixir
   - performance
   - TCP
-  - socket
-  - network
 desc: Passing millions of small TCP messages in Elixir
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image

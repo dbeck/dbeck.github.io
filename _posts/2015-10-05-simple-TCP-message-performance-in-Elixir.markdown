@@ -6,8 +6,6 @@ tags:
   - elixir
   - performance
   - TCP
-  - socket
-  - network
   - ranch
 desc: Simple TCP message performance in Elixir
 keywords: "Elixir, TCP, Network, Performance, socket"

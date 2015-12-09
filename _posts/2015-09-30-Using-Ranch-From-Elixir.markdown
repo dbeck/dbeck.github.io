@@ -6,7 +6,6 @@ tags:
   - elixir
   - ranch
   - TCP
-  - erlang
 desc: Using Ranch From Elixir
 keywords: "Elixir, Ranch, Erlang, TCP"
 twcardtype: summary_large_image
