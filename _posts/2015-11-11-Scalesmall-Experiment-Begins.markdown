@@ -36,6 +36,8 @@ If you look closely you may find similarities to [riak](http://docs.basho.com/ri
 - client controlled consistency
 - lazy replicated state machine
 
+![pic](/images/P8142409.JPG)
+
 ### Consistent hashing and non-uniform nodes
 
 In some systems these two concerns are inter mixed:
