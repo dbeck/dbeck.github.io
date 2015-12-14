@@ -21,6 +21,8 @@ This post goes in reverse order, rather than starting with something abstract an
 - UDP multicast in Elixir
 - UDP multicast in general
 - Logarithmic TCP broadcast
+- Combining UDP multicast and the logarithmic broadcast
+- How do all these fit into scalesmall
 
 ![friends](/images/DSCF4245.JPG)
 
@@ -31,7 +33,7 @@ To do UDP multicast in Elixir I have multiple options:
 - use the [meh/elixir-socket](https://github.com/meh/elixir-socket) library
 - use the [Erlang gen_udp](http://www.erlang.org/doc/man/gen_udp.html) 
 
-I tried `elixir-socket` first and couldn't get it working in an hour. There is no doc about the UDP multicast, so I started dig into the code and realized that it is a convenience layer on top of `gen_udp`. What I found very disturbing is that the original Erlang keywords are mapped to similar looking, different keywords. While `gen_udp` is documented, the magic in `elixir-socket` is not, so I decided to go with the gen_udp.
+I tried `elixir-socket` first and couldn't get it working in an hour. There is no doc about the UDP multicast, so I started to dig into the code and realized that it is a convenience layer on top of `gen_udp`. What I found very disturbing is that the original Erlang keywords are mapped to similar looking, but different keywords. While `gen_udp` is documented, the magic in `elixir-socket` is not, so I decided to rather go with the gen_udp.
 
 #### Multicast receiver
 
@@ -105,9 +107,9 @@ I only pick interesting parts of this topic and include references for the borin
 
 #### Multicast address and membership
 
-UDP multicast is an interesting animal, because using this impacts the link layer. This is in contrast with what we normally do with other UDP and TCP sockets when we operate above that and don't mess with the MAC addresses. I think the way it got implemented in the BSD socket API is pretty much of a hack.
+UDP multicast is an interesting animal, because declaring that I want to receive multicast messages impacts the link layer. This is in contrast with what we normally do with other UDP and TCP sockets when we operate above that and don't mess with the MAC addresses. Plus I think the way it got implemented in the BSD socket API is pretty much of a hack.
 
-The multicast sockets has a corresponding link layer address which has a special mapping. Let's see how it looks:
+The multicast membership has a corresponding link layer address which has a special mapping. Let's see how it looks:
 
 ```
 $ netstat -ng
@@ -136,19 +138,21 @@ In C this would be achieved by the [setsockopt(socket, IPPROTO_ IP, IP_ ADD_MEMB
 
 #### The `active` role
 
-The Erlang's active role is a real gem. It allows us to choose between receiving the UDP messages as normal GenServer messages or we can explicitly call [recv/2 or /3](http://www.erlang.org/doc/man/gen_udp.html#recv-2) to gather the messages. I think the former method fits the OTP way a lot better.
+The Erlang's active role is a real gem. It allows us to choose between receiving the UDP messages as normal GenServer messages or we can explicitly call [recv/2 or /3](http://www.erlang.org/doc/man/gen_udp.html#recv-2) to gather the messages. I think the former method fits the OTP way a lot better. This nicer way is the so called `active mode`.
 
-If I was using `active: false` then I would need to choose between either wait indefinitely with `recv/2` or do an internal loop with `recv/3` and pick a timeout for that. Both are bad because I need to take care of the incoming other messages/GenServer commands while I am waiting for the UDP messages in `recv/[2,3]`.
+If I am in passive mode, when using `active: false` then I would need to choose between either wait indefinitely with `recv/2` or do an internal loop with `recv/3` and pick a timeout for that. Both are bad because I need to take care of the incoming other messages/GenServer commands while I am waiting for the UDP messages in `recv/[2,3]`.
 
 Because of these complications I feel more natural to use active mode as opposed to `active: false`.
 
 For the active mode I have multiple options:
 
-- **active: true** : converts all incoming messages to GenServer messages and passes them to `handle_info`. This is pretty dangerous as the network can overflow the Erlang message queue
+- **active: true** : converts all incoming messages to GenServer messages and passes them right away to `handle_info`. This is pretty dangerous as the network can overflow the Erlang message queue
 - **active: :once** : passes one single incoming message to `handle_info` and then it switches back to passive. To continue as an active socket we need to shoot `:inet.setopts(socket, [active: :once])` again. This allows nice control over the socket.
 - **active: NUMBER** : passes NUMBER messages to `handle_info` and decrement NUMBER until it reaches zero, when it becomes passive. We can call `:inet.setopts(socket, [active: INCREMENT])` where the INCREMENT number will be added to the actual NUMBER.
 
 I like this latter option most, because it allows a bounded number of messages to be enqueued in the Erlang message queue.
+
+If you look at the example code above you can see that I used `active: 10` to start with a 10 element buffer and I called `:inet.setopts(socket, [active: 1])` in handle_info(...) to compensate for the message I just processed.
 
 #### Erlang IP addresses in Elixir
 
@@ -166,22 +170,74 @@ These I guess is obvious if you have spent some time in the Erlang world. But I 
 
 ### UDP multicast in general
 
-The best part of UDP multicast is that it sits between unicast and broadcast and allows selective reception of multicasted messages. At the same time I can shoot a single message to multiple hosts. Multicast also has limitations, like it may or may not work on WANs, because of not all routers allow multicast.
+The best part of UDP multicast is that it sits between unicast and broadcast and allows selective reception of multicasted messages. At the same time I can shoot a single message to multiple hosts. Multicast also has limitations, like it may or may not work on WANs, because not all routers allow multicast. The multicast address you choose also has impact on its scope. It can be local, site only, global, etc... The TTL field also limits how far the packet reaches.
+
+There are lots of good literature about UDP multicast. I recommend [Unix Network Programming, Volume 1: The Sockets Networking API](http://www.amazon.com/Unix-Network-Programming-Volume-Networking/dp/0131411551) by W. Richard Stevens.
 
 ### Logarithmic TCP broadcast
 
-TCP by its nature is unicast. What we can do is to open as many TCP sockets as needed and send the broadcasted message on all these unicast channels. An improvement over this scenario is to delegate this broadcast job to multiple hosts, so in a lucky case the broadcast could take shorter time.
+TCP by its nature is unicast. What we can do is to open as many TCP sockets as needed and send the broadcasted message on all these unicast channels in a loop. An improvement over this scenario is to delegate this broadcast job to multiple hosts, so in a lucky case the broadcast could take shorter time.
 
 The idea I have for the delegation is to send a `NodeList` together with the `Message` to the next hop, so the next hop is requested to pass the `Message` to the nodes in the `NodeList`.
 
 ```
-broadcast(node, node_list, message)
+ Chatter@HOST(node_list, message)
 ```
 
-To illustrate the algorithm I 
+Let's suppose I have 8 nodes [N1, N2, N3, N4, N5, N6, N7, N8] and want to distribute M message to these. Then I would call Chatter on N1 like this:
 
+```
+ Round 1:
+ --------
+ Client -> Chatter@N1([N1, N2, N3, N4, N5, N6, N7, N8], M)
+ # M gets delivered locally at N1
+ # --> M delivered at N1
 
+ Round 2:
+ -------- 
+ # N1 halves the remaining list => [N2, N3, N4, N5]
+ Chatter@N1 -> Chatter@N2([N2, N3, N4, N5], M)
+ # M gets delivered locally at N2
+ # --> M delivered at N1, N2
+ 
+ Round 3:
+ --------
+ # N1 halves the remaining list -> [N6, N7]
+ # N2 halves its remaining list -> [N3, N4]
+ Chatter@N1 -> Chatter@N6([N6, N7], M)
+ # M gets delivered locally at N6
+ Chatter@N2 -> Chatter@N3([N3, N4], M)
+ # M gets delivered locally at N3
+ # --> M delivered at N1, N2, N3, N6
+ 
+ Round 4:
+ --------
+ Chatter@N1 -> Chatter@N5([N8], M)
+ # M gets delivered locally at N8
+ Chatter@N2 -> Chatter@N5([N5], M)
+ # M gets delivered locally at N5
+ Chatter@N3 -> Chatter@N4([N4], M)
+ # M gets delivered locally at N4
+ Chatter@N6 -> Chatter@N7([N7], M)
+ # M gets delivered locally at N7
+ # --> M delivered at N1, N2, N3, N4, N5, N6, N7, N8
+```
 
+### Combining UDP multicast and the logarithmic broadcast
 
+I think the logarithmic broadcast on a LAN could cause issues as the required bandwith grows exponentially in each round. The good news is that we have just discovered UDP broadcast, so we don't need to go havoc on the LAN, but a single multicast would suffice for the local nodes.
 
+I would like my broadcast to support multi data center setups and NATed subnets too. The best solution would be to use the logarithmic TCP broadcast across subnet boundaries and within the subnet I would stick to UDP multicast. I just need to figure out which nodes receive the multicast messages.
+
+In each multicast round I would attach source information to the message which would have a Node ID plus a multicast sequence ID. The receivers of the multicast messages would record these info and attach them to the outgoing messages, both on TCP and UDP multicast. The network would slowly learn which hosts reach each other on multicast and where we need TCP.
+
+Since UDP messages are not reliable, I would randomly choose to force TCP conversation even if UDP multicast is available.
+
+### How do all these fit into scalesmall
+
+The scalesmall experiment is about building up a distributed messaging platform from zero while maximizing the fun factor. This platform should be focusing on being optimal for small messages of less than 100 bytes on average. I have the ambitious goal of doing at least 1 million small messages per node reliably.
+
+The first problem I want solve is how to form a group from a bunch of nodes. I came up with a message protocol in the [previous episode](/Scalesmall-W4-Message-Contents-Finalized/), that I have [implemented too](https://github.com/dbeck/scalesmall/tree/w4/apps/group_manager/lib/group_manager/data).
+
+I am currently working on the theory and implementation of passing the actual messages between nodes, hence this post is about the broadcast/multicast topics. So this is pretty much the beginning of an experimental gossip protocol.
 
