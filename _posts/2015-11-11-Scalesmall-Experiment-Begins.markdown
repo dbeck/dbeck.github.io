@@ -11,6 +11,7 @@ keywords: "Elixir, Distributed, Erlang, Consistent hashing, Riak-Core, Dynamo, R
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142409.JPG
 woopra: scalesmall1
+scalesmall_subscribe: true
 ---
 
 This is a beginning of a new Elixir experiment series. I want to play with a distributed, scalable small-message server. I firmly believe that it should be possible to reach an average of 1M small messages per server in a fault tolerant distributed setup with typical commodity hardware. Well, this means nothing, unless I tell what guarantees this system provides, constraints, etc...

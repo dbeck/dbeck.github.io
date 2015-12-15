@@ -12,6 +12,7 @@ keywords: "Elixir, Distributed, Erlang, Testing, High-performance, Scalable, CRD
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5761.JPG
 woopra: scalesmallw2
+scalesmall_subscribe: true
 ---
 
 This week I made progress by getting rid of bad ideas. I started implementing the messaging part. The message definitions and their operations. While doing that I had the feeling that something is wrong with the basics, just didn't know what. On a separate thread I was watching the conference presentations of [Strangeloop 2015](http://www.thestrangeloop.com/2015/sessions.html) and found ["Distributed, Eventually Consistent Computations" by Christopher Meiklejohn](https://www.youtube.com/watch?v=lsKaNDj4TrE) and ["Building Scalable Stateful Services" by Caitie McCaffrey](https://www.youtube.com/watch?v=H0i_bXKwujQ).

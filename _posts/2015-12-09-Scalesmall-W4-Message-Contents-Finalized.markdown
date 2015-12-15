@@ -12,6 +12,7 @@ keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, CRDT,
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142435.JPG
 woopra: scalesmallw4
+scalesmall_subscribe: true
 ---
 
 This week I further clarified what I want from the group membership messages and also implemented them. I added [unit tests](https://github.com/dbeck/scalesmall/tree/w4/apps/group_manager/test/group_manager/data) for all functions, so I feel more or less safe to continue with the network communication part next week.

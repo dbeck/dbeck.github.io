@@ -12,12 +12,14 @@ keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, UDP, 
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF4245.JPG
 woopra: scalesmallw5
+scalesmall_subscribe: true
 ---
 
 This post goes in reverse order, rather than starting with something abstract and progress towrads the results, I start with something that may be useful for you independent of the scalesmall experiment. Then I will slowly move to the big picture, the applicability of the useful bits in scalesmall and the rationale.
 
 **This blog post is about**:
 
+- Embed ranch
 - UDP multicast in Elixir
 - UDP multicast in general
 - Logarithmic TCP broadcast
@@ -25,6 +27,10 @@ This post goes in reverse order, rather than starting with something abstract an
 - How do all these fit into scalesmall
 
 ![friends](/images/DSCF4245.JPG)
+
+### Embed ranch
+
+[Ranch docs](http://ninenines.eu/docs/en/ranch/1.1/guide/embedded/)
 
 ### UDP multicast in Elixir
 
