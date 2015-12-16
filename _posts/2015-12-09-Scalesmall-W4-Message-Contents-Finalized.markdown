@@ -103,3 +103,4 @@ The [GroupManager.Data.Message](https://github.com/dbeck/scalesmall/blob/w4/apps
 - [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
 - [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
 - [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
+- [The sixth episode](//Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land

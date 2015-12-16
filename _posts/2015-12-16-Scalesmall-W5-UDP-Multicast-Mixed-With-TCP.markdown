@@ -15,7 +15,7 @@ woopra: scalesmallw5
 scalesmall_subscribe: true
 ---
 
-This post goes in reverse order, rather than starting with something abstract and progress towrads the results, I start with something that may be useful for you independent of the scalesmall experiment. Then I will slowly move to the big picture, the applicability of the useful bits in scalesmall and the rationale.
+This post goes in reverse order, rather than starting with something abstract and progress towards the results, I start with those things that may be useful for you independent of the scalesmall experiment. Then I will slowly move to the big picture, the applicability of the useful bits in scalesmall and the rationale.
 
 **This blog post is about**:
 
@@ -30,11 +30,48 @@ This post goes in reverse order, rather than starting with something abstract an
 
 ### Embed ranch
 
-[Ranch docs](http://ninenines.eu/docs/en/ranch/1.1/guide/embedded/)
+I am working on integrating [ranch](http://ninenines.eu/docs/en/ranch/1.1/) for accepting TCP connections. In my previous examples I used the default supervision tree under the `:ranch` application. Now I want my Listener/Acceptor/Handler stuff to sit under my supervision tree like this:
+
+![gm-tree](/images/gm-tree.png)
+
+Only a the strictly ranch specific stuff stays under the ranch tree:
+
+![ranch-tree](/images/ranch-tree.png)
+
+This [ranch doc](http://ninenines.eu/docs/en/ranch/1.1/guide/embedded/) gives hints about how to do that, but this has to be adapted to Elixir. First I need to create a supervisor spec with the help of `:ranch.child_spec` like [this](https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L43):
+
+``` Elixir
+ # copied from: https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L43
+ 
+ listener_spec = :ranch.child_spec(
+   :"GroupManager.Chatter.IncomingHandler",
+   100,
+   :ranch_tcp,
+   opts,
+   GroupManager.Chatter.IncomingHandler,
+   []
+ )
+
+```
+
+The next step is to add this into my supervision tree. In my case under `Chatter`:
+
+``` Elixir
+  # copied from: https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L60
+  
+  children = [
+    worker(PeerDB, [[], [name: PeerDB.id_atom()]]),
+    listener_spec,
+    supervisor(OutgoingSupervisor, [[], [name: OutgoingSupervisor.id_atom()]]),
+    worker(MulticastHandler, [multicast_args, [name: MulticastHandler.id_atom()]])
+  ]
+  
+  {:ok, pid} = supervise(children, strategy: :one_for_one)
+```
 
 ### UDP multicast in Elixir
 
-To do UDP multicast in Elixir I have multiple options:
+In addition to TCP I want to experiment with UDP multicast in `scalesmall`. So to do UDP multicast in Elixir I have multiple options:
 
 - use the [meh/elixir-socket](https://github.com/meh/elixir-socket) library
 - use the [Erlang gen_udp](http://www.erlang.org/doc/man/gen_udp.html) 
@@ -113,7 +150,7 @@ I only pick interesting parts of this topic and include references for the borin
 
 #### Multicast address and membership
 
-UDP multicast is an interesting animal, because declaring that I want to receive multicast messages impacts the link layer. This is in contrast with what we normally do with other UDP and TCP sockets when we operate above that and don't mess with the MAC addresses. Plus I think the way it got implemented in the BSD socket API is pretty much of a hack.
+UDP multicast is an interesting animal, because declaring that I want to receive multicast messages impacts the link layer. This is in contrast with what we normally do with other UDP and TCP sockets when we don't need to mess with the MAC addresses. (Plus I think, adding membership through `setsockopt` calls in the BSD socket API is pretty much of a hack.)
 
 The multicast membership has a corresponding link layer address which has a special mapping. Let's see how it looks:
 
@@ -162,7 +199,7 @@ If you look at the example code above you can see that I used `active: 10` to st
 
 #### Erlang IP addresses in Elixir
 
-The `gen_udp` interface is pretty rough when bad arguments are passed to it. It barks a `bad_arg` and done. This is what I got most of the time when I used `meh/elixir-socket`. The rules are simple though:
+The `gen_udp` interface is pretty rough when bad arguments are passed to it. It barks a `bad_arg` and no explanation whatsoever. It doesn't tell which argument is bad out of the 20 like possible ones. This is what I got most of the time when I used `meh/elixir-socket`. The rules are simple though:
 
 - Erlang wants tuples as IP addresses, like {224,1,1,1}
 - When I want Erlang to convert to these tuples it usually wants character lists as input
@@ -176,7 +213,7 @@ These I guess is obvious if you have spent some time in the Erlang world. But I 
 
 ### UDP multicast in general
 
-The best part of UDP multicast is that it sits between unicast and broadcast and allows selective reception of multicasted messages. At the same time I can shoot a single message to multiple hosts. Multicast also has limitations, like it may or may not work on WANs, because not all routers allow multicast. The multicast address you choose also has impact on its scope. It can be local, site only, global, etc... The TTL field also limits how far the packet reaches.
+The best part of UDP multicast is that it sits between unicast and broadcast and allows selective reception of multicasted messages. At the same time I can shoot a single message to multiple hosts. Multicast also has limitations, like it may or may not work on WANs, because not all routers allow multicast. The multicast address you choose also has and impact on the message scope/TTL. It can be local, site only, global, etc... There is also a TTL field to limit how far the packet goes.
 
 There are lots of good literature about UDP multicast. I recommend [Unix Network Programming, Volume 1: The Sockets Networking API](http://www.amazon.com/Unix-Network-Programming-Volume-Networking/dp/0131411551) by W. Richard Stevens.
 
@@ -184,7 +221,7 @@ There are lots of good literature about UDP multicast. I recommend [Unix Network
 
 TCP by its nature is unicast. What we can do is to open as many TCP sockets as needed and send the broadcasted message on all these unicast channels in a loop. An improvement over this scenario is to delegate this broadcast job to multiple hosts, so in a lucky case the broadcast could take shorter time.
 
-The idea I have for the delegation is to send a `NodeList` together with the `Message` to the next hop, so the next hop is requested to pass the `Message` to the nodes in the `NodeList`.
+The idea I have for the delegation, is to send a `NodeList` together with the `Message` to the next hop, so the next hop is requested to pass the `Message` to the nodes in the `NodeList`.
 
 ```
  Chatter@HOST(node_list, message)
@@ -229,13 +266,15 @@ Let's suppose I have 8 nodes [N1, N2, N3, N4, N5, N6, N7, N8] and want to distri
  # --> M delivered at N1, N2, N3, N4, N5, N6, N7, N8
 ```
 
+So this algorithm passed the message around in 4 steps rather than 8 as it could have been in a simple loop. The algorithm is simple, it only requires to pass distribution lists together with the messages and the nodes being able to split these lists into halves. The algorithm does O(log2 n) rounds, hence I call this `logarithmic broadcast`.
+
 ### Combining UDP multicast and the logarithmic broadcast
 
 I think the logarithmic broadcast on a LAN could cause issues as the required bandwith grows exponentially in each round. The good news is that we have just discovered UDP broadcast, so we don't need to go havoc on the LAN, but a single multicast would suffice for the local nodes.
 
 I would like my broadcast to support multi data center setups and NATed subnets too. The best solution would be to use the logarithmic TCP broadcast across subnet boundaries and within the subnet I would stick to UDP multicast. I just need to figure out which nodes receive the multicast messages.
 
-In each multicast round I would attach source information to the message which would have a Node ID plus a multicast sequence ID. The receivers of the multicast messages would record these info and attach them to the outgoing messages, both on TCP and UDP multicast. The network would slowly learn which hosts reach each other on multicast and where we need TCP.
+In each multicast round I would attach source information to the message which would have a Node ID plus a multicast sequence number. The receivers of the multicast messages would record these info and attach them to the outgoing messages, both on TCP and UDP multicast. The network would slowly learn which hosts reach each other on multicast and where we need TCP.
 
 Since UDP messages are not reliable, I would randomly choose to force TCP conversation even if UDP multicast is available.
 
@@ -247,3 +286,11 @@ The first problem I want solve is how to form a group from a bunch of nodes. I c
 
 I am currently working on the theory and implementation of passing the actual messages between nodes, hence this post is about the broadcast/multicast topics. So this is pretty much the beginning of an experimental gossip protocol.
 
+### Episodes
+
+- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
+- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
+- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
+- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
+- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
+- [The sixth episode](//Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
