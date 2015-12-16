@@ -34,7 +34,7 @@ I am working on integrating [ranch](http://ninenines.eu/docs/en/ranch/1.1/) for 
 
 ![gm-tree](/images/gm-tree.png)
 
-Only a the strictly ranch specific stuff stays under the ranch tree:
+Only the ranch specific stuff stays under the `:ranch` tree:
 
 ![ranch-tree](/images/ranch-tree.png)
 
