@@ -14,7 +14,7 @@ twimage: http://dbeck.github.io/images/IM000071.JPG
 woopra: smallmsgex
 ---
 
-I am still learning Elixir. I have programmed in a number of languages and learning new syntax is not a big deal for me. What I am more interested in is to understand what is the problem domain where the given language fits better. Few comparisons on the Internet convinced me that number crunching is not a good fit for Elixir.
+I am still learning Elixir. I have programmed in a number of languages and learning new syntax is not a big deal for me. What I am more interested in is to understand what is the problem domain where the given language fits better.
 
 I am interested in distributed, networked problems where Elixir is said to be good. I want to make a few experiments to see what I can expect. In this post I create a simple Elixir TCP server that receives small messages. These messages will have these 3 fields:
 
