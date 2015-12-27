@@ -192,6 +192,6 @@ The original idea was bad, I cannot defend that. In the next episodes I used a m
 Edge cases, that may not happen in every system:
 
 - **1)** a shared value is flipping back and forth: `A=1 -> A=2 -> A=1 ...`
-- **2)** a shared datatype and its single operation is Commutative and Associative and receives these parallel updates
+- **2)** a shared datatype and its single operation is Commutative and Associative and receives parallel updates that can be combined in different order. this would result in different histories but the same results
 
 I feel it should be possible to omit the intermediate states with the help of hashes, but I haven't spent much time with this.
