@@ -12,6 +12,7 @@ twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142409.JPG
 woopra: scalesmall1
 scalesmall_subscribe: true
+twitter_embed: true
 ---
 
 This is a beginning of a new Elixir experiment series. I want to play with a distributed, scalable small-message server. I firmly believe that it should be possible to reach an average of 1M small messages per server in a fault tolerant distributed setup with typical commodity hardware. Well, this means nothing, unless I tell what guarantees this system provides, constraints, etc...
@@ -158,4 +159,39 @@ The first I want to implement is the facility that allows nodes join and leave t
 - [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
 - [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
 - [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](//Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
+- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
+
+### Update: 2015-12-27
+
+It's been over 5 weeks since I have written the original post. During these weeks I worked a lot on the ideas above, spent time on better understanding the concepts and try out some of these. The results are mixed:
+
+- **Logarithmic broadcast**: is the thing I currently work on, but I want to mix it with UDP multicast ([more on this](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/))
+- **Client controlled consistency and fault tolerance** and **Greedy resource usage**: still on the plate and when I completed the group membership part I will focus on this
+- **Combine Merkle Tree and Vector Clock**: I no longer fancy this idea. I turned to Idempotent, Commutative, Associative datatypes instead.
+- **Non-uniform nodes**: the group membership messages are to solve this problem
+
+Two days ago Sean Cribbs (@seancribbs) had a valid comment on twitter about `Combine Merkle Tree and Vector Clock`:
+
+<blockquote class="twitter-tweet" lang="hu"><p lang="en" dir="ltr"><a href="https://twitter.com/SeanTAllen">@SeanTAllen</a> <a href="https://twitter.com/marick">@marick</a> <a href="https://twitter.com/dbeck74">@dbeck74</a> I don&#39;t follow how Merkle trees and vector clocks can become one thing</p>&mdash; 5 golden chash rings (@seancribbs) <a href="https://twitter.com/seancribbs/status/680541321266761729">2015. december 26.</a></blockquote> 
+
+Which led to further messages on twitter:
+
+<blockquote class="twitter-tweet" lang="hu"><p lang="en" dir="ltr"><a href="https://twitter.com/dbeck74">@dbeck74</a> <a href="https://twitter.com/SeanTAllen">@SeanTAllen</a> <a href="https://twitter.com/marick">@marick</a> I could see how Merkle could help in finding gaps in a causal history but they aren&#39;t more compact than VCs</p>&mdash; 5 golden chash rings (@seancribbs) <a href="https://twitter.com/seancribbs/status/680775122978869248">2015. december 26.</a></blockquote>
+
+And these:
+
+<blockquote class="twitter-tweet" lang="hu"><p lang="en" dir="ltr"><a href="https://twitter.com/dbeck74">@dbeck74</a> <a href="https://twitter.com/SeanTAllen">@SeanTAllen</a> <a href="https://twitter.com/marick">@marick</a> for instance, if you have a static topology you can remove the ids and just have a list of ints</p>&mdash; 5 golden chash rings (@seancribbs) <a href="https://twitter.com/seancribbs/status/680775427586011136">2015. december 26.</a></blockquote>
+
+I fully agree with Sean, passing hash values is not more compact than Vector Clocks and VC with static topology can omit the node id, which further cuts their size.
+
+The original idea was bad, I cannot defend that. In the next episodes I used a more vector clock like solution in my experiments. There is one bit that comes back to me from time to time:
+
+- do I really care about causality or may be what I am interested in is the state across nodes?
+- if it is state, why don't I represent the state with hashes?
+
+Edge cases, that may not happen in every system:
+
+- **1)** a shared value is flipping back and forth: `A=1 -> A=2 -> A=1 ...`
+- **2)** a shared datatype and its single operation is Commutative and Associative and receives these parallel updates
+
+I feel it should be possible to omit the intermediate states with the help of hashes, but I haven't spent much time with this.
