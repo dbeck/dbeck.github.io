@@ -84,42 +84,40 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
     <th>Remote<br/>call</th>
   </tr>
   <tr>
-    <td>Orange Pi</td>
-    <td>6.3 k/s</td>
-    <td>6.5 k/s</td>   
-    <td>17 k/s</td>
-    <td>390 k/s</td>
-    <td>330 k/s</td>
-    <td>30 MB/s</td>
-    <td>0.409 us</td>
-    <td>2.161 us</td>
+    <td>Hawkboard</td>
+    <td>680 call/s</td>
+    <td>855 call/s</td>
+    <td>2426 call/s</td>
+    <td>41 k call/s</td>
+    <td>52 k call/s</td>
+    <td>24.5 MB/s</td>
+    <td>5.478 us</td>
+    <td>21.317 us</td>
   </tr>
   <tr>
     <td>Banana Pi</td>
-    <td>6.1 k/s</td>
-    <td>8.9 k/s</td>   
-    <td>19 k/s</td>
-    <td>365 k/s</td>
-    <td>310 k/s</td>
+    <td>6.1 k call/s</td>
+    <td>8.9 k call/s</td>   
+    <td>19 k call/s</td>
+    <td>365 k call/s</td>
+    <td>310 k call/s</td>
     <td>100 MB/s</td>
     <td>0.877 us</td>
     <td>4.068 us</td>
   </tr>
   <tr>
-    <td>Hawkboard</td>
-    <td>*</td>
-    <td>*</td>   
-    <td>*</td>
-    <td>*</td>
-    <td>*</td>
-    <td>24.5 MB/s</td>
-    <td>*</td>
-    <td>*</td>
+    <td>Orange Pi</td>
+    <td>6.3 k call/s</td>
+    <td>6.5 k call/s</td>   
+    <td>17 k call/s</td>
+    <td>390 k call/s</td>
+    <td>330 k call/s</td>
+    <td>30 MB/s</td>
+    <td>0.409 us</td>
+    <td>2.161 us</td>
   </tr>
 </table>
 </p>
-
-`*` *Need to install Erlang and Elixir on the Hawkboard to fill these. At the moment my latest try failed with a new error. Will update this part later.*
 
 ### Hardware comparison
 
