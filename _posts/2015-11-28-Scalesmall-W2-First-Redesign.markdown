@@ -8,6 +8,8 @@ tags:
   - scalesmall
   - CRDT
 desc: ScaleSmall Experiment Week Two / First Redesign w/ CRDTs
+description: ScaleSmall Experiment Week Two / First Redesign w/ CRDTs
+author: David Beck
 keywords: "Elixir, Distributed, Erlang, Testing, High-performance, Scalable, CRDT"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5761.JPG

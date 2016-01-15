@@ -6,6 +6,8 @@ tags:
   - IoT
   - sheevaplug
 desc: How I started using SheevaPlug as a desktop
+description: How I started using SheevaPlug as a desktop
+author: David Beck
 keywords: "SheevaPlug, IoT, ARM"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/1013/P1010908-large.JPG

@@ -6,6 +6,8 @@ tags:
   - slowdata
   - bigdata
 desc: Price of Being Distributed
+description: Price of Being Distributed
+author: David Beck
 keywords: "C++, Linux, Unix, Queue, Kafka, BigData, Hadoop, Apache, SlowData, Performance"
 woopra: distribprice
 ---

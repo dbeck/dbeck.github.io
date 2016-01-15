@@ -10,6 +10,8 @@ tags:
   - bananapi
   - orangepi
 desc: ScaleSmall Experiment Week Six and Seven / Test environment
+description: ScaleSmall Experiment Week Six and Seven / Test environment
+author: David Beck
 keywords: "Elixir, Distributed, Erlang, Scalable, Test, Environment"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6707.JPG

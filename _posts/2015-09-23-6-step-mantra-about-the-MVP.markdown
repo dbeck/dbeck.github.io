@@ -7,6 +7,8 @@ tags:
   - MVP
   - minimum-viable-product
 desc: 6 step mantra about the MVP for software developers
+description: 6 step mantra about the MVP for software developers
+author: David Beck
 keywords: "Startup, opinion, MVP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF4993.JPG

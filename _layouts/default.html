@@ -66,6 +66,22 @@
     {% endif %}
     <!-- twitter embed ?-->
 
+    <!-- block scam -->
+    <script type=’text/javascript’>
+    window.blockme = false;
+    var blocklink = ['http://darodar.com', 'http://econom.co','http://ilovevitaly.com',
+'http://topseoservices.co' ,'http://traffic2cash.xyz' ,'http://w3javascript.com' ,'http://googlemare.com' ,'http://share-buttons.xyz'
+,'http://website-stealer.nufaq.com' ,'http://build-a-better-business.2your.site' ,'http://santasgift.ml' ,'http://topseoservices.co'
+,'http://new-look.for-your.website' ,'http://popurls.com' ,'http://smarter-content.for-your.website' ,'http://trafficgenius.xyz'
+,'http://build-audience.for-your.website' ,'http://tuicool' ,'http://happy.new.yeartwit.com' ,'http://ustart.org'
+,'http://semalt.com' ,'http://buttons-for-website.com' ,'http://top1-seo-service.com'];
+    for (var b = blocklink.length; b–;) {
+      if (document.referrer.match(blocklink[b]))
+        window.blockme = true;
+    } 
+    </script>
+    <!-- block scam -->
+
     <!-- Start of Woopra Code -->
     <script>
       (function(){
@@ -74,12 +90,12 @@
       woopra.config({
         domain: 'dbeck.github.io'
       });
-      woopra.track();
+      if( window.blockme == false ) { woopra.track(); }
     </script>
 
     {% if page.woopra %}
     <script>
-      woopra.track( "{{ page.woopra }}", { displayed: true } );
+      if( window.blockme == false ) { woopra.track( "{{ page.woopra }}", { displayed: true } ); }
     </script>
     {% endif %}
     <!-- End of Woopra Code -->
@@ -88,7 +104,10 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-<script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA'+'-63'+'922'+'309'+'-1', 'auto'); ga('send', 'pageview'); </script>
+<script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); 
+    if( window.blockme == false ) { ga('create', 'UA'+'-63'+'922'+'309'+'-1', 'auto'); ga('send', 'pageview'); }
+    else { window.location = “http://google.com/”; }
+    </script>
   </head>
 
   <body>

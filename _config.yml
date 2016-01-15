@@ -59,11 +59,16 @@ version: v1.1.0
 sass:
   style: :expanded # You might prefer to minify using :compressed
 
+# for seo
+twitter:
+  username: dbeck74
+
 # Use the following plug-ins
 gems:
   - jekyll-feed # Add feeds to jekyll
   - jekyll-archives
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
+  - jekyll-paginate
 
 # Exclude these files from your production _site
 exclude:

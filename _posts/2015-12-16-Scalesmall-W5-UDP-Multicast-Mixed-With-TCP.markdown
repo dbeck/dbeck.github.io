@@ -8,6 +8,8 @@ tags:
   - scalesmall
   - UDP-Multicast
 desc: ScaleSmall Experiment Week Five / UDP Multicast Mixed With TCP
+description: ScaleSmall Experiment Week Five / UDP Multicast Mixed With TCP
+author: David Beck
 keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, UDP, Multicast"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF4245.JPG

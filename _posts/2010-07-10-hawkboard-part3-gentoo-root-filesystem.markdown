@@ -7,6 +7,8 @@ tags:
   - hawkboard
   - Linux
 desc: Hacking Gentoo onto my HawkBoard
+description: Hacking Gentoo onto my HawkBoard
+author: David Beck
 keywords: "Hawkboard, IoT, ARM, Linux, Gentoo"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/1091/P1020018-large.JPG

@@ -6,6 +6,8 @@ tags:
   - IoT
   - igep
 desc: Third part of my Igep V2 advanture on Poky and Ubuntu land
+description: Third part of my Igep V2 advanture on Poky and Ubuntu land
+author: David Beck
 keywords: "IGEPv2, IoT, ARM, Poky, Ubuntu, Linux"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 

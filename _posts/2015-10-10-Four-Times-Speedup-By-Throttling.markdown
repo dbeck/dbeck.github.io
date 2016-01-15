@@ -7,6 +7,8 @@ tags:
   - performance
   - TCP
 desc: Four times speedup gained by simple redesign of how I communicate with the Elixir TCP server
+description: Four times speedup gained by simple redesign of how I communicate with the Elixir TCP server
+author: David Beck
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/TripleClient.png

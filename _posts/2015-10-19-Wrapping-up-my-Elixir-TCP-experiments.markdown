@@ -9,6 +9,8 @@ tags:
   - Linux
   - FreeBSD
 desc: Wrapping up my Elixir TCP experiments
+description: Wrapping up my Elixir TCP experiments
+author: David Beck
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/observer-wrap-single-client.png

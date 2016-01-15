@@ -6,6 +6,8 @@ tags:
   - semaphore
   - Linux
 desc: System V Semaphores
+description: System V Semaphores
+author: David Beck
 keywords: "C++, Linux, Unix, Semaphores"
 woopra: semaphores
 ---

@@ -6,6 +6,8 @@ tags:
   - IoT
   - igep
 desc: A few useful tips for using the IGEP-V2 device
+description: A few useful tips for using the IGEP-V2 device
+author: David Beck
 keywords: "IGEPv2, IoT, ARM, Ubuntu, Poky, Linux"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/977/P1010891-large.JPG 

@@ -8,6 +8,8 @@ tags:
   - scalesmall
   - VectorClock
 desc: ScaleSmall Experiment Week Four / Data Lib Completed
+description: ScaleSmall Experiment Week Four / Data Lib Completed
+author: David Beck
 keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, CRDT, VectorClock"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142435.JPG

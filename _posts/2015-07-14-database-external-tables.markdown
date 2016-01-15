@@ -7,6 +7,8 @@ tags:
   - impala
   - postgres
 desc: External tables in database systems
+description: External tables in database systems
+author: David Beck
 keywords: "PostgreSQL, GreenPlum, Cloudera, Impala, Drizzle"
 woopra: exttables
 ---

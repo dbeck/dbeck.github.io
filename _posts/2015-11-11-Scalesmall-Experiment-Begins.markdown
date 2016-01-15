@@ -7,6 +7,8 @@ tags:
   - distributed
   - scalesmall
 desc: ScaleSmall Experiment Begins
+description: ScaleSmall Experiment Begins
+author: David Beck
 keywords: "Elixir, Distributed, Erlang, Consistent hashing, Riak-Core, Dynamo, Replicated state machine, Kafka, Scalable"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142409.JPG

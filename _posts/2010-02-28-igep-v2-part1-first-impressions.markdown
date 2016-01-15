@@ -7,6 +7,9 @@ tags:
   - sheevaplug
   - igep
 desc: First impressions with the IGEP-V2 platform
+description: First impressions with the IGEP-V2 platform
+author: David Beck
+author: David Beck
 keywords: "IGEPv2, IoT, ARM"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 

@@ -7,6 +7,8 @@ tags:
   - performance
   - TCP
 desc: Two and a half times speedup gained by writing better Elixir code in the critical path of my TCP server
+description: Two and a half times speedup gained by writing better Elixir code in the critical path of my TCP server
+author: David Beck
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/BatchPerf.png

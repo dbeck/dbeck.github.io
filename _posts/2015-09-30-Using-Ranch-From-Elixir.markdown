@@ -7,6 +7,8 @@ tags:
   - ranch
   - TCP
 desc: Using Ranch From Elixir
+description: Using Ranch From Elixir
+author: David Beck
 keywords: "Elixir, Ranch, Erlang, TCP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P9083758.JPG

@@ -8,6 +8,8 @@ tags:
   - scalesmall
   - macro
 desc: ScaleSmall Experiment Week Three / Started Implementing the CRDTs
+description: ScaleSmall Experiment Week Three / Started Implementing the CRDTs
+author: David Beck
 keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, CRDT"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6125.JPG

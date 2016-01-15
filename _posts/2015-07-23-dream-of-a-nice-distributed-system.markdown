@@ -6,6 +6,8 @@ tags:
   - elixir
   - distributed
 desc: Dream of a nice distributed system in Elixir
+description: Dream of a nice distributed system in Elixir
+author: David Beck
 keywords: "Erlang, Elixir, Distributed, Portable Native Client"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/elixirpexe.png

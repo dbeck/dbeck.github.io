@@ -6,6 +6,8 @@ tags:
   - IoT
   - smartq
 desc: Getting started with my SmartQ V7
+description: Getting started with my SmartQ V7
+author: David Beck
 keywords: "SmartQ, IoT, ARM"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/1157/P1020036-large.JPG
