@@ -76,8 +76,9 @@
 ,'http://build-audience.for-your.website' ,'http://tuicool' ,'http://happy.new.yeartwit.com' ,'http://ustart.org'
 ,'http://semalt.com' ,'http://buttons-for-website.com' ,'http://top1-seo-service.com', 'http://quit-smoking.ga'];
     for (var b = blocklink.length; b–;) {
-      if (document.referrer.match(blocklink[b]))
+      if (document.referrer.match(blocklink[b])) {
         window.blockme = true;
+      }
     } 
     </script>
     <!-- block scam -->
