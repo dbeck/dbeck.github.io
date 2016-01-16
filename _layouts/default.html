@@ -45,9 +45,12 @@
 
     <title> {{ page.title }} </title>
     
-    <!-- twitter embed ?-->
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type=’text/javascript’>
     {% if page.twitter_embed %}
-<script>window.twttr = (function(d, s, id) {
+window.twttr = (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0],
     t = window.twttr || {};
   if (d.getElementById(id)) return t;
@@ -62,17 +65,9 @@
   };
  
   return t;
-}(document, "script", "twitter-wjs"));</script>
+}(document, "script", "twitter-wjs"));
     {% endif %}
-    <!-- twitter embed ?-->
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- block scam -->
-    <!-- Start of Woopra Code -->
-    <script type=’text/javascript’>
     var blockme = false; 
     var blocklink = ['http://darodar.com', 'http://econom.co','http://ilovevitaly.com',
 'http://topseoservices.co' ,'http://traffic2cash.xyz' ,'http://w3javascript.com' ,'http://googlemare.com' ,'http://share-buttons.xyz'
@@ -80,7 +75,7 @@
 ,'http://new-look.for-your.website' ,'http://popurls.com' ,'http://smarter-content.for-your.website' ,'http://trafficgenius.xyz'
 ,'http://build-audience.for-your.website' ,'http://tuicool' ,'http://happy.new.yeartwit.com' ,'http://ustart.org'
 ,'http://semalt.com' ,'http://buttons-for-website.com' ,'http://top1-seo-service.com', 'http://quit-smoking.ga'];
-    for (var b = blocklink.length; b–;) {
+    for (var b = blocklink.length; b--; ) {
       if (document.referrer.match(blocklink[b])) {
         blockme = true;
       }
