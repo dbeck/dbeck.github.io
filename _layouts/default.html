@@ -51,7 +51,6 @@
 
     <script type="text/javascript">
     blockme = false; 
-    skipme = false;
     var blocklink = ['http://darodar.com', 'http://econom.co','http://ilovevitaly.com',
 'http://topseoservices.co' ,'http://traffic2cash.xyz' ,'http://w3javascript.com' ,'http://googlemare.com' ,'http://share-buttons.xyz'
 ,'http://website-stealer.nufaq.com' ,'http://build-a-better-business.2your.site' ,'http://santasgift.ml' ,'http://topseoservices.co'
@@ -63,7 +62,6 @@
         blockme = true;
       }
     }
-    if (window.hostname.match('127.0.0.1')) { skipme = true; }
 
     {% if page.twitter_embed %}
 window.twttr = (function(d, s, id) {
@@ -98,10 +96,8 @@ window.twttr = (function(d, s, id) {
       var app_le = 'UA';
       var pe_ach = '922';
       var c_r = app_le+'-63'+pe_ach+'309'+'-1';  
-      // if( skipme == false ) {
-        ga('create', c_r, 'auto');  
-        ga('send', 'pageview'); 
-      //}
+      ga('create', c_r, 'auto');  
+      ga('send', 'pageview'); 
     }
     else {
       window.location = 'http://google.com/';
