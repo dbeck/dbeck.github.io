@@ -181,7 +181,7 @@ I omitted minute and second because hour illustrates my point. With a bit of pat
 - all patterns where I extracted the fields
 - and all macro invocations
 
-This is clearly no way to go. There would be an easy solution to this if I could validate `MyDate` by passing only one `MyDate` parameter rather then the extracted fields. Unfortunately I cannot do that due to the limitations of function guards. At least I could not come up with a solution so far.
+This is clearly no way to go. There would be an easy solution to this if I could validate `MyDate` by passing only one `MyDate` parameter rather than the extracted fields. Unfortunately I cannot do that due to the limitations of function guards. At least I could not come up with a solution so far.
 
 #### Third attempt: use defrecord
 
