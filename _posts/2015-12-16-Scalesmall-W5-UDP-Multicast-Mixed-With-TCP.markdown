@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - distributed
   - scalesmall
@@ -43,7 +43,7 @@ This [ranch doc](http://ninenines.eu/docs/en/ranch/1.1/guide/embedded/) gives hi
 
 ``` Elixir
  # copied from: https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L43
- 
+
  listener_spec = :ranch.child_spec(
    :"GroupManager.Chatter.IncomingHandler",
    100,
@@ -59,14 +59,14 @@ The next step is to add this into my supervision tree. In my case under `Chatter
 
 ``` Elixir
   # copied from: https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L60
-  
+
   children = [
     worker(PeerDB, [[], [name: PeerDB.id_atom()]]),
     listener_spec,
     supervisor(OutgoingSupervisor, [[], [name: OutgoingSupervisor.id_atom()]]),
     worker(MulticastHandler, [multicast_args, [name: MulticastHandler.id_atom()]])
   ]
-  
+
   {:ok, pid} = supervise(children, strategy: :one_for_one)
 ```
 
@@ -75,7 +75,7 @@ The next step is to add this into my supervision tree. In my case under `Chatter
 In addition to TCP I want to experiment with UDP multicast in `scalesmall`. So to do UDP multicast in Elixir I have multiple options:
 
 - use the [meh/elixir-socket](https://github.com/meh/elixir-socket) library
-- use the [Erlang gen_udp](http://www.erlang.org/doc/man/gen_udp.html) 
+- use the [Erlang gen_udp](http://www.erlang.org/doc/man/gen_udp.html)
 
 I tried `elixir-socket` first and couldn't get it working in an hour. There is no doc about the UDP multicast, so I started to dig into the code and realized that it is a convenience layer on top of `gen_udp`. What I found very disturbing is that the original Erlang keywords are mapped to similar looking, but different keywords. While `gen_udp` is documented, the magic in `elixir-socket` is not, so I decided to rather go with the gen_udp.
 
@@ -85,16 +85,16 @@ Here is my sample UDP multicast receiver:
 
 ``` Elixir
 defmodule MulticastReceiver do
-  
+
   use GenServer
-    
+
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, :ok, opts)
   end
-  
+
   def init (:ok) do
     udp_options = [
-      :binary, 
+      :binary,
       active:          10,
       add_membership:  { {224,1,1,1}, {0,0,0,0} },
       multicast_if:    {0,0,0,0},
@@ -102,17 +102,17 @@ defmodule MulticastReceiver do
       multicast_ttl:   4,
       reuseaddr:       true
     ]
-    
+
     {:ok, _socket} = :gen_udp.open(49999, udp_options)
   end
-  
+
   def handle_info({:udp, socket, ip, port, data}, state)
   do
     # when we popped one message we allow one more to be buffered
     :inet.setopts(socket, [active: 1])
     IO.inspect [ip, port, data]
     {:noreply, state}
-  end  
+  end
 end
 ```
 
@@ -122,7 +122,7 @@ I used `netcat` as:
 
 ```
 $ nc -u 224.1.1.1 49999
-hello 
+hello
 world
 ^C
 ```
@@ -130,7 +130,7 @@ world
 The response was:
 
 ```
-$ iex 
+$ iex
 Erlang/OTP 18 [erts-7.1] [source] [64-bit] [smp:4:4] [async-threads:10] [hipe] [kernel-poll:false] [dtrace]
 
 Interactive Elixir (1.1.1) - press Ctrl+C to exit (type h() ENTER for help)
@@ -238,12 +238,12 @@ Let's suppose I have 8 nodes [N1, N2, N3, N4, N5, N6, N7, N8] and want to distri
  # --> M delivered at N1
 
  Round 2:
- -------- 
+ --------
  # N1 halves the remaining list => [N2, N3, N4, N5]
  Chatter@N1 -> Chatter@N2([N2, N3, N4, N5], M)
  # M gets delivered locally at N2
  # --> M delivered at N1, N2
- 
+
  Round 3:
  --------
  # N1 halves the remaining list -> [N6, N7]
@@ -253,7 +253,7 @@ Let's suppose I have 8 nodes [N1, N2, N3, N4, N5, N6, N7, N8] and want to distri
  Chatter@N2 -> Chatter@N3([N3, N4], M)
  # M gets delivered locally at N3
  # --> M delivered at N1, N2, N3, N6
- 
+
  Round 4:
  --------
  Chatter@N1 -> Chatter@N5([N8], M)
@@ -289,10 +289,11 @@ I am currently working on the theory and implementation of passing the actual me
 
 ### Episodes
 
-- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
-- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
-- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
-- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
-- [The seventh episode](/Scalesmall-W6-W7-Test-environment/) is about my test environment hardware
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)

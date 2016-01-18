@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - distributed
   - scalesmall
@@ -41,7 +41,7 @@ Digging through the literature, there seem to be a wealth of clocks like version
 
 On a sidenote: I find very little literature or blog posts give a good overview about when to use which and why. People seem to focus on their results and talk about that specific niche only. If you happen to be wandering in the land of these clocks I suggest to read [Scalable and Accurate Causality Tracking for Eventually Consistent Stores](/images/dvvset-dais.pdf) by Paulo Sérgio Almeida, Carlos Baquero, Ricardo Gonçalves, Nuno Preguiça, and Victor Fonte.
 
-Reading the paper I realized that my use case could be covered with a very simple solution. The nodes need to increment and pass a counter at each state change and send this over. This is very much like the VVclient approach in the paper. 
+Reading the paper I realized that my use case could be covered with a very simple solution. The nodes need to increment and pass a counter at each state change and send this over. This is very much like the VVclient approach in the paper.
 
 ### Local Clock Module
 
@@ -99,10 +99,11 @@ The [GroupManager.Data.Message](https://github.com/dbeck/scalesmall/blob/w4/apps
 
 ### Episodes
 
-- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
-- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
-- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
-- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
-- [The seventh episode](/Scalesmall-W6-W7-Test-environment/) is about my test environment hardware
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)

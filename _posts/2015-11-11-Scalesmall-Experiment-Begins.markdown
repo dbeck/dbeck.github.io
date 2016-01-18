@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - distributed
   - scalesmall
@@ -62,7 +62,7 @@ I am a big fan of state machines. I like modelling processes with them. When I f
 
 Paxos and Raft are popular for solving the problem.
 
-There is a twist though. I want to use a state machine for handling node states, joins and leaves. The events are Join(Node) and Leave(Node). If we distribute these events in the same order then all nodes will have the same idea about who is in and who has left the group. 
+There is a twist though. I want to use a state machine for handling node states, joins and leaves. The events are Join(Node) and Leave(Node). If we distribute these events in the same order then all nodes will have the same idea about who is in and who has left the group.
 
 My particular case has a few interesting properties. If a node joins and leaves the group immediately then we can merge the two events, may be even omit them? The other thing is the node events are independent of each other so they can be merged. For example one node detects that NodeA left and another node detects NodeB left, then these events can be merged. So I could allow the nodes to either see a different sequence of events or transform the event sequence to an equivalent other one.
 
@@ -153,15 +153,6 @@ I started a new MIT licensed project for this experiment at [github](https://git
 
 The first I want to implement is the facility that allows nodes join and leave the group dynamically. This will be implemented in the [group_manager application](https://github.com/dbeck/scalesmall/tree/master/apps/group_manager).
 
-### Episodes
-
-- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
-- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
-- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
-- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
-
 ### Update: 2015-12-27
 
 It's been over 5 weeks since I have written the original post. During these weeks I worked a lot on the ideas above, spent time on better understanding the concepts and try out some of these. The results are mixed:
@@ -173,7 +164,7 @@ It's been over 5 weeks since I have written the original post. During these week
 
 Two days ago Sean Cribbs (@seancribbs) had a valid comment on twitter about `Combine Merkle Tree and Vector Clock`:
 
-<blockquote class="twitter-tweet" lang="hu"><p lang="en" dir="ltr"><a href="https://twitter.com/SeanTAllen">@SeanTAllen</a> <a href="https://twitter.com/marick">@marick</a> <a href="https://twitter.com/dbeck74">@dbeck74</a> I don&#39;t follow how Merkle trees and vector clocks can become one thing</p>&mdash; 5 golden chash rings (@seancribbs) <a href="https://twitter.com/seancribbs/status/680541321266761729">2015. december 26.</a></blockquote> 
+<blockquote class="twitter-tweet" lang="hu"><p lang="en" dir="ltr"><a href="https://twitter.com/SeanTAllen">@SeanTAllen</a> <a href="https://twitter.com/marick">@marick</a> <a href="https://twitter.com/dbeck74">@dbeck74</a> I don&#39;t follow how Merkle trees and vector clocks can become one thing</p>&mdash; 5 golden chash rings (@seancribbs) <a href="https://twitter.com/seancribbs/status/680541321266761729">2015. december 26.</a></blockquote>
 
 Which led to further messages on twitter:
 
@@ -196,3 +187,15 @@ Edge cases, that may not happen in every system:
 - **2)** a shared datatype and its single operation is Commutative and Associative and receives parallel updates that can be combined in different order. this would result in different histories but the same results
 
 I feel it should be possible to omit the intermediate states with the help of hashes, but I haven't spent much time with this.
+
+### Episodes
+
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)
+

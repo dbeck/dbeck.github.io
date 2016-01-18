@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - distributed
   - scalesmall
@@ -33,8 +33,8 @@ Let's go through these.
 ```Elixir
 defmodule GroupManager.Data.Item do
   require Record
-  Record.defrecord :item, member: nil, start_range: 0, end_range: 0xffffffff, priority: 0  
-  @type t :: record( :item, member: term, start_range: integer, end_range: integer, priority: integer )  
+  Record.defrecord :item, member: nil, start_range: 0, end_range: 0xffffffff, priority: 0
+  @type t :: record( :item, member: term, start_range: integer, end_range: integer, priority: integer )
 end
 ```
 
@@ -56,9 +56,9 @@ I don't want to force the users of this *Object* to ```require GroupManager.Data
 defmodule GroupManager.Data.Item do
 
   require Record
-  Record.defrecord :item, member: nil, start_range: 0, end_range: 0xffffffff, priority: 0  
+  Record.defrecord :item, member: nil, start_range: 0, end_range: 0xffffffff, priority: 0
   @type t :: record( :item, member: term, start_range: integer, end_range: integer, priority: integer )
-  
+
   @spec new(term) :: t
   def new(id)
   do
@@ -143,7 +143,7 @@ Now the question is how to implement this ```is_valid``` guard. It turned out th
           :erlang.element(5, unquote(data)) >= 0 and
           :erlang.element(5, unquote(data)) <= 0xffffffff and
           # start_range <= end_range
-          :erlang.element(3, unquote(data)) <= :erlang.element(4, unquote(data))          
+          :erlang.element(3, unquote(data)) <= :erlang.element(4, unquote(data))
         end
       false ->
         quote do
@@ -194,7 +194,7 @@ Same as before. I need to ```require GroupManager.Data.Item``` in order to use i
   do
     true
   end
-  
+
   def valid?(_), do: false
 ```
 
@@ -228,13 +228,14 @@ If you look at the code you will find instances where I check other invariants l
 
 ### Episodes
 
-- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
-- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
-- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
-- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
-- [The seventh episode](/Scalesmall-W6-W7-Test-environment/) is about my test environment hardware
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)
 
 ### Need help
 

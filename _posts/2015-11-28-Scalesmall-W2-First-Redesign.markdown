@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - distributed
   - scalesmall
@@ -59,7 +59,7 @@ This is what I want to achieve with the messages:
 - start and stop serving a subrange (```Register``` and  ```Release```)
 - agreeing the priority list for a subrange (```Promote``` and ```Demote```)
 
-Now I think differently because the subrange ```Split``` intermixes very badly with the other messages. It makes a big difference to ```Split``` a subrange and then nodes ```Register``` for the subrange or first ```Register``` and then ```Split```. The same applies to ```Split``` and ```Promote```/```Demote```. On top of all these ```Promote``` and ```Demote``` are not Idempotent. 
+Now I think differently because the subrange ```Split``` intermixes very badly with the other messages. It makes a big difference to ```Split``` a subrange and then nodes ```Register``` for the subrange or first ```Register``` and then ```Split```. The same applies to ```Split``` and ```Promote```/```Demote```. On top of all these ```Promote``` and ```Demote``` are not Idempotent.
 
 ### The new protocol
 
@@ -92,10 +92,11 @@ The other option would be to write a similar thing on my own. I believe there ar
 
 ### Episodes
 
-- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
-- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
-- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
-- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
-- [The seventh episode](/Scalesmall-W6-W7-Test-environment/) is about my test environment hardware
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)

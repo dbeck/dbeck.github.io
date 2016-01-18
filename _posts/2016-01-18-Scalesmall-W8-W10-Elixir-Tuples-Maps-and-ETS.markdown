@@ -6,9 +6,9 @@ tags:
   - elixir
   - scalesmall
   - ETS
-desc: ScaleSmall Experiment Week Eigth to Ten / OOP, ETS and Status
-description: ScaleSmall Experiment Week Eigth to Ten / OOP, ETS and Status
-keywords: "Elixir, Distributed, Erlang, Scalable, ETS, OOP"
+desc: ScaleSmall Experiment Week Eigth to Ten / Tuples, Maps, ETS and Status
+description: ScaleSmall Experiment Week Eigth to Ten / Tuples, Maps, ETS and Status
+keywords: "Elixir, Distributed, Erlang, Scalable, Tuple, Map, ETS, OOP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5297.JPG
 woopra: scalesmallw9
@@ -32,16 +32,16 @@ Now that I am using Elixir for some momths now, I found myself missing my dirty 
 - when I need complex data structures to represent certain objects
 - I feel better when I am sure that theses data structures meet certain conditions
 
-With C++ classes I could easily control how member variables change. I could enforce predicates and relations of member variables. It took some time to find the Elixir ways for this.
+With C++ classes I could easily control how member variables change. I could enforce predicates and relations between member variables. It took some time to find the Elixir ways for this.
 
 #### Complex structures
 
 For any non-trivial program I need data types that contain multiple members that serves the same purpose. I found two options for my purposes:
 
-- [struct](http://elixir-lang.org/getting-started/structs.html)
-- [record](http://elixir-lang.org/docs/v1.1/elixir/Record.html)
+- [defstruct ~-> Map](http://elixir-lang.org/getting-started/structs.html)
+- [defrecord ~-> Tuple](http://elixir-lang.org/docs/v1.1/elixir/Record.html)
 
-To protect myself from my ignorance while learning a new language, I feel safer, if I can make sure that the members of my data type are well defined. Plus I want to make sure that the content of the member variables meet certain conditions.
+To protect myself from my ignorance while learning a new language, I feel safer, if I can make sure that the members of my data types are well defined. Plus I want to make sure that the content of the member variables meet certain conditions.
 
 To demonstrate the idea let's imagine a `MyDate` object that:
 
@@ -54,7 +54,7 @@ Let's ignore leap years and all the different day counts in the various months. 
 
 I would like to use an Elixir module to hold all `MyDate` related functions at one place.
 
-#### First attempt using maps (structs)
+#### First attempt using maps (defstruct)
 
 ```Elixir
 defmodule MyDate do
@@ -183,7 +183,7 @@ I omitted minute and second because hour illustrates my point. With a bit of pat
 
 This is clearly no way to go. There would be an easy solution to this if I could validate `MyDate` by passing only one `MyDate` parameter rather then the extracted fields. Unfortunately I cannot do that due to the limitations of function guards. At least I could not come up with a solution so far.
 
-#### Third attempt: us defrecord
+#### Third attempt: use defrecord
 
 By using tuples instead of Maps I can improve this landscape a lot. Let's see how:
 
@@ -311,19 +311,76 @@ end
 
 #### Conclusion
 
-The major difference between tuples and maps is that the former can be validated in guard expressions. This includes the data structure and also the member values. The roots of this difference are coming from the range of [allowed expressions for guards](http://erlang.org/doc/reference_manual/expressions.html#id83710) in the BEAM VM. If you look closer you will notice that there is no support for extracting members of a map within a guard expression. For tuples there is `:erlang.element`.
+The major difference between tuples and maps is that the former can be validated in guard expressions. This includes the data structure and also the member values. The roots of this difference are coming from the [allowed expressions for guards](http://erlang.org/doc/reference_manual/expressions.html#id83710) in the BEAM VM. If you look closer you will notice that there is no support for extracting members of a map within a guard expression. For tuples there is `:erlang.element`.
 
 ### ETS
 
 Very different topic. There are lots of tutorials about ETS like [this in Elixir](http://learningelixir.joekain.com/building-a-cache-in-elixir-with-ets/) and [this one in Erlang](http://learnyousomeerlang.com/ets) and I also suggest to read the official [Elixir ETS](http://elixir-lang.org/getting-started/mix-otp/ets.html) and [Erlang ETS](http://www.erlang.org/doc/man/ets.html) docs about it.
 
-I won't start from the ETS introduction here.
+I won't introduce ETS here. The links above are truely great. This is about my findings about ETS.
 
-#### ETS and tuples
+#### Why ETS
 
+I find there are lots of knowledge in the Erlang / Elixir world that people are not explicit about. ETS is one example. Reading the Elixir tutorials and slowly digging into the language it was not clear that:
 
+1. if the idiomatic way of storing and manipulating state is through the Actor model, that is spawning a process to store the state and let it manipulate (and prohibiting other parties directly tweaking the state)
+2. plus there is already a `Hash{Dict,Map}`` family of functions
 
+then what is the advantage of using ETS? It is an in-memory storage facility that also exists in Elixir. So what is the reason why the Elixir stuff not as good as ETS?
+
+These were my questions and when I dug through the docs and posts I couldn't find a straight answer.
+
+#### My ETS theory
+
+The way I understood is that the benefit of ETS is that it is a global structure and I can access it without going through the owner. The other part of the story is the performance claims ETS docs make about its speed. I had no time comparing the speed of the HashDcit and ETS, however I see no theoretical reasons why the Elixir HashDict would need to be slower. (May be if ETS was implemented as a BIF in C? But HashDict could be a BIF too...)
+
+The first part, namely bypassing the Actor model and accessing the ETS data directly is an interesting topic. I fancy the Erlang / Elixir way of creating separate actors for tasks and let them fail if they misbehave and all the corresponding OTP theory. Putting the direct ETS access into this context, I feel like ETS is a hack. I can accept that it is needed for performance reasons, but I miss the clarity on this topic.
+
+#### Storing data in ETS
+
+Now that I have shared my doubts, let's see some of its usages.
+
+ETS stores tuples which nicely aligns with my other choice of representing data structures by `defrecord`. ETS by default uses the first element of the tuple as the key. The first element with my `defrecord` structures is the tuple's type tag. So if I want to store these records into ETS, I will need to change it like this:
+
+```Elixir
+defmodule MyDateDB do
+
+  require MyDateTime
+
+  def new_table
+  do
+    table = :ets.new(__MODULE__, [:named_table, :set, :protected, {:keypos, 2}])
+  end
+
+  def add(date)
+  when MyDateTime.is_valid(date)
+  do
+    :ets.insert(__MODULE__, date)
+  end
+end
+```
+
+This pointless example stores one `MyDateTime` object per dates. The `:protected` setting is the one that allows shared, read-only access between processes. The `:keypos 2` setting tells ETS at which position the key field is.
+
+Here is an [example](https://github.com/dbeck/scalesmall/blob/w9/apps/group_manager/lib/group_manager/chatter/peer_db.ex) from the scalesmall codebase that maintains a database of which peers had been in contact from other peers through multicast. More on this below.
 
 ### Scalesmall status
 
+I implemented the broadcast protocol I mentioned in [the seventh episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/). This features a TCP based logarithmic broadcast, with the ability to skip nodes from the broadcast tree that is accessible by UDP multicast.
+
+Given that my whole testbed sits on the same network, the nodes slowly learn about others and will omit them from the broadcast tree. The only issue with this is that UDP cannot be trusted. For that reason I always add at least one random node to the broadcast tree from those who would otherwise to be removed because of the multicast information.
+
+I developed the [group membership messages](https://github.com/dbeck/scalesmall/tree/w9/apps/group_manager/lib/group_manager/data) weeks ago, so my current task is to combine the broadcast and the membership implementations. When that is done I plan to make a long article about the `scalesmall` group membership in general.
+
+The broadcast implementation is in the [Chatter folder](https://github.com/dbeck/scalesmall/tree/w9/apps/group_manager/lib/group_manager/chatter) and the [Chatter.ex](https://github.com/dbeck/scalesmall/blob/w9/apps/group_manager/lib/group_manager/chatter.ex). I know it lacks documentation, so that together with my article has a high priority.
+
 ### Episodes
+
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)

@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - scalesmall
   - IoT
@@ -54,7 +54,7 @@ Setting up the board was like a breeze, the easiest of all. The other great feat
 
 ![orange pi plus](/images/orange-pi-plus.jpg)
 
-I bought the 
+I bought the
 [Orange Pi Plus](http://www.aliexpress.com/item/Orange-Pi-plus-H3-Quad-Core-1-6GHZ-1GB-RAM-4K-Open-source-development-board-banana/32248189300.html) for this experiment recently from Aliexpress for $43.05 including shipping.
 
 The main strength of the board is the quad core CPU running at 1.6 GHZ. This is the fastest in the testbed. The SATA speed is limited by the USB-SATA bridge. I measure 30MB/s sequential reads from the disk.
@@ -74,9 +74,9 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
 <p>
 <table>
   <tr>
-    <th>&nbsp;</th>                   
-    <th>Request<br/>Reply</th> 
-    <th>Throttle</th> 
+    <th>&nbsp;</th>
+    <th>Request<br/>Reply</th>
+    <th>Throttle</th>
     <th>Head<br/>Rest</th>
     <th>Sync<br/>Ack</th>
     <th>Async<br/>Ack</th>
@@ -98,7 +98,7 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
   <tr>
     <td>Banana Pi</td>
     <td>6.1 k call/s</td>
-    <td>8.9 k call/s</td>   
+    <td>8.9 k call/s</td>
     <td>19 k call/s</td>
     <td>365 k call/s</td>
     <td>310 k call/s</td>
@@ -109,7 +109,7 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
   <tr>
     <td>Orange Pi</td>
     <td>6.3 k call/s</td>
-    <td>6.5 k call/s</td>   
+    <td>6.5 k call/s</td>
     <td>17 k call/s</td>
     <td>390 k call/s</td>
     <td>330 k call/s</td>
@@ -125,10 +125,10 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
 <p>
 <table>
   <tr>
-    <th>&nbsp;</th>                   
-    <th>Hawkboard</th> 
-    <th>Orange Pi<br/>Plus</th> 
-    <th>Banana Pi<br/>M1</th> 
+    <th>&nbsp;</th>
+    <th>Hawkboard</th>
+    <th>Orange Pi<br/>Plus</th>
+    <th>Banana Pi<br/>M1</th>
   </tr>
   <tr>
     <td>CPU</td>
@@ -192,10 +192,11 @@ When I see my software running great on this hardware environment I will move to
 
 ### Episodes
 
-- [First episode](/Scalesmall-Experiment-Begins/) started with lots of ideas
-- [The second episode](/Scalesmall-W1-Combininig-Events/) continued with more ideas and the now obsolete protocol
-- [The third episode](/Scalesmall-W2-First-Redesign/) is about getting rid of bad ideas and diving into CRDTs
-- [The fourth episode](/Scalesmall-W3-Elixir-Macro-Guards/) is detour at the lands of function guard macros
-- [The fifth episode](/Scalesmall-W4-Message-Contents-Finalized/) finalized the message contents
-- [The sixth episode](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/) is a tour on the UDP multicast and TCP land
-- [The seventh episode](/Scalesmall-W6-W7-Test-environment/) is about my test environment hardware
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)
