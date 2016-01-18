@@ -83,7 +83,7 @@ window.twttr = (function(d, s, id) {
   return t;
 }(document, "script", "twitter-wjs"));
     {% endif %}
-      if( blockme == false and skipme == false ) { 
+      if( blockme == false ) { 
         (function(){
           var t,i,e,n=window,o=document,a=arguments,s="script",r=["config","track","identify","visit","push","call","trackForm","trackClick"],c=function(){var t,i=this;for(i._e=[],t=0;r.length>t;t++)(function(t){i[t]=function(){return i._e.push([t].concat(Array.prototype.slice.call(arguments,0))),i}})(r[t])};for(n._w=n._w||{},t=0;a.length>t;t++)n._w[a[t]]=n[a[t]]=n[a[t]]||new c;i=o.createElement(s),i.async=1,i.src="//static.woopra.com/js/t/5.js",e=o.getElementsByTagName(s)[0],e.parentNode.insertBefore(i,e)})("woopra");
 
@@ -98,10 +98,10 @@ window.twttr = (function(d, s, id) {
       var app_le = 'UA';
       var pe_ach = '922';
       var c_r = app_le+'-63'+pe_ach+'309'+'-1';  
-      if( skipme == false ) {
+      // if( skipme == false ) {
         ga('create', c_r, 'auto');  
         ga('send', 'pageview'); 
-      }
+      //}
     }
     else {
       window.location = 'http://google.com/';
