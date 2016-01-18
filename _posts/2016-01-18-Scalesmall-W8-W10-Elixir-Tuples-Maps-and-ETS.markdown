@@ -27,7 +27,7 @@ While I am playing with `scalesmall` I also spend time to find a job. Right now 
 
 For me to start writing programs with functions only, using immutable variables was easy. I even enjoy it. When C++11 came out I found myself writing more and more lambda functions for rapid prototyping and trying out ideas without all the ceremony of classes.
 
-Now that I am using Elixir for some momths now, I found myself missing my dirty little classes again. Especially these things:
+Now that I am using Elixir for some months now, I found myself missing my dirty little classes again. Especially these things:
 
 - when I need complex data structures to represent certain objects
 - I feel better when I am sure that theses data structures meet certain conditions
@@ -36,7 +36,7 @@ With C++ classes I could easily control how member variables change. I could enf
 
 #### Complex structures
 
-For any non-trivial program I need data types that contain multiple members that serves the same purpose. I found two options for my purposes:
+For any non-trivial program I need data types that contain multiple members that serve the same purpose. I found two options for my purposes:
 
 - [defstruct ~-> Map](http://elixir-lang.org/getting-started/structs.html)
 - [defrecord ~-> Tuple](http://elixir-lang.org/docs/v1.1/elixir/Record.html)
@@ -175,7 +175,7 @@ defmodule MyDateTime do
 end
 ```
 
-I omitted minute and second because hour illustrates my point. With a bit of pattern matching I could reuse the validation code from the `MyDate` module. This bit of pattern matching is a pain. It introduces coupling between the structure of the module and its users. Furthermore, more levels of nesting makes the code unreadable. Also, if I rename a member or add new members, such as a `year` to MyDate, then I need to update:
+I omitted minute and second because hour illustrates my point. With a bit of pattern matching I could reuse the validation code from the `MyDate` module. This bit of pattern matching is a pain. It introduces coupling between the structure of the module and its users. Furthermore, more levels of nesting the data types would make the code unreadable. Also, if I rename a member or add new members, such as a `year` to MyDate, then I need to update:
 
 - the `is_valid` macro in `MyDate`
 - all patterns where I extracted the fields
