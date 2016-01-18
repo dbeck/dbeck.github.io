@@ -9,7 +9,6 @@ tags:
   - ranch
 desc: Simple TCP message performance in Elixir
 description: Simple TCP message performance in Elixir
-author: David Beck
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/IM000071.JPG

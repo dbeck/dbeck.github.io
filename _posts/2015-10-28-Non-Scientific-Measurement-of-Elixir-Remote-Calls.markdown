@@ -8,7 +8,6 @@ tags:
   - MacOSX
 desc: Non-Scientific measurment of the cost of calling a remote process
 description: Non-Scientific measurment of the cost of calling a remote process
-author: David Beck
 keywords: "Elixir, Performance, MacOSX"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5286.JPG

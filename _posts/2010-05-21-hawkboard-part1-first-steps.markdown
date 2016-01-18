@@ -7,7 +7,6 @@ tags:
   - hawkboard
 desc: Getting started using my HawkBoard
 description: Getting started using my HawkBoard
-author: David Beck
 keywords: "Hawkboard, IoT, ARM"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/1097/P1020019-large.JPG

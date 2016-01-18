@@ -7,7 +7,6 @@ tags:
   - protobuf
 desc: 5 lessons learnt from choosing ZeroMQ + Protocol Buffers
 description: 5 lessons learnt from choosing ZeroMQ + Protocol Buffers
-author: David Beck
 keywords: "Distributed, ZeroMQ, Protocol Buffers, Programming, Performance"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6937.JPG

@@ -9,7 +9,6 @@ tags:
   - reliability
 desc: Experimental protocol for passing large number of small messages reliably
 description: Experimental protocol for passing large number of small messages reliably
-author: David Beck
 keywords: "TCP, Network, Performance, socket, experiment"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/experimentalprotocol_combine2_red3.png

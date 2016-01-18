@@ -7,7 +7,6 @@ tags:
   - ecosystem
 desc: How I imagine a flourishing IoT ecosystem
 description: How I imagine a flourishing IoT ecosystem
-author: David Beck
 keywords: "Erlang, Elixir, Distributed, Portable Native Client"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/elixirpexe.png

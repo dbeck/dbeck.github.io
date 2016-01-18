@@ -8,7 +8,6 @@ tags:
   - Linux
 desc: My HawkBoard starts using a SATA disk
 description: My HawkBoard starts using a SATA disk
-author: David Beck
 keywords: "Hawkboard, IoT, ARM, SATA, Disk, Gentoo, Linux"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/1061/P1020013-large.JPG

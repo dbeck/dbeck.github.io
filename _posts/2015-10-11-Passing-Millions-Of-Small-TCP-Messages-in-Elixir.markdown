@@ -8,7 +8,6 @@ tags:
   - TCP
 desc: Passing millions of small TCP messages in Elixir
 description: Passing millions of small TCP messages in Elixir
-author: David Beck
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/ThrottledReply.png

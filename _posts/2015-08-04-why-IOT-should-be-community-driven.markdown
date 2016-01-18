@@ -7,7 +7,6 @@ tags:
   - ecosystem
 desc: Building up an IoT community and ecosystem
 description: Building up an IoT community and ecosystem
-author: David Beck
 keywords: "IOT, Ecosystem, EndUser, Community"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/appmkt.jpg

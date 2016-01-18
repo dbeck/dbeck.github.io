@@ -8,7 +8,6 @@ tags:
   - Linux
 desc: Fourth part of my Igep V2 advanture on Gentoo
 description: Fourth part of my Igep V2 advanture on Gentoo
-author: David Beck
 keywords: "IGEPv2, IoT, ARM, Gentoo, Linux"
 twcardtype: summary_large_image 
 twimage: http://dbeck.github.io/images/989/P1010895-large.JPG

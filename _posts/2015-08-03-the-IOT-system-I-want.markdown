@@ -9,7 +9,6 @@ tags:
   - igep
 desc: The IOT system I want
 description: The IOT system I want
-author: David Beck
 keywords: "IOT, Ecosystem, EndUser"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/iot2.jpg
