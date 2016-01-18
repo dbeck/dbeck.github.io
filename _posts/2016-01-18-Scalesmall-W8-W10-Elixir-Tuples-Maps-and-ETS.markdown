@@ -323,8 +323,9 @@ I won't introduce ETS here. The links above are truely great. This is about my f
 
 I find there are lots of knowledge in the Erlang / Elixir world that people are not explicit about. ETS is one example. Reading the Elixir tutorials and slowly digging into the language it was not clear that:
 
-1. if the idiomatic way of storing and manipulating state is through the Actor model, that is spawning a process to store the state and let it manipulate (and prohibiting other parties directly tweaking the state)
-2. plus there is already a `Hash{Dict,Map}`` family of functions
+1. given the idiomatic way of storing and manipulating state is through the Actor model
+2. that is spawning a process to store the state and let it manipulate (and prohibiting other parties directly tweaking the state)
+3. plus there is already a `Hash{Dict,Map}`` family of functions
 
 then what is the advantage of using ETS? It is an in-memory storage facility that also exists in Elixir. So what is the reason why the Elixir stuff not as good as ETS?
 
