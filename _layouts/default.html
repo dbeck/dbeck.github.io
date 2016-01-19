@@ -51,14 +51,14 @@
 
     <script type="text/javascript">
     blockme = false; 
-    var blocklink = ['http://darodar.com', 'http://econom.co','http://ilovevitaly.com',
+    var blocklink = ['http://social-widget.xyz', 'http://darodar.com', 'http://econom.co','http://ilovevitaly.com',
 'http://topseoservices.co' ,'http://traffic2cash.xyz' ,'http://w3javascript.com' ,'http://googlemare.com' ,'http://share-buttons.xyz'
 ,'http://website-stealer.nufaq.com' ,'http://build-a-better-business.2your.site' ,'http://santasgift.ml' ,'http://topseoservices.co'
 ,'http://new-look.for-your.website' ,'http://popurls.com' ,'http://smarter-content.for-your.website' ,'http://trafficgenius.xyz'
 ,'http://build-audience.for-your.website' ,'http://tuicool' ,'http://happy.new.yeartwit.com' ,'http://ustart.org'
 ,'http://semalt.com' ,'http://buttons-for-website.com' ,'http://top1-seo-service.com', 'http://quit-smoking.ga'];
     for (var b = blocklink.length; b--; ) {
-      if (document.referrer.match(blocklink[b])) {
+      if (document.referrer.indexof(blocklink[b]) > -1) {
         blockme = true;
       }
     }
