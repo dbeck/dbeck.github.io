@@ -133,14 +133,14 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
   <tr>
     <td>CPU</td>
     <td>TI OMAP L138</td>
-    <td>Allwinner A20</td>
     <td>Allwinner H3</td>
+    <td>Allwinner A20</td>
   </tr>
   <tr>
     <td>Clock speed x Cores</td>
     <td>456 MHz x 1</td>
-    <td>1 GHz x 2</td>
     <td>1.6 GHz x 4</td>
+    <td>1 GHz x 2</td>
   </tr>
   <tr>
     <td>RAM</td>
@@ -175,8 +175,8 @@ I use my TCP test applications to compare the boards. [More about the TCP test c
   <tr>
     <td>Bogomips</td>
     <td>149 x 1</td>
-    <td>1920 x 4</td>
     <td>1436 x 2</td>
+    <td>1920 x 4</td>
   </tr>
 </table>
 </p>
