@@ -41,7 +41,7 @@ Only the ranch specific stuff stays under the `:ranch` tree:
 
 This [ranch doc](http://ninenines.eu/docs/en/ranch/1.1/guide/embedded/) gives hints about how to do that, but this has to be adapted to Elixir. First I need to create a supervisor spec with the help of `:ranch.child_spec` like [this](https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L43):
 
-``` Elixir
+```elixir
  # copied from: https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L43
 
  listener_spec = :ranch.child_spec(
@@ -57,7 +57,7 @@ This [ranch doc](http://ninenines.eu/docs/en/ranch/1.1/guide/embedded/) gives hi
 
 The next step is to add this into my supervision tree. In my case under `Chatter`:
 
-``` Elixir
+```elixir
   # copied from: https://github.com/dbeck/scalesmall/blob/w5/apps/group_manager/lib/group_manager/chatter.ex#L60
 
   children = [
@@ -83,7 +83,7 @@ I tried `elixir-socket` first and couldn't get it working in an hour. There is n
 
 Here is my sample UDP multicast receiver:
 
-``` Elixir
+```elixir
 defmodule MulticastReceiver do
 
   use GenServer
@@ -205,7 +205,7 @@ The `gen_udp` interface is pretty rough when bad arguments are passed to it. It 
 - Erlang wants tuples as IP addresses, like {224,1,1,1}
 - When I want Erlang to convert to these tuples it usually wants character lists as input
 
-``` Elixir
+```elixir
   ex(1)> "127.0.0.1" |> String.to_char_list |> :inet.parse_address
   {:ok, {127, 0, 0, 1}}
 ```

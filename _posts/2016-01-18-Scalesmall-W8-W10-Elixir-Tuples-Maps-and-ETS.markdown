@@ -56,7 +56,7 @@ I would like to use an Elixir module to hold all `MyDate` related functions at o
 
 #### First attempt using maps (defstruct)
 
-```Elixir
+```elixir
 defmodule MyDate do
   defstruct month: 1, day: 1
 
@@ -100,7 +100,7 @@ What I wanted to achieve is to validate the `MyDate` object whenever I want to w
 
 #### Second attempt: improve validation
 
-```Elixir
+```elixir
 defmodule MyDate do
   defstruct month: 1, day: 1
 
@@ -143,7 +143,7 @@ end
 
 Now the validation code has moved to the `is_valid` macro. This is nicer and also allows other modules to validate the `MyDate` object. Let's imagine I have a `MyDateTime` object like this:
 
-```Elixir
+```elixir
 defmodule MyDateTime do
 
   require MyDate
@@ -187,7 +187,7 @@ This is clearly no way to go. There would be an easy solution to this if I could
 
 By using tuples instead of Maps I can improve this landscape a lot. Let's see how:
 
-```Elixir
+```elixir
 defmodule MyDate do
 
   require Record
@@ -259,7 +259,7 @@ end
 
 Now I can validate a `MyDate` object with a single `MyDate.is_valid` macro call and as you will see it doesn't leak the internal structure into users of the `MyDate` module:
 
-```Elixir
+```elixir
 defmodule MyDateTime do
 
   require MyDate
@@ -343,7 +343,7 @@ Now that I have shared my doubts, let's see some of its usages.
 
 ETS stores tuples which nicely aligns with my other choice of representing data structures by `defrecord`. ETS by default uses the first element of the tuple as the key. The first element with my `defrecord` structures is the tuple's type tag. So if I want to store these records into ETS, I will need to change it like this:
 
-```Elixir
+```elixir
 defmodule MyDateDB do
 
   require MyDateTime

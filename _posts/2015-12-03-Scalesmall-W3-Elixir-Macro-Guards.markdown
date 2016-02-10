@@ -30,7 +30,7 @@ Let's go through these.
 
 ### Using the Record module
 
-```Elixir
+```elixir
 defmodule GroupManager.Data.Item do
   require Record
   Record.defrecord :item, member: nil, start_range: 0, end_range: 0xffffffff, priority: 0
@@ -40,7 +40,7 @@ end
 
 Let's try using this new object:
 
-```
+```elixir
 iex(2)> GroupManager.Data.Item.item
 ** (CompileError) iex:2: you must require GroupManager.Data.Item before invoking the macro GroupManager.Data.Item.item/0
     (elixir) src/elixir_dispatch.erl:98: :elixir_dispatch.dispatch_require/6
@@ -52,7 +52,7 @@ iex(3)> GroupManager.Data.Item.item
 
 I don't want to force the users of this *Object* to ```require GroupManager.Data.Item``` because I want the binding of my record structure and the Item module more transparent. For that reason I add a ```new()``` function. I want to enforce the user to fill the member in my record:
 
-```Elixir
+```elixir
 defmodule GroupManager.Data.Item do
 
   require Record
@@ -69,7 +69,7 @@ end
 
 Let's try this:
 
-```
+```elixir
 iex(2)> GroupManager.Data.Item.new
 ** (UndefinedFunctionError) undefined function: GroupManager.Data.Item.new/0
     GroupManager.Data.Item.new()
@@ -89,7 +89,7 @@ I want my module to be as defensive as possible, so whenever I receive a ```Grou
 
 I can check these invariants like this:
 
-```Elixir
+```elixir
 def myfunc({:item, member, start_range, end_range, priority})
 when
   is_nil(member) == false and
@@ -111,7 +111,7 @@ I want to validate the input everywhere so my mistakes can come out early. When 
 
 The best would be to create something like this:
 
-```Elixir
+```elixir
 def myfunc(obj)
 when is_valid(obj)
 do
@@ -121,7 +121,7 @@ end
 
 Now the question is how to implement this ```is_valid``` guard. It turned out this cannot be a simple function. It has to be a macro. I checked the Elixir sources and found how [Record.is_record was implemented](https://github.com/elixir-lang/elixir/blob/master/lib/elixir/lib/record.ex#L84). With a bit of tweaking I came up with this thing:
 
-```Elixir
+```elixir
   defmacro is_valid(data) do
     case Macro.Env.in_guard?(__CALLER__) do
       true ->
@@ -173,7 +173,7 @@ Now the question is how to implement this ```is_valid``` guard. It turned out th
 
 This is ugly, but has to be implemented once. Let's try it:
 
-```
+```elixir
 iex(2)> c = GroupManager.Data.Item.new(node())
 {:item, :nonode@nohost, 0, 4294967295, 0}
 iex(3)> GroupManager.Data.Item.is_valid(c)
@@ -187,7 +187,7 @@ true
 
 Same as before. I need to ```require GroupManager.Data.Item``` in order to use it. Let's add a few helpers to make life easier:
 
-```Elixir
+```elixir
   @spec valid?(t) :: boolean
   def valid?(data)
   when is_valid(data)
@@ -200,7 +200,7 @@ Same as before. I need to ```require GroupManager.Data.Item``` in order to use i
 
 This is now more convenient:
 
-```
+```elixir
 iex(2)> c = GroupManager.Data.Item.new(node())
 {:item, :nonode@nohost, 0, 4294967295, 0}
 iex(3)> GroupManager.Data.Item.valid?(c)
