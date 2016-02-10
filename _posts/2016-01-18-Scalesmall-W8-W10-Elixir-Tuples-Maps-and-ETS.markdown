@@ -12,7 +12,7 @@ keywords: "Elixir, Distributed, Erlang, Scalable, Tuple, Map, ETS, OOP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5297.JPG
 woopra: scalesmallw9
-scalesmall_subscribe: true
+scalesmall_subscribe: false
 ---
 
 Scalesmall in the past weeks progressed very well so I even forgot to post about it. Should I do the same again, please have a look at the [github repo](https://github.com/dbeck/scalesmall) to have a rough idea what goes on.

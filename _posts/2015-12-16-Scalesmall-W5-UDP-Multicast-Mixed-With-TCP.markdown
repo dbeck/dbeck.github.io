@@ -13,7 +13,7 @@ keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, UDP, 
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF4245.JPG
 woopra: scalesmallw5
-scalesmall_subscribe: true
+scalesmall_subscribe: false
 ---
 
 This post goes in reverse order, rather than starting with something abstract and progress towards the results, I start with those things that may be useful for you independent of the scalesmall experiment. Then I will slowly move to the big picture, the applicability of the useful bits in scalesmall and the rationale.

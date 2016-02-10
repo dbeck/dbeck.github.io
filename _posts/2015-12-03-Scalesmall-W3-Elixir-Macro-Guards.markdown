@@ -13,7 +13,7 @@ keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, CRDT"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6125.JPG
 woopra: scalesmallw3
-scalesmall_subscribe: true
+scalesmall_subscribe: false
 ---
 
 I guess I am still carrying a lot of my C++ baggage and not fully grasped the idiomatic Elixir thing. Hope you will correct me and suggest better options. While implementing the CRDT for my group messages I had the feeling that I am still doing what I practiced for OO for long:

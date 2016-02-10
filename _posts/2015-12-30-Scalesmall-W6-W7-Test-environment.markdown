@@ -15,7 +15,7 @@ keywords: "Elixir, Distributed, Erlang, Scalable, Test, Environment"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6707.JPG
 woopra: scalesmallw6
-scalesmall_subscribe: true
+scalesmall_subscribe: false
 ---
 
 I spent the past two weeks with creating my hardware test environment. This was a background task for long. I already had a few components around and I slowly ordered others when I decided how the env should look like. Before Christmas all components arrived so I could start soldering, drilling and cabling this bodge together:

@@ -12,7 +12,7 @@ keywords: "Elixir, Distributed, Erlang, Consistent hashing, Riak-Core, Dynamo, R
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142409.JPG
 woopra: scalesmall1
-scalesmall_subscribe: true
+scalesmall_subscribe: false
 twitter_embed: true
 ---
 

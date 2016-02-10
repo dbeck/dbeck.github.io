@@ -12,7 +12,7 @@ keywords: "Elixir, Distributed, Erlang, Replicated state machine, Scalable"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5689.JPG
 woopra: scalesmallw1
-scalesmall_subscribe: true
+scalesmall_subscribe: false
 ---
 
 This is the second episode of the ```scalesmall``` experiment. In the [previous post](/Scalesmall-Experiment-Begins/) I touched a few areas I want to experiment with. Since then I made a few design decisions and also progressed with the implementation.
