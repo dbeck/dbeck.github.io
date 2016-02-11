@@ -200,3 +200,5 @@ When I see my software running great on this hardware environment I will move to
 6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
 7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
 8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)
+9. [GroupManagement code works, beta](/Scalesmall-W11-W13-Group-Manager-Implementation/)
+

@@ -211,3 +211,4 @@ I would like to progress with the Log structure of the shared state.
 6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
 7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
 8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)
+9. [GroupManagement code works, beta](/Scalesmall-W11-W13-Group-Manager-Implementation/)

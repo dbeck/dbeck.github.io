@@ -383,3 +383,15 @@ These services are part of supervision tree.
 5. Make the communication secure.
 
 I realize this post became too long, so I want to dedicate one post to explain why and how are the messages idempotent, associative and commutative. Plus another post that dives more into this combination of TCP broadcast and UDP multicast.
+
+### Episodes
+
+1. [Ideas to experiment with](/Scalesmall-Experiment-Begins/)
+2. [More ideas and a first protocol that is not in use anymore](/Scalesmall-W1-Combininig-Events/)
+3. [Got rid of the original protocol and looking into CRDTs](/Scalesmall-W2-First-Redesign/)
+4. [My first ramblings about function guards](/Scalesmall-W3-Elixir-Macro-Guards/)
+5. [The group membership messages](/Scalesmall-W4-Message-Contents-Finalized/)
+6. [Design of a mixed broadcast](/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/)
+7. [My ARM based testbed](/Scalesmall-W6-W7-Test-environment/)
+8. [Experience with defstruct, defrecord and ETS](/Scalesmall-W8-W10-Elixir-Tuples-Maps-and-ETS/)
+9. [GroupManagement code works, beta](/Scalesmall-W11-W13-Group-Manager-Implementation/)
