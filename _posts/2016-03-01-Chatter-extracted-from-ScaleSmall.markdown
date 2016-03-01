@@ -256,7 +256,7 @@ Let's suppose the nodes reside on two subnets, A and B. The multicast messages d
 
 ![mixed](/images/mixed_broadcast1.png)
 
-Subnet A receive the message right away through multicast, and subnet B receives it at the second round. Subnet B receives it twice more because the second and third TCP targets will send multicast messages again while eliminating the TCP targets. If the initiator would be smarter, subnet B would receive less traffic. This optimizations is yet to be developed.
+Subnet A receive the message right away through multicast, and subnet B receives it at the second round. Subnet B receives it twice more because the second and third TCP targets will send multicast messages again while eliminating the TCP targets. If the initiator would be smarter, subnet B would receive less traffic. This optimization is yet to be developed.
 
 The end result is that both subnets receive less traffic and the message spread faster by the multicast optimization.
 
