@@ -244,7 +244,7 @@ The goal is to reduce the number of sends N1 does at the expense of a slightly l
 
 #### UDP multicast optimization
 
-`Chatter` saves the `Seen ID list` for every message it receives. Based on that it knows if other peers claim that they have received UDP multicast messages from the given node. If this indicates that we the destination does receive multicast from us then we are free to use it instead of TCP. We both would benefit since the peer will have the information sooner and the delivery is less work for us.
+`Chatter` saves the `Seen ID list` for every message it receives. Based on that it knows if other peers claim that they have received UDP multicast messages from the given node. If this indicates that the destination does receive multicast from us, then we are free to use it instead of TCP. We both would benefit since the peer will have the information sooner and the delivery is less work for us.
 
 `Chatter` replaces the `Seen ID list` and the `BroadcastID` on every packet it forwards to the information corresponds to the given node.
 
