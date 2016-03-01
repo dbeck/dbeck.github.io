@@ -121,7 +121,8 @@ The user in this example doesn't want to use the `NetID table`, so the `extract_
 The `MessageHandler` also needs to be registered so `Chatter` will know about it:
 
 ```elixir
-iex(6)> Chatter.SerializerDB.add(db_pid, handler)
+iex(6)> db_pid = Chatter.SerializerDB.locate!
+iex(7)> Chatter.SerializerDB.add(db_pid, handler)
 ```
 
 The first parameter of the message handler takes a tuple and assumes the first element to be an atom. This will be converted to string and a 32 bit checksum of this string will identify the message type both in the SerializerDB and the `Payload Type Tag` field of the message.
