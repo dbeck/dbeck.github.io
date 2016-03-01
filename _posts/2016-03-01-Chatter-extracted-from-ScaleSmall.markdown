@@ -103,8 +103,8 @@ Here is a very simple and inefficient illustration:
 
 ```elixir
 iex(1)> extract_netids_fn = fn(t) -> [] end
-iex(2)> encode_with_fn = fn(t,\_id\_map) -> :erlang.term\_to\_binary(t) end
-iex(3)> decode_with_fn = fn(b,\_id\_map) -> {:erlang.binary\_to\_term(b), <<>>} end
+iex(2)> encode_with_fn = fn(t,_id_map) -> :erlang.term_to_binary(t) end
+iex(3)> decode_with_fn = fn(b,_id_map) -> {:erlang.binary_to_term(b), <<>>} end
 iex(4)> dispatch_fn = fn(t) -> IO.inspect(["arrived", t])
   {:ok, t}
 end
