@@ -12,7 +12,7 @@ description: Chatter Quickstart Guide (0.0.11)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/log_broadcast.png
-woopra: chatter_examples
+woopra: chatterex_quickstart_v0_0_11
 scalesmall_subscribe: false
 ---
 

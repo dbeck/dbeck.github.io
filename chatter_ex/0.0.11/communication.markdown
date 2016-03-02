@@ -12,7 +12,7 @@ description: Chatter Communication Internals (0.0.11)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/chatter_message_structure.png
-woopra: chatter_examples
+woopra: chatterex_communication_v0_0_11
 scalesmall_subscribe: false
 ---
 
