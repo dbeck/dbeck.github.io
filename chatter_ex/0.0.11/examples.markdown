@@ -7,8 +7,8 @@ tags:
   - scalesmall
   - chatter
   - gossip
-desc: Chatter Examples
-description: Chatter Examples
+desc: Chatter Examples (0.0.11)
+description: Chatter Examples (0.0.11)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/tcp_broadcast.png

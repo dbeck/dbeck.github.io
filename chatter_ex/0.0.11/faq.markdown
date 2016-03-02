@@ -7,8 +7,8 @@ tags:
   - scalesmall
   - chatter
   - gossip
-desc: Chatter FAQ
-description: Chatter FAQ
+desc: Chatter FAQ (0.0.11)
+description: Chatter FAQ (0.0.11)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/mixed_broadcast1.png

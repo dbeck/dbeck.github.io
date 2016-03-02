@@ -7,8 +7,8 @@ tags:
   - scalesmall
   - chatter
   - gossip
-desc: Chatter Communication Internals
-description: Chatter Communication Internals
+desc: Chatter Communication Internals (0.0.11)
+description: Chatter Communication Internals (0.0.11)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/chatter_message_structure.png

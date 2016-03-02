@@ -7,8 +7,8 @@ tags:
   - scalesmall
   - chatter
   - gossip
-desc: Chatter Quickstart Guide
-description: Chatter Quickstart Guide
+desc: Chatter Quickstart Guide (0.0.11)
+description: Chatter Quickstart Guide (0.0.11)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/log_broadcast.png
