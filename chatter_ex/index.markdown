@@ -18,13 +18,13 @@ scalesmall_subscribe: false
 
 # Chatter for Elixir
 
-Chatter is a communication library for Elixir that combines TCP and UDP multicast to broadcast information. Chatter compresses and encrypts the messages.
+Chatter is a communication library for Elixir that combines TCP unicast and UDP multicast to broadcast information to a set of nodes. Chatter compresses and encrypts the messages.
 
 ## Releases
 
-### [0.0.11](/chatter_ex/0.0.11/) First public release
+### [0.0.11 - First public release](/chatter_ex/0.0.11/)
 
-- [The original blog post about Chatter.](/Chatter-extracted-from-ScaleSmall/)
 - [Documentation](/chatter_ex/0.0.11/)
+- [The original blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 
 # Under construction
