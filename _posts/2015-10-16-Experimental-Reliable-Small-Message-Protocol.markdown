@@ -3,9 +3,7 @@ published: true
 layout: post
 category: Other
 tags: 
-  - reliable
   - performance
-  - TCP
   - reliability
 desc: Experimental protocol for passing large number of small messages reliably
 description: Experimental protocol for passing large number of small messages reliably

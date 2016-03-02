@@ -7,6 +7,7 @@ tags:
   - distributed
   - scalesmall
   - UDP-Multicast
+  - TCP
 desc: ScaleSmall Experiment Week Five / UDP Multicast Mixed With TCP
 description: ScaleSmall Experiment Week Five / UDP Multicast Mixed With TCP
 keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, UDP, Multicast"

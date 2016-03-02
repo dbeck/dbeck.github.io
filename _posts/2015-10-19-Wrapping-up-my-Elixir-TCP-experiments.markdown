@@ -6,8 +6,6 @@ tags:
   - elixir
   - performance
   - TCP
-  - Linux
-  - FreeBSD
 desc: Wrapping up my Elixir TCP experiments
 description: Wrapping up my Elixir TCP experiments
 keywords: "Elixir, TCP, Network, Performance, socket"

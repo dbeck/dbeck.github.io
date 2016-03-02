@@ -4,7 +4,7 @@ layout: post
 category: Other
 tags: 
   - slowdata
-  - bigdata
+  - performance
 desc: Price of Being Distributed
 description: Price of Being Distributed
 keywords: "C++, Linux, Unix, Queue, Kafka, BigData, Hadoop, Apache, SlowData, Performance"

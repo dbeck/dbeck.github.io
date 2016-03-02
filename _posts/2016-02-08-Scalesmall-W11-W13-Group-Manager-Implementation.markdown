@@ -6,6 +6,7 @@ tags:
   - elixir
   - scalesmall
   - group-manager
+  - gossip
 desc: ScaleSmall Experiment Week Eleven to Thirteen / Group Manager now works
 description: ScaleSmall Experiment Week Eleven to Thirteen / Group Manager now works
 keywords: "Elixir, Distributed, Erlang, Scalable, Group, Manager"

@@ -4,7 +4,6 @@ layout: post
 category: "ScaleSmall for Elixir"
 tags:
   - elixir
-  - distributed
   - scalesmall
 desc: ScaleSmall Experiment Week One / Combining Events
 description: ScaleSmall Experiment Week One / Combining Events

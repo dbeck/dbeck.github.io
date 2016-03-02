@@ -6,6 +6,9 @@ tags:
   - elixir
   - scalesmall
   - chatter
+  - gossip
+  - UDP-Multicast
+  - TCP
 desc: Chatter extracted from ScaleSmall
 description: Chatter extracted from ScaleSmall
 keywords: "Elixir, Distributed, Erlang, Scalable, Broadcast, Multicast, UDP"

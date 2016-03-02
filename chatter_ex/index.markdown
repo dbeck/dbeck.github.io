@@ -1,16 +1,17 @@
 ---
 published: true
 layout: default
-category: Elixir
+category: "Chatter for Elixir"
 tags:
   - elixir
   - scalesmall
   - chatter
+  - gossip
 desc: Chatter main page under construction
 description: Chatter main page under construction
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast"
 twcardtype: summary_large_image
-twimage: http://dbeck.github.io/images/DSCF6936.JPG
+twimage: http://dbeck.github.io/images/mixed_broadcast1.png
 woopra: chatter_exmain
 scalesmall_subscribe: false
 ---
@@ -59,5 +60,9 @@ iex(8)> Chatter.broadcast([{:net_id, {192, 168, 1, 100}, 29999}], {:hello, "worl
 
 - [see package at github](https://github.com/dbeck/chatter_ex)
 - [the original blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
+- [Chatter FAQ](/chatter_ex/faq.html)
+- [Chatter Examples](/chatter_ex/examples.html)
+- [Chatter Communication Internals](/chatter_ex/communication.html)
+- [Chatter Quickstart Guide](/chatter_ex/quickstar.html)
 
 # Under construction

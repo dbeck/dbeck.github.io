@@ -3,12 +3,8 @@ published: true
 layout: post
 category: "ScaleSmall for Elixir"
 tags:
-  - elixir
   - scalesmall
   - IoT
-  - hawkboard
-  - bananapi
-  - orangepi
 desc: ScaleSmall Experiment Week Six and Seven / Test environment
 description: ScaleSmall Experiment Week Six and Seven / Test environment
 keywords: "Elixir, Distributed, Erlang, Scalable, Test, Environment"

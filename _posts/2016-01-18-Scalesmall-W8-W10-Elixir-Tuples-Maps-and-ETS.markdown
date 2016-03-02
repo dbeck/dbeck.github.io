@@ -6,6 +6,7 @@ tags:
   - elixir
   - scalesmall
   - ETS
+  - macro
 desc: ScaleSmall Experiment Week Eigth to Ten / Tuples, Maps, ETS and Status
 description: ScaleSmall Experiment Week Eigth to Ten / Tuples, Maps, ETS and Status
 keywords: "Elixir, Distributed, Erlang, Scalable, Tuple, Map, ETS, OOP"

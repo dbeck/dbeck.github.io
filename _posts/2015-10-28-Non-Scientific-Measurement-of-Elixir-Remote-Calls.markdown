@@ -5,7 +5,6 @@ category: Elixir
 tags: 
   - elixir
   - performance
-  - MacOSX
 desc: Non-Scientific measurment of the cost of calling a remote process
 description: Non-Scientific measurment of the cost of calling a remote process
 keywords: "Elixir, Performance, MacOSX"

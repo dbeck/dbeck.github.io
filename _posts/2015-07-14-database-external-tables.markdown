@@ -4,8 +4,6 @@ layout: post
 category: Other
 tags: 
   - database
-  - impala
-  - postgres
 desc: External tables in database systems
 description: External tables in database systems
 keywords: "PostgreSQL, GreenPlum, Cloudera, Impala, Drizzle"

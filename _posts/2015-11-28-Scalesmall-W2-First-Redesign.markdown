@@ -4,7 +4,6 @@ layout: post
 category: "ScaleSmall for Elixir"
 tags:
   - elixir
-  - distributed
   - scalesmall
   - CRDT
 desc: ScaleSmall Experiment Week Two / First Redesign w/ CRDTs

@@ -6,6 +6,7 @@ tags:
   - elixir
   - scalesmall
   - group-manager
+  - gossip
 desc: ScaleSmall Experiment Week Fourteen / More Group Manager information
 description: ScaleSmall Experiment Week Fourteen / More Group Manager information
 keywords: "Elixir, Distributed, Erlang, Scalable, Group, Manager"

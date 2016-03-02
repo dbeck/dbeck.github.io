@@ -6,7 +6,6 @@ tags:
   - elixir
   - distributed
   - scalesmall
-  - VectorClock
 desc: ScaleSmall Experiment Week Four / Data Lib Completed
 description: ScaleSmall Experiment Week Four / Data Lib Completed
 keywords: "Elixir, Distributed, Erlang, Macro, High-performance, Scalable, CRDT, VectorClock"
