@@ -18,13 +18,6 @@ scalesmall_subscribe: false
 
 # Chatter for Elixir (0.0.11)
 
-- [FAQ](faq.html)
-- [Examples](examples.html)
-- [Communication Internals](communication.html)
-- [Quickstart Guide](quickstart.html)
-
-# Other docs
-
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Quickstart Guide](quickstart.html)
 - [FAQ](faq.html)
