@@ -60,9 +60,9 @@ iex(8)> Chatter.broadcast([{:net_id, {192, 168, 1, 100}, 29999}], {:hello, "worl
 
 - [see package at github](https://github.com/dbeck/chatter_ex)
 - [the original blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
-- [Chatter FAQ](/chatter_ex/faq.html)
-- [Chatter Examples](/chatter_ex/examples.html)
-- [Chatter Communication Internals](/chatter_ex/communication.html)
-- [Chatter Quickstart Guide](/chatter_ex/quickstar.html)
+- [FAQ](/chatter_ex/faq.html)
+- [Examples](/chatter_ex/examples.html)
+- [Communication Internals](/chatter_ex/communication.html)
+- [Quickstart Guide](/chatter_ex/quickstart.html)
 
 # Under construction
