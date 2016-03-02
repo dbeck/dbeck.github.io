@@ -39,9 +39,11 @@ Since `Chatter` uses UDP multicast, it is not guaranteed that all messages arriv
 
 ```elixir
 iex(1)> extract_netids_fn = fn(t) -> [] end
-iex(2)> encode_with_fn = fn(t,map) -> :erlang.term_to_binary(t) end
-iex(3)> decode_with_fn = fn(b,map) -> {:erlang.binary_to_term(b), <<>>} end
-iex(4)> dispatch_fn = fn(t) -> {IO.inspect(["arrived", t]), t} end
+iex(2)> encode_with_fn = fn(t,_id_map) -> :erlang.term_to_binary(t) end
+iex(3)> decode_with_fn = fn(b,_id_map) -> {:erlang.binary_to_term(b), <<>>} end
+iex(4)> dispatch_fn = fn(t) -> IO.inspect(["arrived", t])
+  {:ok, t}
+end
 iex(5)> handler = Chatter.MessageHandler.new(
     {:hello, "world"},
     extract_netids_fn,
