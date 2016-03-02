@@ -82,5 +82,4 @@ It is very likely that messages will be delivered multiple times to nodes, so th
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Quickstart Guide](quickstart.html)
 - [Overview](index.html)
-- [FAQ](faq.html)
 

@@ -20,5 +20,4 @@ scalesmall_subscribe: false
 
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Quickstart Guide](quickstart.html)
-- [FAQ](faq.html)
 - [Communication internals](communication.html)

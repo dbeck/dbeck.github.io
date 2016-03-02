@@ -90,5 +90,4 @@ iex(9)> Chatter.broadcast([destination], {:hello, "world"})
 
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Overview](index.html)
-- [FAQ](faq.html)
 - [Communication internals](communication.html)

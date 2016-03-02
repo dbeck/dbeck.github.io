@@ -27,5 +27,4 @@ Chatter is a communication library for Elixir that combines TCP unicast and UDP 
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Overview](/chatter_ex/0.0.11/)
 - [Quickstart Guide](/chatter_ex/0.0.11/quickstart.html)
-- [FAQ](/chatter_ex/0.0.11/faq.html)
 - [Communication internals](/chatter_ex/0.0.11/communication.html)
