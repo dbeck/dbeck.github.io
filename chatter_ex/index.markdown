@@ -55,7 +55,7 @@ iex(8)> Chatter.broadcast([{:net_id, {192, 168, 1, 100}, 29999}], {:hello, "worl
 
 ### More information
 
-[see package at github](https://github.com/dbeck/chatter_ex)
-[the original blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
+- [see package at github](https://github.com/dbeck/chatter_ex)
+- [the original blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 
 # Under construction
