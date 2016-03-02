@@ -16,7 +16,7 @@ woopra: chatterex_quickstart_v0_0_11
 scalesmall_subscribe: false
 ---
 
-# Quickstart Guide (0.0.11)
+# Quickstart Guide (Chatter 0.0.11)
 
 - add dependency
 - start the application

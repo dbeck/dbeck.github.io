@@ -16,7 +16,7 @@ woopra: chatterex_communication_v0_0_11
 scalesmall_subscribe: false
 ---
 
-# Communication Internals (0.0.11)
+# Communication Internals (Chatter 0.0.11)
 
 ## Message structure
 

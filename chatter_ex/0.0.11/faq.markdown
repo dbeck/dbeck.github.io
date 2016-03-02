@@ -16,7 +16,7 @@ woopra: chatterex_faq_v0_0_11
 scalesmall_subscribe: false
 ---
 
-# Frequently Asked Questions (0.0.11)
+# Frequently Asked Questions (Chatter 0.0.11)
 
 # Other docs
 

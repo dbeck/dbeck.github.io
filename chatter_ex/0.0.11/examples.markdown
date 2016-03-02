@@ -16,7 +16,7 @@ woopra: chatterex_examples_v0_0_11
 scalesmall_subscribe: false
 ---
 
-# Examples (0.0.11)
+# Examples (Chatter 0.0.11)
 
 # Other docs
 

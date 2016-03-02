@@ -16,7 +16,7 @@ woopra: chatterex_main_v0_0_11
 scalesmall_subscribe: false
 ---
 
-# Chatter for Elixir (0.0.11)
+# Chatter for Elixir (Chatter 0.0.11)
 
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Quickstart Guide](quickstart.html)
