@@ -15,6 +15,8 @@ woopra: chatter_exmain
 scalesmall_subscribe: false
 ---
 
+# Under construction
+
 ## Chatter library for Elixir
 
 `Chatter` helps you in broadcasting information to a set of nodes. The messages are compressed and encrypted. The transfers utilize UDP multicast on the local network. For non local transfers `Chatter` builds a broadcast tree and try to involve more and more nodes in the message distribution.
@@ -54,3 +56,6 @@ iex(8)> Chatter.broadcast([{:net_id, {192, 168, 1, 100}, 29999}], {:hello, "worl
 ### More information
 
 [see package at github](https://github.com/dbeck/chatter_ex)
+[the original blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
+
+# Under construction
