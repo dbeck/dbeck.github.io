@@ -7,16 +7,16 @@ tags:
   - scalesmall
   - chatter
   - gossip
-desc: Chatter Quickstart Guide (0.0.11)
-description: Chatter Quickstart Guide (0.0.11)
+desc: Chatter Quickstart Guide (0.0.12)
+description: Chatter Quickstart Guide (0.0.12)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast, Gossip"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/log_broadcast.png
-woopra: chatterex_quickstart_v0_0_11
+woopra: chatterex_quickstart_v0_0_12
 scalesmall_subscribe: false
 ---
 
-# Quickstart Guide (Chatter 0.0.11)
+# Quickstart Guide (Chatter 0.0.12)
 
 - add dependency
 - start the application
@@ -30,7 +30,7 @@ scalesmall_subscribe: false
   defp deps do
     [
       {:xxhash, git: "https://github.com/pierresforge/erlang-xxhash"},
-      {:chatter, "~> 0.0.11"}
+      {:chatter, "~> 0.0.12"}
     ]
   end
 ```

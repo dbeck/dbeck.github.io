@@ -7,16 +7,16 @@ tags:
   - scalesmall
   - chatter
   - gossip
-desc: Chatter for Elixir (0.0.11)
-description: Chatter for Elixir (0.0.11)
+desc: Chatter for Elixir (0.0.12)
+description: Chatter for Elixir (0.0.12)
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/mixed_broadcast1.png
-woopra: chatterex_main_v0_0_11
+woopra: chatterex_main_v0_0_12
 scalesmall_subscribe: false
 ---
 
-# Chatter for Elixir (Chatter 0.0.11)
+# Chatter for Elixir (Chatter 0.0.12)
 
 - [Intro blog post about Chatter](/Chatter-extracted-from-ScaleSmall/)
 - [Quickstart Guide](quickstart.html)
