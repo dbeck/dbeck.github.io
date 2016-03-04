@@ -29,7 +29,7 @@ The `Chatter` message structure is designed to be secure and small. Since the Ne
 
 Because of this widespread and often redundant usage, I decided to factor out the NetIDs into a `NetID table`. This adds extra complexity at the message encoding and decoding but gives a huge shrink in the message size, both because of the removed redundancy and also because of compression is more efficient.
 
-![structure](/images/chatter_message_structure.png)
+![structure](/images/chatter_message_structure_0012.png)
 
 ## Overview
 
