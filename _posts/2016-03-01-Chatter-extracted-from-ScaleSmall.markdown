@@ -272,3 +272,13 @@ It has a high chance that every node on the local network will be removed from t
 #### Messages duplicated, multiplicated
 
 It is very likely that messages will be delivered multiple times to nodes, so the application need to handle that. `GroupManager` actually benefit from this because the `MessageHandler`'s `dispatch` callback works in a special way. It not just receives an object but can return a different object of the same type. This result object will be included in the next message transfer round and allows the application to merge in changes or additional information while the gossip progresses.
+
+#### Update
+
+This post covers Chatter 0.0.11. There are a lots of improvements happened since:
+
+- better distribution plan for remote networks
+- added a few size fields into the message structure to make it easier to parse in other languages
+- better discovery of remote networks
+
+The [latest docs are avalialble](https://github.com/dbeck/chatter_ex/tree/master/docs) inside the source tree on github.
