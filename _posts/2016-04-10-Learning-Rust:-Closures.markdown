@@ -205,3 +205,10 @@ fn can_put_with_env() {
 ### More information
 
 I found [this post](http://huonw.github.io/blog/2015/05/finding-closure-in-rust/) from Huon Wilson that helped me better understand closures in Rust. I warmly recommend his other posts too. I think the [Finding Closure in Rust](http://huonw.github.io/blog/2015/05/finding-closure-in-rust/) post is a great complement to the official Rust documentation about Closures.
+
+### Rust version
+
+```
+$ rustc --version
+rustc 1.7.0 (a5d1e7a59 2016-02-29)
+```
