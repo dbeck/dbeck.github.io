@@ -164,7 +164,7 @@ The explain message tells me that I should have used `FnMut` instead of `Fn` if 
 
 #### Fixed code
 
-I added another method to the trait:
+I added another method to the impl:
 
 ```rust
 impl <T : Copy> CircularBuffer<T> {
