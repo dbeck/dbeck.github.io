@@ -212,3 +212,7 @@ I found [this post](http://huonw.github.io/blog/2015/05/finding-closure-in-rust/
 $ rustc --version
 rustc 1.7.0 (a5d1e7a59 2016-02-29)
 ```
+
+### Git repo
+
+I opened a [github repo](https://github.com/dbeck/rust_playground) for this experiment series.
