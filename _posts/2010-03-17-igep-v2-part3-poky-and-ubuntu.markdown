@@ -1,15 +1,15 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - igep
 desc: Third part of my Igep V2 advanture on Poky and Ubuntu land
 description: Third part of my Igep V2 advanture on Poky and Ubuntu land
 keywords: "IGEPv2, IoT, ARM, Poky, Ubuntu, Linux"
-twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/983/P1010892-large.JPG 
+twcardtype: summary_large_image
+twimage: http://dbeck.github.io/images/983/P1010892-large.JPG
 woopra: igep3
 ---
 
@@ -101,21 +101,21 @@ The noatime option on the root filesystem can make a real difference in user exp
 ### My ubuntu xorg.conf using the omapfb driver
 
 ```
-Section "Device" 
-  Identifier    "OMAPFB Graphics Controller" 
-  Driver        "omapfb" 
-  Option        "fb" "/dev/fb0" 
+Section "Device"
+  Identifier    "OMAPFB Graphics Controller"
+  Driver        "omapfb"
+  Option        "fb" "/dev/fb0"
 EndSection
 
-Section "Monitor" 
-  Identifier    "Generic Monitor" 
-  Option        "DPMS" 
+Section "Monitor"
+  Identifier    "Generic Monitor"
+  Option        "DPMS"
 EndSection
 
-Section "Screen" 
-  Identifier    "Default Screen" 
-  Device        "OMAPFB Graphics Controller" 
-  Monitor       "Generic Monitor" 
+Section "Screen"
+  Identifier    "Default Screen"
+  Device        "OMAPFB Graphics Controller"
+  Monitor       "Generic Monitor"
   DefaultDepth  16
 EndSection
 ```
@@ -130,5 +130,3 @@ Although I have a usable SD card with a good set of Desktop programs the SD card
 2.  look for an other distribution
 
 The second option looks harder but this experience tells me there will be other packages not updated. I also have very good experiences with Gentoo on x86 so I will try that first.
-
-

@@ -26,13 +26,13 @@ This testbed has 5 machines:
 - 1 x [Banana Pi M1](http://www.banana-pi.com/eacp_view.asp?id=35) + 60 GB SSD
 - 1 x [Orange Pi Plus](http://www.orangepi.org) + 500 GB HDD
 
-I spent around 10 days out of the two weeks with adding two other machines I have, but finally I gave up: the [Igep V2](/igep-v2-part1-first-impressions/) and the [SheevaPlug](/sheevaplug-experiences/) are not going to be part of this experiment. (It is an interesting story by itself about how painful it is to use an open source Arm board that was fancy 5 years ago and now the support is pretty much gone.)
+I spent around 10 days out of the two weeks with adding two other machines I have, but finally I gave up: the `Igep V2` and the `SheevaPlug` are not going to be part of this experiment. (It is an interesting story by itself about how painful it is to use an open source Arm board that was fancy 5 years ago and now the support is pretty much gone.)
 
 ### The Hawkboards
 
 ![hawkboard](/images/hawkboard-a.png)
 
-I bought the Hawkboards five years ago because I wanted to experiment with a distributed filesystem. My time allocated for this has disappeared for family reasons. As the kids grow I am slowly having more time and I decided to resurrect these machines. It turned out that my [5 years old blogposts](/hawkboard-part3-gentoo-root-filesystem/) helped the most with the Hawkboards.
+I bought the Hawkboards five years ago because I wanted to experiment with a distributed filesystem. My time allocated for this has disappeared for family reasons. As the kids grow I am slowly having more time and I decided to resurrect these machines. It turned out that my 5 years old blogposts helped the most with the Hawkboards.
 
 The Hawkboard itself is a painfully slow machine. It has 128 MB RAM and a very slow CPU. (It took a day to compile a Linux kernel on the board.)  The good point is that it has a SATA connector. I originally wanted to use its DSP coprocessor to off-load compression or may be other tasks, but that is not in scope for scalesmall.
 

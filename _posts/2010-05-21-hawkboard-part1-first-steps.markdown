@@ -1,14 +1,14 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - hawkboard
 desc: Getting started using my HawkBoard
 description: Getting started using my HawkBoard
 keywords: "Hawkboard, IoT, ARM"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1097/P1020019-large.JPG
 woopra: hawkboard1
 ---
@@ -84,7 +84,7 @@ bootargs=mem=128M console=ttyS2,115200n8 root=/dev/ram0 rw initrd=0xc1180000,8M
 bootcmd=nand read.e 0xc1180000 0x400000 0x800000;nand read.e 0xc0700000 0x200000 0x200000;bootm 0xc0700000
 bootdelay=3
 baudrate=115200
-bootfile="uImage" 
+bootfile="uImage"
 stdin=serial
 stdout=serial
 stderr=serial
@@ -204,11 +204,11 @@ Bad eraseblock 904 at 0x000007100000
 Bad block table written to 0x000007fe0000, version 0x01
 Bad block table written to 0x000007fc0000, version 0x01
 Creating 5 MTD partitions on "davinci_nand.1":
-0x000000000000-0x000000020000 : "u-boot env" 
-0x000000020000-0x000000040000 : "UBL" 
-0x000000040000-0x0000000c0000 : "u-boot" 
-0x000000200000-0x000000400000 : "kernel" 
-0x000000400000-0x000008000000 : "filesystem" 
+0x000000000000-0x000000020000 : "u-boot env"
+0x000000020000-0x000000040000 : "UBL"
+0x000000040000-0x0000000c0000 : "u-boot"
+0x000000200000-0x000000400000 : "kernel"
+0x000000400000-0x000008000000 : "filesystem"
 davinci_nand davinci_nand.1: controller rev. 2.5
 console [netcon0] enabled
 netconsole: network logging started
@@ -346,5 +346,3 @@ Serial          : 0000000000000000
 * * *
 
 The bogo value show that CPU is not very fast as expected. To achieve some decent performance I need to learn DSP programming.
-
-

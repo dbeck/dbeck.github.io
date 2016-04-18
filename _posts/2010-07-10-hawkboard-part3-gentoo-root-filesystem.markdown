@@ -1,15 +1,15 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - hawkboard
   - Linux
 desc: Hacking Gentoo onto my HawkBoard
 description: Hacking Gentoo onto my HawkBoard
 keywords: "Hawkboard, IoT, ARM, Linux, Gentoo"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1091/P1020018-large.JPG
 woopra: hawkboard3
 ---
@@ -152,7 +152,7 @@ x11-libs/libSM           x11-libs/libX11                x11-libs/libXau         
 x11-libs/libXdmcp        x11-libs/libXext               x11-libs/libXmu                 x11-libs/libXpm
 x11-libs/libXt           x11-libs/libxcb                x11-libs/xtrans                 x11-misc/util-macros
 x11-proto/inputproto     x11-proto/kbproto              x11-proto/xcb-proto             x11-proto/xextproto
-x11-proto/xf86bigfontproto                              x11-proto/xproto 
+x11-proto/xf86bigfontproto                              x11-proto/xproto
 ```
 
 Some of these packages were already part of the stage3 tarball like find utils, flex and bison. I installed many others like git, cmake, ragel and mtd utils.
@@ -164,4 +164,3 @@ I collect the binary packages I compile and publish them [at this location](http
 ### Disclaimer
 
 The usual crap. Every information here are collected on a best effort bases. There is no warranty that these work and no liability for any damage. Use at your own risk. If you download any binary package than you accept its license.
-

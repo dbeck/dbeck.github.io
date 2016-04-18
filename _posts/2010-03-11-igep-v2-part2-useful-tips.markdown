@@ -1,15 +1,15 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - igep
 desc: A few useful tips for using the IGEP-V2 device
 description: A few useful tips for using the IGEP-V2 device
 keywords: "IGEPv2, IoT, ARM, Ubuntu, Poky, Linux"
-twcardtype: summary_large_image 
-twimage: http://dbeck.github.io/images/977/P1010891-large.JPG 
+twcardtype: summary_large_image
+twimage: http://dbeck.github.io/images/977/P1010891-large.JPG
 woopra: igep2
 ---
 
@@ -89,4 +89,3 @@ srv/tftp/poky:
 ```
 
 There are 3 distributions in the image. It boots the poky-image-sato distribution by default. To change that one needs an RS232 debug console cable and set the appropriate variables in UBoot. A much easier option is to rename the directories on the NFS/TFTP server.
-

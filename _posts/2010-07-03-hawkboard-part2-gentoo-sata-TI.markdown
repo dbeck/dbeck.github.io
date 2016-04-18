@@ -1,15 +1,15 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - hawkboard
   - Linux
 desc: My HawkBoard starts using a SATA disk
 description: My HawkBoard starts using a SATA disk
 keywords: "Hawkboard, IoT, ARM, SATA, Disk, Gentoo, Linux"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1061/P1020013-large.JPG
 woopra: hawkboard2
 ---
@@ -71,14 +71,14 @@ I modified make.conf and replaced Os flag with O3 which will lead to significant
 *   nano /etc/make.conf
 
 ```
-CFLAGS="-O3 -march=armv5te -pipe " 
-CXXFLAGS="-O3 -march=armv5te -pipe " 
-CHOST="armv5tel-softfloat-linux-gnueabi" 
+CFLAGS="-O3 -march=armv5te -pipe "
+CXXFLAGS="-O3 -march=armv5te -pipe "
+CHOST="armv5tel-softfloat-linux-gnueabi"
 
 FEATURES="buildpkg -ccache -stricter -test strict test-fail-continue assume-digests collision-protect cvs \
          digest distlocks fixpackages multilib-strict news parallel-fetch protect-owned sandbox sfperms sign \
-         splitdebug unmerge-logs unmerge-orphans userfetch userpriv usersandbox" 
-ACCEPT_KEYWORDS="~arm" 
+         splitdebug unmerge-logs unmerge-orphans userfetch userpriv usersandbox"
+ACCEPT_KEYWORDS="~arm"
 USE="nls -X -kde -gtk -gnome -fortran -mysql -bluetooth -flac -test -apache2 \
      -kerberos -smartcard linguas_en linguas_en_US linguas_hu"
 ```
@@ -233,4 +233,3 @@ My task here was to collect the information that was already available. If I use
 *   Roger Monk
 
 If I omitted anyone please tell me: dbeck-at-beckground-hu. Anyway, thank you guys!
-

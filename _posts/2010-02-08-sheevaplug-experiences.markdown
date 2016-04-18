@@ -1,14 +1,14 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - sheevaplug
 desc: How I started using SheevaPlug as a desktop
 description: How I started using SheevaPlug as a desktop
 keywords: "SheevaPlug, IoT, ARM"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1013/P1010908-large.JPG
 woopra: sheevaplugexp
 ---
@@ -67,4 +67,3 @@ After X startup the "xrandr -o 0" command must be run. This fixes the various od
 
 Although I am very happy with my sheevaplug device it must be noted that it is not very fast. I can edit texts and can browse the web and it is usable. The practical consequence of this is that I have to very carefully select what applications I want to use. I use midori browser rather than firefox. I use gnumeric and abiword rather then openoffice. I use kate rather than kdevelop. Video playback is simply unusable in this setup.
 After googling a lot I found a faster device that I want to evaluate next: [IGEP v2](http://www.igep-platform.com/). This is a lot faster than sheevaplug, thanks to the floating point and DSP capabilities. This is based on OMAP 3530 like [beagleboard](http://beagleboard.org/) with the addition of RJ45 ethernet, WIFI and Bluetooth. The [IGEP V2](http://www.igep-platform.com/) can be ordered from Europe so the shipping cost is reasonable. Plus ISEE also sells enclosure and other goodies with the device.
-

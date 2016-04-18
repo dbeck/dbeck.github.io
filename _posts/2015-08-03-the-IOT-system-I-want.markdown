@@ -1,8 +1,8 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - ecosystem
   - sheevaplug
@@ -40,9 +40,9 @@ After I spent a few month playing with SheevaPlug I realized that I want somethi
 After a bit of experimenting and hacking this device served as my desktop for a year. I liked those days.
 
 ### Hawkboard experiments
-In the same year, 2010 I noticed another board: the HawkBoard. It has less ram, slower CPU but had a SATA connector. I bought three of them, because I wanted to experiment with a distributed filesystem. The board was build on the Texas Instruments OMAP L138 platform which bundles a DSP (Digital Signal Processor) with the CPU. 
+In the same year, 2010 I noticed another board: the HawkBoard. It has less ram, slower CPU but had a SATA connector. I bought three of them, because I wanted to experiment with a distributed filesystem. The board was build on the Texas Instruments OMAP L138 platform which bundles a DSP (Digital Signal Processor) with the CPU.
 
-My idea was to utilize the DSP for streaming data processing such as compression, ECC, may be analytics. That would have been a great fit. 
+My idea was to utilize the DSP for streaming data processing such as compression, ECC, may be analytics. That would have been a great fit.
 
 ### My kid has born
 When my first daughter has born I happily thrown away all my midnight projects. I bought a quiet X86 PC and all these gizmos and things went to the storage room.
@@ -53,7 +53,7 @@ What is very interesting to see how much my mentality has changed with respect t
 When I think about IoT devices I include the ones I mentioned and more in my picture. I didn't mention my smart TV, mobile phone, tablets and all the _things_ I have. I don't yet have sensors and controllers, intelligent fridge, central heating and such things. As it stands it is not likely that I'll invest in those because I am a consumer. I don't want to spend time configuring these and hacking them in any ways.
 
 ### The definition of the things in the IoT
-When I first heard this IoT term I didn't understand what is this about. The term doesn't describe it very well. The _Internet_ part suggests that it is about connecting _things_. Which may be OK, but the story doesn't stop there. We actually want _things_ to understand each other. I also want to control _things_. I may want information from these _things_. 
+When I first heard this IoT term I didn't understand what is this about. The term doesn't describe it very well. The _Internet_ part suggests that it is about connecting _things_. Which may be OK, but the story doesn't stop there. We actually want _things_ to understand each other. I also want to control _things_. I may want information from these _things_.
 
 Almost all my friends has _things_ in their homes. A common one is Raspberry PI. Not so many articles mention this device in the IoT literature even though this is a smart one. Many people automate the process of downloading films from the Internet. Fetch subtitles for them. Organize TV series into folders. Make sure no one to miss an episode.
 
@@ -69,10 +69,9 @@ Let's imagine my friend has developed an application on their Raspberry PI that 
 
 The (not so big) problem is that another customer may have a different type of smart device. Google with the Android app market has solved this problem. People with very different hardwares are using the same apps. It is secure and win-win for the developers and the customers too.
 
-I used Android as a cross platform example. I don't really think my friends will install Android on their PIs. 
+I used Android as a cross platform example. I don't really think my friends will install Android on their PIs.
 
 ### Google Portable Native Client to the rescue
-Very recently I bumped into Google Native Client which allows users to create applications to be run on different architectures including MIPS, ARM, X86-32 and 64. These happen to cover most tablets, phones, PCs, NAS', Media Boxes and intelligent thingies. 
+Very recently I bumped into Google Native Client which allows users to create applications to be run on different architectures including MIPS, ARM, X86-32 and 64. These happen to cover most tablets, phones, PCs, NAS', Media Boxes and intelligent thingies.
 
 To make this happen someone needs to setup this app market and create the framework to distribute the apps. Not rocket science.
-

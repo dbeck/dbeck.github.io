@@ -1,15 +1,15 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - igep
   - Linux
 desc: Fourth part of my Igep V2 advanture on Gentoo
 description: Fourth part of my Igep V2 advanture on Gentoo
 keywords: "IGEPv2, IoT, ARM, Gentoo, Linux"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/989/P1010895-large.JPG
 woopra: igep4
 ---
@@ -69,11 +69,11 @@ I suspected it contains sensible defaults, the commands in the chrooted environm
  # built this stage.
  # Please consult /usr/share/portage/config/make.conf.example for a more
  # detailed example.
- CFLAGS="-Os -pipe -march=armv7-a -mfpu=vfp -mfloat-abi=softfp" 
- CXXFLAGS="-Os -pipe -march=armv7-a -mfpu=vfp -mfloat-abi=softfp" 
+ CFLAGS="-Os -pipe -march=armv7-a -mfpu=vfp -mfloat-abi=softfp"
+ CXXFLAGS="-Os -pipe -march=armv7-a -mfpu=vfp -mfloat-abi=softfp"
  # WARNING: Changing your CHOST is not something that should be done lightly.
  # Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.
- CHOST="armv7a-unknown-linux-gnueabi" 
+ CHOST="armv7a-unknown-linux-gnueabi"
 ```
 
 The CFLAGS and CXXFLAGS were set to space/performance optimized code while I don’t care that much for space rather I care for speed. My planned optimization flags looked better for IGEP. My plan was to first compile GCC with optimization. I hoped that this will reduce the compilation time of other packages.
@@ -135,48 +135,48 @@ I already overridden the CFLAGS and CXXFLAGS variables in the make.conf but ther
  sys-devel/gcc-config: 1.4.1
  sys-devel/libtool:   2.2.6b
  virtual/os-headers:  2.6.27-r2
- ACCEPT_KEYWORDS="arm" 
- ACCEPT_LICENSE="* -@EULA" 
- CBUILD="armv7a-unknown-linux-gnueabi" 
- CHOST="armv7a-unknown-linux-gnueabi" 
- CONFIG_PROTECT="/etc" 
+ ACCEPT_KEYWORDS="arm"
+ ACCEPT_LICENSE="* -@EULA"
+ CBUILD="armv7a-unknown-linux-gnueabi"
+ CHOST="armv7a-unknown-linux-gnueabi"
+ CONFIG_PROTECT="/etc"
  CONFIG_PROTECT_MASK="/etc/ca-certificates.conf /etc/env.d /etc/gconf /etc/sandbox.d \
-                      /etc/terminfo /etc/udev/rules.d" 
- DISTDIR="/usr/portage/distfiles" 
- GENTOO_MIRRORS="http://distfiles.gentoo.org" 
- LANG="en_US.UTF-8" 
- LDFLAGS="-Wl,-O1" 
- PKGDIR="/usr/portage/packages" 
- PORTAGE_CONFIGROOT="/" 
+                      /etc/terminfo /etc/udev/rules.d"
+ DISTDIR="/usr/portage/distfiles"
+ GENTOO_MIRRORS="http://distfiles.gentoo.org"
+ LANG="en_US.UTF-8"
+ LDFLAGS="-Wl,-O1"
+ PKGDIR="/usr/portage/packages"
+ PORTAGE_CONFIGROOT="/"
  PORTAGE_RSYNC_OPTS="--recursive --links --safe-links --perms --times --compress \
                      --force --whole-file --delete --stats --timeout=180 --exclude=/distfiles \
-                     --exclude=/local --exclude=/packages" 
- PORTAGE_TMPDIR="/var/tmp" 
- PORTDIR="/usr/portage" 
- SYNC="rsync://rsync.gentoo.org/gentoo-portage" 
+                     --exclude=/local --exclude=/packages"
+ PORTAGE_TMPDIR="/var/tmp"
+ PORTDIR="/usr/portage"
+ SYNC="rsync://rsync.gentoo.org/gentoo-portage"
  USE="X a52 aac acl acpi alsa apache2 arm berkdb bluetooth bzip2 cairo cdr cli consolekit \
      cracklib crypt cups cxx dbus dts dvdr eds emboss encode evo fam firefox flac fortran gdbm \
      gif gnome gpm gstreamer gtk hal iconv ipv6 jpeg kde ldap libnotify mad mikmod mng modules mp3 \
      mp4 mpeg mudflap mysql ncurses nls nptl nptlonly ogg opengl openmp pam pcre pdf perl png ppds \
      pppd python qt3support qt4 quicktime readline reflection sdl session snmp spell spl ssl \
      startup-notification svg sysfs tcpd thunar tiff truetype unicode usb vorbis xml xorg \
-     xulrunner xv xvid zlib" 
+     xulrunner xv xvid zlib"
  ALSA_PCM_PLUGINS="adpcm alaw asym copy dmix dshare dsnoop empty extplug file hooks iec958 \
                    ioplug ladspa lfloat linear meter mmap_emul mulaw multi null plug rate route \
-                   share shm softvol" 
+                   share shm softvol"
  APACHE2_MODULES="actions alias auth_basic authn_alias authn_anon authn_dbm authn_default \
                   authn_file authz_dbm authz_default authz_groupfile authz_host authz_owner \
                   authz_user autoindex cache dav dav_fs dav_lock deflate dir disk_cache env \
                   expires ext_filter file_cache filter headers include info log_config logio \
                   mem_cache mime mime_magic negotiation rewrite setenvif speling status unique_id \
-                  userdir usertrack vhost_alias" 
- ELIBC="glibc" 
- INPUT_DEVICES="keyboard mouse evdev" 
- KERNEL="linux" 
- LCD_DEVICES="bayrad cfontz cfontz633 glk hd44780 lb216 lcdm001 mtxorb ncurses text" 
- RUBY_TARGETS="ruby18" 
- USERLAND="GNU" 
- VIDEO_CARDS="fbdev glint mach64 mga nv r128 radeon savage sis tdfx trident voodoo" 
+                  userdir usertrack vhost_alias"
+ ELIBC="glibc"
+ INPUT_DEVICES="keyboard mouse evdev"
+ KERNEL="linux"
+ LCD_DEVICES="bayrad cfontz cfontz633 glk hd44780 lb216 lcdm001 mtxorb ncurses text"
+ RUBY_TARGETS="ruby18"
+ USERLAND="GNU"
+ VIDEO_CARDS="fbdev glint mach64 mga nv r128 radeon savage sis tdfx trident voodoo"
  Unset:  CPPFLAGS, CTARGET, EMERGE_DEFAULT_OPTS, FFLAGS, \
          INSTALL_MASK, LC_ALL, LINGUAS, MAKEOPTS, PORTAGE_COMPRESS, \
          PORTAGE_COMPRESS_FLAGS, PORTAGE_RSYNC_EXTRA_OPTS, \
@@ -206,7 +206,7 @@ I couldn’t understand what are these X related libraries are doing with GCC. I
  PASS: test-round
  PASS: test-gh
  ERROR: In procedure dynamic-link:
- ERROR: file: "libtest-asmobs", message: "file not found" 
+ ERROR: file: "libtest-asmobs", message: "file not found"
  FAIL: test-asmobs
  PASS: test-list
  PASS: test-unwind
@@ -283,5 +283,3 @@ Finally I configured my kernel based on the default igep configuration. I disabl
 ### Package repository
 
 Many packages compiled as expected and some had minor issues. So far all of them are working. My ultimate goal is to make my IGEP a desktop machine based on Gentoo. Now I have everything in place for a console based Gentoo setup and I’m successfully using it over NFS. I share the packages I built [at this location.](http://dbeck.beckground.hu/gentoo/igep-packages/) I publish my newly build packages from time to time. The binaries are shared on a goodwill bases and the ususal BSD disclaimer applies. Use it on your on risk, etc… All binaries stay under their original licenses that you can find in the portage database.
-
-

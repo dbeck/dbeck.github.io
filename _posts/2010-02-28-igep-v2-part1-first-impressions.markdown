@@ -1,5 +1,5 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
 tags:
@@ -79,4 +79,3 @@ I have not decided yet which path I take, but I keep you posted.
 ## IGEP and Sheevaplug together
 
 ![](/images/1013/P1010908-large.JPG)
-

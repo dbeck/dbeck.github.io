@@ -1,8 +1,8 @@
 ---
-published: true
+published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - ecosystem
 desc: Building up an IoT community and ecosystem
@@ -20,7 +20,7 @@ Every time I hear that, this and that company came up with a new IoT standard I 
 3. consultancy firms want to sell integration but at the same time trying to influence standards to fit their business needs
 4. startups cover a few selected segments of making IoT a system because of limited resources
 
-I feel that the participants in this game either reluctant or not able to see the IoT landscape as a convergent system. 
+I feel that the participants in this game either reluctant or not able to see the IoT landscape as a convergent system.
 
 ### Intelligent devices at home
 Let's take a look around a typical networked home. Here is a list of devices I expect to see:
@@ -53,7 +53,7 @@ From this point on the feasibility of standards and protocols invented by groups
 Everyone would benefit from this model. The same way as Linux has drivers for virtually anything and the same way as Android market place covers all possible user needs, this IoT app market would eventually cover all hardwares and devices under the sun.
 
 ### The technical solution
-I believe Google Portable Native Client has a solution for running code in a secure environment in a portable way. It is efficient and resource friendly thus it would have acceptable performance on slower devices too. 
+I believe Google Portable Native Client has a solution for running code in a secure environment in a portable way. It is efficient and resource friendly thus it would have acceptable performance on slower devices too.
 
 There are few things missing, but I believe this is not rocket science:
 
@@ -74,4 +74,3 @@ There is obviously a business opportunity for the one who makes the app market a
 * gather and analyze data from the devices
 * control devices remotely
 * provide services based on these apps
-

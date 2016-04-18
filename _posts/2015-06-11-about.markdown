@@ -1,12 +1,12 @@
 ---
+published: false
 layout: post
 title: About
 permalink: /about/
 category: Other
-tags: 
+tags:
   - dbeck
   - about
-published: false
 woopra: about
 ---
 
