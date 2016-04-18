@@ -1,8 +1,8 @@
 ---
-published: true
+published: false
 layout: post
 category: Startup
-tags: 
+tags:
   - startup
 desc: 6 step mantra about the MVP for software developers
 description: 6 step mantra about the MVP for software developers
