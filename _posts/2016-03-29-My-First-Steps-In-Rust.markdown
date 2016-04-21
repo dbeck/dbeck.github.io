@@ -90,7 +90,7 @@ This was exactly the thing why I was afraid to jump in. The error tells me that 
 
 It looks like the generic code's type `T` doesn't get resolved when the compiler arrives to the `println!` macro.
 
-I went great lengths to try instantiating instantiate type `T` until I realized that it works very differently compared to C++.
+I went great lengths to try instantiating type `T` until I realized that it works very differently compared to C++.
 
 ### The correct code
 
@@ -140,3 +140,10 @@ pub fn testme() {
 I can't remember how I arrived to this solution since I made so many desperate attempts to fix it. When it worked, it clicked in perfectly. I don't need to *instantiate* the type, what I need is to give information to the compiler about the type. So I need to restrict type `T`, so the trait implementation only accepts types that actually implement the Debug trait. So the compiler was unhappy because of the *possibility* to pass types that doesn't implement the Debug trait and not what it was telling me: that I did pass a type that doesn't.
 
 This makes sense and I like the way it is. Actually, I even prefer the Rust's way of generics compared to C++ templates. I am very positive about my next steps in Rust despite the unhelpful and misleading error messages, because I think once I understand how it works, I can reason about the code no matter what the compiler is complaining about.
+
+### Rust version
+
+```
+$ rustc --version
+rustc 1.7.0 (a5d1e7a59 2016-02-29)
+```

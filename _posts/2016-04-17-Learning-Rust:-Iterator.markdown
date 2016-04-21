@@ -37,7 +37,7 @@ The iterator is an object that implements the [Iterator trait](https://doc.rust-
 
 The return value tells the users if there are more items to be iterated over or returns `None` if not.
 
-Iterators can be chained together with adaptors and a consumer. This allows chaining up a data source, a number of transformation and a destination. An example from [Herman J. Radtke III](http://hermanradtke.com/2015/06/22/effectively-using-iterators-in-rust.html) looks like this:
+Iterators can be chained together with adaptors and a consumer. This allows chaining up a data source, a number of transformations and a destination. An example from [Herman J. Radtke III](http://hermanradtke.com/2015/06/22/effectively-using-iterators-in-rust.html) looks like this:
 
 ```rust
 fn use_names_for_something_else(_names: Vec<&str>) {
