@@ -23,9 +23,9 @@ This post changes the iterator to use slices rather then holding a reference to 
 
 This is yet another single publisher, single consumer queue. (I know there is one in the core library too.)
 
-My queue implementation is based on a fix sized circular buffer. When the queue is full, the writer starts overwriting past elements. The writer doesn't get blocked, and the circular buffer won't be extended. This way the writer is not affected by the reader's speed and the buffer size doesn't grow without bounds. Memory allocation only happens when the buffer is created.
+My queue implementation is based on a fix sized buffer. When the queue is full, the writer starts overwriting past elements. The writer doesn't get blocked, and the buffer won't be extended. This way the writer is not affected by the reader's speed and the buffer size doesn't grow without bounds. Memory allocation only happens when the buffer is created.
 
-The reader can get an iterator to the queue and reading is done through this iterator. The read position is stored in the circular buffer, so data can only be delivered at most once.
+The reader can get an iterator to the queue and reading is done through this iterator. The read position is stored in the `CircularBuffer` data structure, so data can only be delivered at most once.
 
 Here the reader cannot wait for being notified when new elements arrived. I believe these are separate concerns:
 
@@ -222,6 +222,8 @@ impl <'_, T: '_ + Copy> Iterator for CircularBufferIterator<'_, T> {
 ```
 
 ### Notes
+
+I call the underlying data structure `CircularBuffer` because of the way writer wraps over at the end, when reaches the final element in the `buffer`. This may be confusing that the underlying implementation is not a linked list.
 
 The reader and the writer are both using the `buffer` vector. The reader tries to convince the writer to use its location while the reader processes the data previously written by the writer. To minimize contention the writer goes through the `buffer` in forward order and the `reader` works in the backward order.
 
