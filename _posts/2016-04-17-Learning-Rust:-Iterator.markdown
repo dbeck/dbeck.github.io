@@ -216,3 +216,10 @@ rustc 1.7.0 (a5d1e7a59 2016-02-29)
 ### Git repo
 
 I opened a [github repo](https://github.com/dbeck/rust_playground) for this experiment series.
+
+### Episodes of this series
+
+1. [Closures](/Learning-Rust-Closures/)
+2. [Iterator](/Learning-Rust-Iterator/)
+3. [Yet Another Lock-Free Queue](/Learning-Rust-Yet-Another-Lock-Free-Queue/)
+4. [Sharing My Queue Between Threads](/Learning-Rust-Sharing-My-Queue-Between-Threads/)
