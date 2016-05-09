@@ -183,6 +183,8 @@ rustc 1.8.0 (db2939409 2016-04-11)
 
 There is a [github repo](https://github.com/dbeck/rust_playground) for this experiment series. The source code of this experiment is [here](https://github.com/dbeck/rust_playground/blob/iter.4/src/spsc/mod.rs).
 
+**Update**: The SPSC channel is now released as [lossyq crate](https://crates.io/crates/lossyq).
+
 ### Episodes of this series
 
 1. [Closures](/Learning-Rust-Closures/)
