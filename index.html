@@ -24,6 +24,15 @@ woopra: mainpage
 
 <div id="home" style="float: left">
 
+  <h1>Rust Actor Library</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      {% if post.category == 'ActorRS' %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
   <h1>Rust experiments</h1>
   <ul class="posts">
     {% for post in site.posts %}
@@ -84,7 +93,7 @@ woopra: mainpage
   <h1>Other</h1>
   <ul class="posts">
     {% for post in site.posts %}
-      {% if post.category != 'Rust' and post.category != 'Elixir' and post.category != 'IoT' and post.category != 'Startup' and post.category != 'ScaleSmall for Elixir' and post.category != 'Chatter for Elixir' %}
+      {% if post.category != 'ActorRS' and post.category != 'Rust' and post.category != 'Elixir' and post.category != 'IoT' and post.category != 'Startup' and post.category != 'ScaleSmall for Elixir' and post.category != 'Chatter for Elixir' %}
         <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
       {% endif %}
     {% endfor %}
