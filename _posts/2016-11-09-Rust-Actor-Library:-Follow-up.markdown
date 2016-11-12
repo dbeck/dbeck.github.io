@@ -92,3 +92,7 @@ I was surprised when I measured an other (unnamed) actor system's speed. It took
 3. How to handle errors in the message flow
 
 If you have questions, feedbacks or recommendation for an area that needs better explanation, please don't hesitate to contact me. Feedbacks help a lot and are highly appreciated!
+
+### Update
+
+I have written a [new post](/Example-Source-and-Sink/) with another, more actor-like example.

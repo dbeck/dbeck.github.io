@@ -183,4 +183,5 @@ rustc 1.12.1 (d4f39402a 2016-10-19)
 
 ### Update
 
-I have written a [follow up post](/Rust-Actor-Library-Follow-up/) based on the feedbacks. 
+1. I have written a [follow up post](/Rust-Actor-Library-Follow-up/) based on the feedbacks.
+2. I have written a [new post](/Example-Source-and-Sink/) with another example.
