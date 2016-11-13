@@ -24,19 +24,19 @@ As promised in my [first post](/Rust-Actor-Library-First-assorted-thoughts/) I s
 It is in a struct that you create. It holds state in the member variables of your choice. An example struct would be this:
 
 ```rust
-struct SendGreatingsActor {
+struct SendGreetingsActor {
   last_sent: usize,
 }
 ```
 
-([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.1/src/great_int.rs#L4))
+([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.2/src/greet_int.rs#L4))
 
-This is another silly example for demonstration purposes. The `SendGreatingsActor` sends integers as a greating to a receiver. The `last_sent` value is its state.
+This is another silly example for demonstration purposes. The `SendGreetingsActor` sends integers as a greeting to a receiver. The `last_sent` value is its state.
 
 ### How does the actor send messages?
 
 ```rust
-impl source::Source for SendGreatingsActor {
+impl source::Source for SendGreetingsActor {
 
   type OutputValue = usize;
   type OutputError = String;
@@ -51,9 +51,9 @@ impl source::Source for SendGreatingsActor {
 }
 ```
 
-([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.1/src/great_int.rs#L8))
+([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.2/src/greet_int.rs#L8))
 
-The `SendGreatingsActor` implements the [source element trait](https://github.com/dbeck/acto-rs/blob/0.5.2/src/elem/source.rs#L5) which has a single output channel. It has two associated types. One for the normal messages and another one for errors. The [Message enum](https://github.com/dbeck/acto-rs/blob/0.5.2/src/lib.rs#L45) allows you to separate the normal processing from errors.
+The `SendGreetingsActor` implements the [source element trait](https://github.com/dbeck/acto-rs/blob/0.5.2/src/elem/source.rs#L5) which has a single output channel. It has two associated types. One for the normal messages and another one for errors. The [Message enum](https://github.com/dbeck/acto-rs/blob/0.5.2/src/lib.rs#L45) allows you to separate the normal processing from errors.
 
 The `output` channel is a fixed sized queue. The `put` function receives a lambda function. This lambda receives a mutable reference to the next element in the queue. This allows very low latency messaging because all elements in the queue are preallocated.
 
@@ -62,17 +62,17 @@ The `output` channel is a fixed sized queue. The `put` function receives a lambd
 Let's create another silly actor for receiving the messages:
 
 ```rust
-struct PrintGreatingSumActor {
+struct PrintGreetingsumActor {
   sum_received: usize,
 }
 ```
 
-([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.1/src/great_int.rs#L22))
+([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.2/src/greet_int.rs#L22))
 
 To demonstrate how it changes its internal state I added a variable the sums up the integers it receives. The code for receiving messages is:
 
 ```rust
-impl sink::Sink for PrintGreatingSumActor {
+impl sink::Sink for PrintGreetingsumActor {
 
   type InputValue = usize;
   type InputError = String;
@@ -102,7 +102,7 @@ impl sink::Sink for PrintGreatingSumActor {
 }
 ```
 
-([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.1/src/great_int.rs#L26))
+([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.2/src/greet_int.rs#L26))
 
 This is slightly more complicated than the sender was. I chose the [sink trait](https://github.com/dbeck/acto-rs/blob/0.5.2/src/elem/sink.rs#L4) which has a single input channel. There are two complications here that we need to handle:
 
@@ -129,34 +129,34 @@ let mut sched = scheduler::new();
 sched.start();
 
 // specify the output queue size of the source element
-let greater_queue_size = 2_000;
+let greeter_queue_size = 2_000;
 
 // create the source actor
-let (greater_task, mut greater_output) =
-  source::new( "SendGreatings",
-               greater_queue_size,
-               Box::new(SendGreatingsActor{last_sent:0}));;
+let (greeter_task, mut greeter_output) =
+  source::new( "SendGreetings",
+               greeter_queue_size,
+               Box::new(SendGreetingsActor{last_sent:0}));;
 
 // create the sink actor
 let mut printer_task =
-  sink::new( "PrintGreatingAndSum",
-             Box::new(PrintGreatingSumActor{sum_received:0}));
+  sink::new( "PrintGreetingAndSum",
+             Box::new(PrintGreetingsumActor{sum_received:0}));
 
 // connect the sink to the source's output channel
-printer_task.connect(&mut greater_output).unwrap();
+printer_task.connect(&mut greeter_output).unwrap();
 
 // pass the two actors to the scheduler for being executed
-let greater_id = sched.add_task(greater_task, SchedulingRule::OnExternalEvent).unwrap();
+let greeter_id = sched.add_task(greeter_task, SchedulingRule::OnExternalEvent).unwrap();
 let _printer_id = sched.add_task(printer_task, SchedulingRule::OnMessage);
 
 // notify the source element, which tells the scheduler to execute it
-sched.notify(&greater_id).unwrap();
+sched.notify(&greeter_id).unwrap();
 
 // stop the scheduler
 sched.stop();
 ```
 
-([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.1/src/great_int.rs#L55))
+([Code here.](https://github.com/dbeck/acto-rs-playground/blob/0.0.2/src/greet_int.rs#L55))
 
 The above code does all three points. It creates and starts the scheduler. It creates the two actors. We need to specify the message queue size between the two actors. The message queue is always owned by the sender so the queue size is passed to the source element (actor) in this case. The next step is to connect the two actors. This is an unusual step which is quite different from other actor implementations. I explained the rationale behind this in a [previous post](/Rust-Actor-Library-Follow-up/). There are two main differences:
 
@@ -166,7 +166,7 @@ The above code does all three points. It creates and starts the scheduler. It cr
 When we pass the actors to the scheduler we need to tell it how to schedule them. The sink element is quite obvious: it should run when it received a new message, hence the `OnMessage` rule. For the source element we have multiple choices. If I chose the `Loop` rule it would be run in a loop and generate messages continuously. There could be use-cases when this is the sensible choice. I chose the `OnExternalEvent` rule instead, which runs the source actor when it is triggered by a `notify` call as above:
 
 ```rust
-sched.notify(&greater_id).unwrap();
+sched.notify(&greeter_id).unwrap();
 ```
 
 The `OnMessage` rule for the source would not make any sense, since it has no input channels. Another sensible choice would be to execute it periodically with the [Periodic rule](https://github.com/dbeck/acto-rs/blob/0.5.2/src/lib.rs#L70).
