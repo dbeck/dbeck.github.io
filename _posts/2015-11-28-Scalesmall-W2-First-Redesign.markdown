@@ -11,7 +11,7 @@ description: ScaleSmall Experiment Week Two / First Redesign w/ CRDTs
 keywords: "Elixir, Distributed, Erlang, Testing, High-performance, Scalable, CRDT"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5761.JPG
-woopra: scalesmallw2
+pageid: scalesmallw2
 scalesmall_subscribe: false
 ---
 

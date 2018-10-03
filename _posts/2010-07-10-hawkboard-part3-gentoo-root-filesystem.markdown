@@ -11,7 +11,7 @@ description: Hacking Gentoo onto my HawkBoard
 keywords: "Hawkboard, IoT, ARM, Linux, Gentoo"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1091/P1020018-large.JPG
-woopra: hawkboard3
+pageid: hawkboard3
 ---
 
 I share my Gentoo root filesystem for Hawkboard. It does not support a GUI and it has other issues too. I describe the process of flashing a SATA ready kernel and also set the U-Boot parameters to boot that. I believe the Gentoo philosophy is very practical for embedded devices. Gentoo users normally compile everything from source and it has a smart system to fine tune the compilation procedure. Embedded users often have special needs so this can be a big advantage. The compilation is very time consuming so I share the compiled binary packages as well.

@@ -2,13 +2,13 @@
 published: true
 layout: post
 category: Other
-tags: 
+tags:
   - semaphore
   - Linux
 desc: System V Semaphores
 description: System V Semaphores
 keywords: "C++, Linux, Unix, Semaphores"
-woopra: semaphores
+pageid: semaphores
 ---
 
 ### Interesting beast
@@ -33,11 +33,11 @@ Funny to say that System V semaphores are non-traditional semaphores for somethi
 
 Apart from being a (not very compelling) semaphore we can create system wide counters with semaphores. Users can wait for them. My use case is that I wanted a local, non-distributed queue where the messages are identified by their stream position, just like [Kafka](http://kafka.apache.org/documentation.html).
 
-An item in the semaphore set can only hold up to 32767 values which is not very big for my local queue. This is where value sets (equals System V semaphore) and atomic operations come into the picture. 
+An item in the semaphore set can only hold up to 32767 values which is not very big for my local queue. This is where value sets (equals System V semaphore) and atomic operations come into the picture.
 
 ### Simple counter
 
-As a demonstration of the atomic operations let's create a simple counter that always increases and others can wait for these to happen. 
+As a demonstration of the atomic operations let's create a simple counter that always increases and others can wait for these to happen.
 
 The publisher creates the semaphore, resets to zero and increases the value.
 
@@ -105,7 +105,7 @@ ops[0].sem_op   = 1;
 ops[0].sem_flg  = 0;
 ops[1].sem_num  = 0;
 ops[1].sem_op   = -10000;
-ops[1].sem_flg  = IPC_NOWAIT;    
+ops[1].sem_flg  = IPC_NOWAIT;
 ops[2].sem_num  = 1;
 ops[2].sem_op   = 1;
 ops[2].sem_flg  = 0;

@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - performance
   - TCP
@@ -11,7 +11,7 @@ description: Passing millions of small TCP messages in Elixir
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/ThrottledReply.png
-woopra: syncmsgex
+pageid: syncmsgex
 ---
 
 The last post of my TCP experiment series shows how easy it is to achieve a huge performance gain in Elixir if you are lucky (like me) or you know your Elixir trade (others). In my previous experiments I had to build on my existing experience with network programming in C++ which didn't bring too much results. I could speed up my original design design from [22k messages per second](/simple-TCP-message-performance-in-Elixir/) to [100k messages per second](/Four-Times-Speedup-By-Throttling/) and finally to [250k messages per second](/Over-Two-Times-Speedup-By-Better-Elixir-Code/).
@@ -83,10 +83,10 @@ defmodule Batch.Handler do
     transport.setopts(socket, [nodelay: :true])
     loop(socket, transport, container, timer_pid, << >>)
   end
-  
+
   def flush(socket, transport, container) do
     list = Batch.Container.flush(container)
-    case Batch.Container.generate_ack(list) do  
+    case Batch.Container.generate_ack(list) do
       {id, skipped} ->
         packet = << id :: binary-size(8), skipped :: little-size(32) >>
         transport.send(socket, packet)
@@ -94,7 +94,7 @@ defmodule Batch.Handler do
         :ok
     end
   end
-  
+
   def timer(socket, transport, container) do
     flush(socket, transport, container)
     receive do
@@ -103,7 +103,7 @@ defmodule Batch.Handler do
       5 -> timer(socket, transport, container)
     end
   end
-    
+
   def loop(socket, transport, container, timer_pid, yet_to_parse) do
     case transport.recv(socket, 0, 5000) do
       {:ok, packet} ->
@@ -114,13 +114,13 @@ defmodule Batch.Handler do
         shutdown(socket, transport, container, timer_pid)
       _ ->
         shutdown(socket, transport, container, timer_pid)
-    end    
+    end
   end
-  
+
   defp process(_container, << >> ) do
     << >>
   end
-  
+
   defp process(container, packet) do
     case packet do
       << id :: binary-size(8), sz :: little-size(32) , data :: binary-size(sz) >> ->
@@ -133,7 +133,7 @@ defmodule Batch.Handler do
         unparsed
       end
   end
-  
+
   defp shutdown(socket, transport, container, timer_pid) do
     Batch.Container.stop(container)
     :ok = transport.close(socket)
@@ -157,7 +157,7 @@ defmodule Sync.Handler do
     transport.setopts(socket, [nodelay: :true])
     loop(socket, transport, << >>)
   end
-      
+
   def loop(socket, transport, yet_to_parse) do
     case transport.recv(socket, 0, 5000) do
       {:ok, packet} ->
@@ -173,9 +173,9 @@ defmodule Sync.Handler do
         shutdown(socket, transport)
       _ ->
         shutdown(socket, transport)
-    end    
+    end
   end
-  
+
   defp shutdown(socket, transport) do
     :ok = transport.close(socket)
   end
@@ -183,7 +183,7 @@ defmodule Sync.Handler do
   defp process(<< >>, << >>, _skipped ) do
     { << >>, {} }
   end
-  
+
   defp process(<< >>, last_id, skipped ) do
     { << >>, { last_id, skipped } }
   end
@@ -198,7 +198,7 @@ defmodule Sync.Handler do
         { unparsed, {} }
     end
   end
-  
+
   defp process(packet, last_id, skipped) do
     case packet do
       << id :: binary-size(8), sz :: little-size(32) , _data :: binary-size(sz) >> ->
@@ -253,7 +253,7 @@ namespace
     on_destruct(std::function<void()> fun) : fun_(fun) {}
     ~on_destruct() { if( fun_ ) fun_(); }
   };
-  
+
   //
   // for measuring ellapsed time and print statistics
   //
@@ -261,29 +261,29 @@ namespace
   {
     typedef std::chrono::high_resolution_clock      highres_clock;
     typedef std::chrono::time_point<highres_clock>  timepoint;
-    
+
     timepoint  start_;
     uint64_t   iteration_;
-    
+
     timer(uint64_t iter) : start_{highres_clock::now()}, iteration_{iter} {}
-    
+
     int64_t spent_usec()
     {
       using namespace std::chrono;
       timepoint now{highres_clock::now()};
       return duration_cast<microseconds>(now-start_).count();
     }
-      
+
     ~timer()
     {
       using namespace std::chrono;
       timepoint now{highres_clock::now()};
-      
+
       uint64_t  usec_diff     = duration_cast<microseconds>(now-start_).count();
       double    call_per_ms   = iteration_*1000.0     / ((double)usec_diff);
       double    call_per_sec  = iteration_*1000000.0  / ((double)usec_diff);
       double    us_per_call   = (double)usec_diff     / (double)iteration_;
-      
+
       std::cout << "elapsed usec=" << usec_diff
                 << " avg(usec/call)=" << std::setprecision(8) << us_per_call
                 << " avg(call/msec)=" << std::setprecision(8) << call_per_ms
@@ -291,7 +291,7 @@ namespace
                 << std::endl;
     }
   };
-  
+
   template <size_t MAX_ITEMS>
   struct buffer
   {
@@ -304,11 +304,11 @@ namespace
     size_t         n_items_;
     uint32_t       len_;
     char           data_[5];
-    
+
     buffer() : n_items_{0}, len_{5}
     {
       memcpy(data_, "hello", 5);
-      
+
       for( size_t i=0; i<MAX_ITEMS; ++i )
       {
         // I am cheating with the packet content to be fixed
@@ -327,17 +327,17 @@ namespace
         items_[(i*3)+2].iov_len  = len_;
       }
     }
-    
+
     void push(uint64_t id)
     {
-      ids_[n_items_++] = id; 
+      ids_[n_items_++] = id;
     }
-    
+
     bool needs_flush() const
     {
       return (n_items_ >= MAX_ITEMS);
     }
-    
+
     void flush(int sockfd)
     {
       if( !n_items_ ) return;
@@ -362,21 +362,21 @@ int main(int argc, char ** argv)
       throw "can't create socket";
     }
     on_destruct close_sockfd( [sockfd](){ close(sockfd); } );
-    
+
     // server address (127.0.0.1:8000)
     struct sockaddr_in server_addr;
     ::memset(&server_addr, 0, sizeof(server_addr));
-    
+
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    server_addr.sin_port = htons(8000);  
-    
+    server_addr.sin_port = htons(8000);
+
     // connect to server
     if( connect(sockfd, (struct sockaddr *)&server_addr, sizeof(struct sockaddr)) == -1 )
     {
       throw "failed to connect to server at 127.0.0.1:8000";
     }
-    
+
     {
       /* This hurts performance
       int flag = 1;
@@ -386,13 +386,13 @@ int main(int argc, char ** argv)
       }
       */
     }
-    
+
     // the buffer template parameter tells how many messages shall
     // we batch together
     buffer<50>   data;
     uint64_t     id            = 0;
     int64_t      last_ack      = -1;
-    
+
     //
     // this lambda function checks if we have received a new ACK.
     // if we did then it checks the content and returns the max
@@ -404,7 +404,7 @@ int main(int argc, char ** argv)
       fd_set fdset;
       FD_ZERO(&fdset);
       FD_SET(sockfd, &fdset);
-      
+
       // give 1 msec to the acks to arrive
       struct timeval tv { 0, 1000 };
       int select_ret = select( sockfd+1, &fdset, NULL, NULL, &tv );
@@ -417,12 +417,12 @@ int main(int argc, char ** argv)
         // max 2048 acks that we handle in one check
         size_t alloc_bytes = 12 * 2048;
         std::unique_ptr<uint8_t[]> ack_data{new uint8_t[alloc_bytes]};
-        
+
         //
         // let's receive what has arrived. if there are more than 2048
         // ACKs waiting, then the next loop will take care of them
         //
-        
+
         auto recv_ret = recv(sockfd, ack_data.get(), alloc_bytes, 0);
         if( recv_ret < 0 )
         {
@@ -434,12 +434,12 @@ int main(int argc, char ** argv)
           {
             uint64_t id = 0;
             uint32_t skipped = 0;
-            
+
             // copy the data to the variables above
             //
             memcpy(&id, ack_data.get()+pos, sizeof(id) );
             memcpy(&skipped, ack_data.get()+pos+sizeof(id), sizeof(skipped) );
-            
+
             // check the ACKs
             if( (ret_ack + skipped + 1) != id )
             {
@@ -451,13 +451,13 @@ int main(int argc, char ** argv)
       }
       return ret_ack;
     };
-    
+
     for( int i=0; i<50; ++i )
     {
       size_t iter = 1000000;
       timer t(iter);
       int64_t checked_at_usec = 0;
-      
+
       // send data in a loop
       for( size_t kk=0; kk<iter; ++kk )
       {
@@ -466,7 +466,7 @@ int main(int argc, char ** argv)
         {
           data.flush(sockfd);
         }
-        
+
         //
         // check time after every 1000 send so I reduce
         // OS calls by not querying time too often
@@ -486,15 +486,15 @@ int main(int argc, char ** argv)
         }
         ++id;
       }
-      
+
       // flush all unflushed items
       data.flush(sockfd);
-      
+
       // wait for all outstanding ACKs
       while( last_ack < (id-1) )
         last_ack = check_ack(last_ack);
     }
-    
+
     while( last_ack < (id-1) )
     {
       last_ack = check_ack(last_ack);

@@ -10,7 +10,7 @@ description: Getting started using my HawkBoard
 keywords: "Hawkboard, IoT, ARM"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1097/P1020019-large.JPG
-woopra: hawkboard1
+pageid: hawkboard1
 ---
 
 With all my experiences with [IGEP](http://dbeck.beckground.hu/tags/igep) and [SheevaPlug](http://dbeck.beckground.hu/tags/sheevaplug) I was ready for a new experience with an ARM board having a SATA connector. My desktop environment at home is totally ARM based. First I tried SheevaPlug being my desktop but I was not completely satisfied because of the instability of the USB based display. Then I tried IGEP which has proper display handling but when it does I/O on USB or SDHC it largely blocks the system. Finally I set up SheevaPlug to be my NFS server and I use IGEP from NFS root. I compiled a Gentoo system on the IGEP and this became a pretty usable system with acceptable performance. The story was almost done, but there was one point I couldn’t digest: the NFS perfromance. I connected a USB disk to SheevaPlug and it sees around 16MB/s. When it is exported to IGEP through NFS it goes down to 4MB/s. There are also issues with the USB disks power saving. These are the factors that made me curious about the [Hawkboard](http://www.hawkboard.org/) .

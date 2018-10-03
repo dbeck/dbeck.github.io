@@ -11,7 +11,7 @@ description: "Example: Source and Sink (Actors)"
 keywords: "Rust, Actor, Concurrency"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF0473.JPG
-woopra: actors_ex1
+pageid: actors_ex1
 scalesmall_subscribe: false
 ---
 

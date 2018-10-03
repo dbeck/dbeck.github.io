@@ -9,7 +9,7 @@ description: "Learning Rust: Yet Another Lock Free Queue"
 keywords: "Rust, Learning, Experiment, Lock-Free, Queue, Lock free queue"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6901.JPG
-woopra: rust_spsc
+pageid: rust_spsc
 scalesmall_subscribe: false
 ---
 

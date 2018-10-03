@@ -10,7 +10,7 @@ description: Building up an IoT community and ecosystem
 keywords: "IOT, Ecosystem, EndUser, Community"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/appmkt.jpg
-woopra: iotecosystem
+pageid: iotecosystem
 ---
 
 Every time I hear that, this and that company came up with a new IoT standard I feel a shiver in my back. There are variations when single or multiple ones hide themselves behind a so called non-profit organization. There seems to be a whole lot of different companies trying to take advantage which has a few aspects I don't like.

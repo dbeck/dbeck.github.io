@@ -12,7 +12,7 @@ description: ScaleSmall Experiment Week Fourteen / More Group Manager informatio
 keywords: "Elixir, Distributed, Erlang, Scalable, Group, Manager"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6936.JPG
-woopra: scalesmallw14
+pageid: scalesmallw14
 scalesmall_subscribe: false
 ---
 
@@ -66,7 +66,7 @@ I have a few reasons why I want `scalesmall` group manager to be different:
 
 #### Exercise
 
-Let's define a use-case for the group manager: I have a huge customer database that I want to shard over a set of machines. For a start I don't think about redundancy. Let's suppose I have three machines: M1, M2 and M3. How would a group manager help in this? 
+Let's define a use-case for the group manager: I have a huge customer database that I want to shard over a set of machines. For a start I don't think about redundancy. Let's suppose I have three machines: M1, M2 and M3. How would a group manager help in this?
 
 **Let's define 3 groups**:
 

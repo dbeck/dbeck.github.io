@@ -11,7 +11,7 @@ description: "Rust Actor Library: Follow up"
 keywords: "Rust, Actor, Concurrency"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF0485.JPG
-woopra: actors_follow
+pageid: actors_follow
 scalesmall_subscribe: false
 ---
 

@@ -2,15 +2,15 @@
 published: true
 layout: post
 category: Other
-tags: 
+tags:
   - elixir
   - distributed
 desc: Dream of a nice distributed system in Elixir
 description: Dream of a nice distributed system in Elixir
 keywords: "Erlang, Elixir, Distributed, Portable Native Client"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/elixirpexe.png
-woopra: elixirpexe
+pageid: elixirpexe
 ---
 
 A bit of my history around Ruby and C++, and my future could be Elixir?
@@ -28,7 +28,7 @@ This was the point when I heard about Elixir and I was fortunate enough to have 
 
 I did try Erlang few years ago because I read the nice features of the Erlang VM and I saw how useful these would be in the distributed systems I worked on. The Erlang language on the other hand was not to my taste. I could write programs in it but I didn’t enjoy it. It was also well before my Lambda experiences so I didn’t feel the need to struggle with Erlang.
 
-### Portable Native Client 
+### Portable Native Client
 So now I am deeply in love with Elixir but as with other relations I am affraid to jump in full heartedly because of previous frustrations. My main fear is that I am going to invest a lot and at some point it is going to be slow. Or too slow for the actual task I want to use it for. Then I will have to find workarounds to achieve an acceptable level of performance.
 
 Few weeks ago I met the [Portable Native Client](https://www.chromium.org/nativeclient/pnacl/introduction-to-portable-native-client) solution that is used in the Google Chrome browser. This allows someone to write code in C++ which will be compiled to an intermediate format. This intermediate format is still platform independent. This format can be distributed to other machines and they can run it by first translating to their architecture and then pasing this into a secured execution environment. The translation can be either fast or optimized. According to the Google publications the code after the optimized translation is around 5–10% slower than if the same code would have been natively compiled from C++. This is fine for me.

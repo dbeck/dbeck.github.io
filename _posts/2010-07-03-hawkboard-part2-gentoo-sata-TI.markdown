@@ -11,7 +11,7 @@ description: My HawkBoard starts using a SATA disk
 keywords: "Hawkboard, IoT, ARM, SATA, Disk, Gentoo, Linux"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1061/P1020013-large.JPG
-woopra: hawkboard2
+pageid: hawkboard2
 ---
 
 In this second part of my Hawkboard tale I share my experiences installing Gentoo Linux on an SD card, how I failed with the SATA disk and how much I appreciated Texas Instruments customer support. Finally I was able to use the SATA disk by choosing the right kernel and patches.

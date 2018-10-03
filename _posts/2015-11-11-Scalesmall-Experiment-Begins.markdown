@@ -11,7 +11,7 @@ description: ScaleSmall Experiment Begins
 keywords: "Elixir, Distributed, Erlang, Consistent hashing, Riak-Core, Dynamo, Replicated state machine, Kafka, Scalable"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P8142409.JPG
-woopra: scalesmall1
+pageid: scalesmall1
 scalesmall_subscribe: false
 twitter_embed: true
 ---

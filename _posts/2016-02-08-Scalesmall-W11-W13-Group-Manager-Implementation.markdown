@@ -12,7 +12,7 @@ description: ScaleSmall Experiment Week Eleven to Thirteen / Group Manager now w
 keywords: "Elixir, Distributed, Erlang, Scalable, Group, Manager"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6871.JPG
-woopra: scalesmallw11
+pageid: scalesmallw11
 scalesmall_subscribe: false
 ---
 
@@ -127,7 +127,7 @@ When I don't know any members of a group or I am the first one in the group I ca
 If I explicitly add a list of nodes I want to be notified about my will then I can add them in the list. They will be contacted through TCP through a logarithmic broadcast. More about the various communication methods in the `communication between nodes` section.
 
 ```elixir
-  iex(2)> alias GroupManager.Chatter.NetID                          
+  iex(2)> alias GroupManager.Chatter.NetID
   nil
   iex(3)> GroupManager.join("Group1",[ NetID.new({192,168,1,97}, 29999) ])
   :ok
@@ -138,7 +138,7 @@ More on the `NetID` type in the `group manager messages and data types` section.
 **Query group members**:
 
 ```elixir
-  iex(4)> GroupManager.members("Group1")                                  
+  iex(4)> GroupManager.members("Group1")
   [{:net_id, {192, 168, 1, 100}, 29999}, {:net_id, {192, 168, 1, 97}, 29999}]
 ```
 
@@ -159,7 +159,7 @@ This returns a list of `NetID` types which identifies peers. Each node slowly le
       {:local_clock, {:net_id, {192, 168, 1, 100}, 29999}, 2}}}
 ```
 
-This tells others that I want to serve the key range from 0xf to 0xff and my service is accessible on port #11223. 
+This tells others that I want to serve the key range from 0xf to 0xff and my service is accessible on port #11223.
 
 **Query group topology**:
 
@@ -339,7 +339,7 @@ This type represents the shared knowledge about the group topology.
 
     require Record
     # ..snip..
-  
+
     Record.defrecord :message,
                      time: nil,
                      items: nil,
@@ -356,7 +356,7 @@ This type represents the shared knowledge about the group topology.
 
 - `time` is a vector clock
 - `items` is a timed set of items that each represent one particular participation information
-- `group_name` 
+- `group_name`
 
 ### Implementation details
 

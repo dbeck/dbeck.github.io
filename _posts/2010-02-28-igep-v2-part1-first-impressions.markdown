@@ -11,7 +11,7 @@ description: First impressions with the IGEP-V2 platform
 keywords: "IGEPv2, IoT, ARM"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/983/P1010892-large.JPG
-woopra: igep1
+pageid: igep1
 ---
 
 This is the first part of my experiences with the [IGEP-V2 platform](http://www.igep-platform.com/). This is a [Beagleborad](http://beagleboard.org/) clone with some very nice additions. They are both credit card size computers based on the Texas Instruments Omap3 CPUs. It is an ARM family CPU with very low power consumption. Both have nice homepages so I will not repeat specs here. I will rather compare my experiences with my [Sheevaplug](http://www.newit.co.uk/) device that I bought earlier. It is also an ARM family computer based on the Marvell Kirkwood platform.

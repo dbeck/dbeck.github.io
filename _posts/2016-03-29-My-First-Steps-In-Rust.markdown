@@ -9,7 +9,7 @@ description: My First Steps In Rust
 keywords: "Rust, Learning, Experiment"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF4696.JPG
-woopra: rust_first_steps
+pageid: rust_first_steps
 scalesmall_subscribe: false
 ---
 

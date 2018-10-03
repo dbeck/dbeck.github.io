@@ -12,7 +12,7 @@ description: The IOT system I want
 keywords: "IOT, Ecosystem, EndUser"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/iot2.jpg
-woopra: iotiwant
+pageid: iotiwant
 ---
 
 I have mixed feelings when I hear the term IoT. Partly because as a developer and startupper I have a different viewpoint of IoT than I have when I am a customer. My developer part is more like a hacker with interest all the devices around me. The consumer part don't really want to spend time with these thingies only benefit from them. The startupper wants to do business.

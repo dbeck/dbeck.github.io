@@ -10,7 +10,7 @@ description: How I started using SheevaPlug as a desktop
 keywords: "SheevaPlug, IoT, ARM"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1013/P1010908-large.JPG
-woopra: sheevaplugexp
+pageid: sheevaplugexp
 ---
 
 This article is about my experiences with my sheevaplug device, which is the original v1 model (rev 1.3). Marvell announced its 3.0 successor at CES, January 2010. Its price and availability is still unknown.

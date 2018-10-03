@@ -9,7 +9,7 @@ description: "Learning Rust: Closures"
 keywords: "Rust, Learning, Experiment"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6998.JPG
-woopra: rust_closures
+pageid: rust_closures
 scalesmall_subscribe: false
 ---
 

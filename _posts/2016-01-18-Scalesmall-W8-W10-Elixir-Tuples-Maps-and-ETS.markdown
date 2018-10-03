@@ -12,7 +12,7 @@ description: ScaleSmall Experiment Week Eigth to Ten / Tuples, Maps, ETS and Sta
 keywords: "Elixir, Distributed, Erlang, Scalable, Tuple, Map, ETS, OOP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5297.JPG
-woopra: scalesmallw9
+pageid: scalesmallw9
 scalesmall_subscribe: false
 ---
 

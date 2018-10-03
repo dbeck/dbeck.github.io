@@ -2,18 +2,18 @@
 published: true
 layout: post
 category: Other
-tags: 
+tags:
   - slowdata
   - performance
 desc: Price of Being Distributed
 description: Price of Being Distributed
 keywords: "C++, Linux, Unix, Queue, Kafka, BigData, Hadoop, Apache, SlowData, Performance"
-woopra: distribprice
+pageid: distribprice
 ---
 
 
 ### BigData
-I am watching how new and new BigData projects came from nowhere and slowly changing the whole computing landscape. I see a great value in this and I see great ideas coming from these projects. One of my personal favourite is [Kafka](http://kafka.apache.org). I like its simplicity and the way they found a balance between having a good abstraction over queues and still being fast and scalable. 
+I am watching how new and new BigData projects came from nowhere and slowly changing the whole computing landscape. I see a great value in this and I see great ideas coming from these projects. One of my personal favourite is [Kafka](http://kafka.apache.org). I like its simplicity and the way they found a balance between having a good abstraction over queues and still being fast and scalable.
 The other good outcome of these projects is distributed computing became easy. Now everyone can imagine a new kind of scalable service by selecting a few projects and putting these pieces together. This is also great. Sometimes however I feel there may be too many people designing new distributed systems.
 ### Streaming + Batch architecture
 More and more people feel the high latency of Hadoop + MapReduce family too limiting and new designs are cropping up. A typical way of thought is to use a scalable queue to store high volume incoming data. Then use a distributed stream processor to post process the data and use a scalable distributed storage to sink the data into a data lake in parallel to the stream processing. We have ticking, streaming data and historical data at the same time. Typical building blocks are Kafka / RabitMQ, Storm, Hadoop/HDFS, Redis, Cassandra, Hive, etc...

@@ -11,7 +11,7 @@ description: "Rust Actor Library: First assorted thoughts"
 keywords: "Rust, Actor, Concurrency"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF0458.JPG
-woopra: actors_first
+pageid: actors_first
 scalesmall_subscribe: false
 ---
 

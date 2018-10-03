@@ -10,7 +10,7 @@ description: Getting started with my SmartQ V7
 keywords: "SmartQ, IoT, ARM"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/1157/P1020036-large.JPG
-woopra: smartq
+pageid: smartq
 ---
 
 I chose an ARM based MID to experiment with. This guy is able to play Full-HD videos with low power consumption. The SmartQ V7 I bought is far from the build quality of IPad but far cheaper and has lot more connectors by default. Three operating systems can be chosen during the device boot. All of them is set to Chinese so it takes some time to change language. Actually WinCE has to be upgraded in order to switch language. With Linux it is pretty easy and it takes some time to set on Android.

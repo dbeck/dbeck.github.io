@@ -9,7 +9,7 @@ description: "Learning Rust: Sharing My Queue Between Threads"
 keywords: "Rust, Learning, Experiment, Lock-Free, Queue, Lock free queue, multithreading"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6937.JPG
-woopra: rust_thrq
+pageid: rust_thrq
 scalesmall_subscribe: false
 ---
 

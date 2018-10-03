@@ -9,7 +9,7 @@ description: "Learning Rust: Iterator"
 keywords: "Rust, Learning, Experiment, Iterator"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF4625.JPG
-woopra: rust_iter
+pageid: rust_iter
 scalesmall_subscribe: false
 ---
 

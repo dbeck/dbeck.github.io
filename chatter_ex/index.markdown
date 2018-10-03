@@ -12,7 +12,7 @@ description: Chatter main page under construction
 keywords: "Elixir, Distributed, Erlang, Scalable, Multicast, Broadcast"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/mixed_broadcast1.png
-woopra: chatterex_exmain
+pageid: chatterex_exmain
 scalesmall_subscribe: false
 ---
 

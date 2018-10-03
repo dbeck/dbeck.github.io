@@ -2,15 +2,15 @@
 published: false
 layout: post
 category: IoT
-tags: 
+tags:
   - IoT
   - ecosystem
 desc: How I imagine a flourishing IoT ecosystem
 description: How I imagine a flourishing IoT ecosystem
 keywords: "Erlang, Elixir, Distributed, Portable Native Client"
-twcardtype: summary_large_image 
+twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/elixirpexe.png
-woopra: elixirpexe
+pageid: elixirpexe
 ---
 
 A bit of my history around Ruby and C++, and my future could be Elixir?

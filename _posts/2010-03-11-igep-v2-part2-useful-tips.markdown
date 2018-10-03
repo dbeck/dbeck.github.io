@@ -10,7 +10,7 @@ description: A few useful tips for using the IGEP-V2 device
 keywords: "IGEPv2, IoT, ARM, Ubuntu, Poky, Linux"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/977/P1010891-large.JPG
-woopra: igep2
+pageid: igep2
 ---
 
 This is the second episode of my soap-opera with IGEP/V2 . I like this device a lot. I still see the potential to use this as my desktop machine. The first step on the road is to change the factory installed linux to something more usable. The documentation is very bad, so I had to find out lots of things myself. Some of my experiences are collected here.

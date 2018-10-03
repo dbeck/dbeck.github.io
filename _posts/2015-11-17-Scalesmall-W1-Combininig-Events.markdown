@@ -10,7 +10,7 @@ description: ScaleSmall Experiment Week One / Combining Events
 keywords: "Elixir, Distributed, Erlang, Replicated state machine, Scalable"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5689.JPG
-woopra: scalesmallw1
+pageid: scalesmallw1
 scalesmall_subscribe: false
 ---
 

@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - ranch
   - TCP
@@ -11,7 +11,7 @@ description: Using Ranch From Elixir
 keywords: "Elixir, Ranch, Erlang, TCP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/P9083758.JPG
-woopra: usingranchex
+pageid: usingranchex
 ---
 
 This post goes reverse order. Results and conclusion first. Background and motivation last. I keep my random ramblings to the end so you can save yourself earlier.
@@ -59,7 +59,7 @@ defmodule TestMe2 do
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
-    
+
     children = [
       worker(TestMe2.Worker, [])
     ]
@@ -90,7 +90,7 @@ defmodule TestMe2.Handler do
     pid = spawn_link(__MODULE__, :init, [ref, socket, transport, opts])
     {:ok, pid}
   end
-         
+
   def init(ref, socket, transport, _Opts = []) do
     :ok = :ranch.accept_ack(ref)
     loop(socket, transport)
@@ -125,7 +125,7 @@ defmodule Testme1.Handler do
     Pid = spawn_link(__MODULE__, :init, [Ref, Socket, Transport, Opts])
     {:ok, Pid}
   end
-         
+
   def init(Ref, Socket, Transport, _Opts = []) do
     :ok = :ranch.accept_ack(Ref)
     loop(Socket, Transport)
@@ -156,6 +156,6 @@ Then I spent quite some time looking for an Elixir alternative to Ranch. What I 
 
 ### Background
 
-I have no Erlang or Elixir experience. I have read Dave Thomas' Programming in Elixir. I have looked at Erlang for long and always wanted to use the BEAM Virtual Machine for a real project. 
+I have no Erlang or Elixir experience. I have read Dave Thomas' Programming in Elixir. I have looked at Erlang for long and always wanted to use the BEAM Virtual Machine for a real project.
 
 One great plus on the Elixir side is the possibility to use Erlang libraries. I read that this should be easy. For further preparation I also read the Little Elixir and & OTP Guidebook from Benjamin Tan Wei Hao. I always liked the OTP concepts and expected that most Erlang and Elixir libs will use it.

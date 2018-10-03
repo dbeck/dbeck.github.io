@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Other
-tags: 
+tags:
   - performance
   - reliability
 desc: Experimental protocol for passing large number of small messages reliably
@@ -10,7 +10,7 @@ description: Experimental protocol for passing large number of small messages re
 keywords: "TCP, Network, Performance, socket, experiment"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/experimentalprotocol_combine2_red3.png
-woopra: relmsgexp
+pageid: relmsgexp
 ---
 
 In my previous Elixir experiments {[1](/Four-Times-Speedup-By-Throttling/), [2](/Passing-Millions-Of-Small-TCP-Messages-in-Elixir/)} I palyed a bit with relaxing the Request/Reply pattern. Replies were only used to acknowledge the Requests and I allowed these ACKs to be delayed and combined into fewer messages. The motivation for doing that is to allow the sender to continue without immediate acknowledgement. The sender can still decide to wait for the ACKs thus revert to the original Request/Reply pattern.
@@ -82,7 +82,7 @@ The **Ack** messages can inform the sender about the number of receivers receive
 - **#Delivered** tells how many times the message has been delivered to nodes
 - **#Processed** tells how many nodes have processed the message
 
-The next diagramm shows the case when both the delivery and the progress acknowledgements were batched together for three data messages: 
+The next diagramm shows the case when both the delivery and the progress acknowledgements were batched together for three data messages:
 
 ![Throttled reply](/images/experimentalprotocol_simple_combine.png)
 
@@ -102,11 +102,11 @@ To reduce the number of ACKs and thus save bandwidth and processing time, hops m
 
 ### Error handling and recovery
 
-The error handling somewhat reflects to the Erlang / Elixir philosophy. Let it crash. If any party detect an anomaly it can and should close the connection. An obvious error scenario is when someone sends a **Data** message without a preceeding **Init**. 
+The error handling somewhat reflects to the Erlang / Elixir philosophy. Let it crash. If any party detect an anomaly it can and should close the connection. An obvious error scenario is when someone sends a **Data** message without a preceeding **Init**.
 
 ![Throttled reply](/images/experimentalprotocol_missing_init.png)
 
-I will need a bit more time to gather error scenarios and the best responses to them. 
+I will need a bit more time to gather error scenarios and the best responses to them.
 
 The recovery part needs more thoughts too. My gut feeling is that I can delegate recovery to the parties and they should be able to recover based on the information they have, but I didn't have much time to think about this.
 

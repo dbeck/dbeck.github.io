@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - performance
 desc: Non-Scientific measurment of the cost of calling a remote process
@@ -10,7 +10,7 @@ description: Non-Scientific measurment of the cost of calling a remote process
 keywords: "Elixir, Performance, MacOSX"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF5286.JPG
-woopra: callmeasurex
+pageid: callmeasurex
 ---
 
 During my TCP experiment blog series I realized that sending messages to a remote Elixir process can slow down the sender process more than I expected. As José pointed out in his comment, passing messages involves copying the message from the sender. In addition to that, I had the gut feeling that it also has a hidden cost on top of the copying. This is a rough, non scientific attempt to estimate this hidden cost.
@@ -29,58 +29,58 @@ defmodule Testme do
   # local_fun does a tail recursive call until val < 0.
   # 'local_fun' is the baseline for comparison to 'remote_fun'
   #
-  
+
   def local_fun(val) when(val<=0) do
     :ok
   end
-  
+
   def local_fun(val) when(val>0) do
     local_fun(val-1)
   end
-  
+
   #
   # remote_loop is used to receive messages without doing
   # anything with them. it can be stopped too.
   #
-  
+
   def remote_loop do
     receive do
       {:stop} -> :ok
       _ -> remote_loop
     end
   end
-  
+
   #
   # remote_fun is almost the same as local_fun except that
   # it sends 'val' to the pid. the purpose of this function is
   # measuring how much it costs to send a message to another
   # local process.
   #
-  
+
   def remote_fun(pid, val) when(val<=0) do
     send pid, {val}
     :ok
   end
-  
+
   def remote_fun(pid, val) when(val>0) do
     send pid, {val}
     remote_fun(pid, val-1)
   end
-  
+
   #
   # 'measure_f' tries to calculate the avarage speed of a function.
   # it tries to estimate the number of calls a function can be made in 10 seconds
   # in multiple steps, going up from 1ms, 500ms, 3s to 10s
   #
-  
+
   def measure_f(name,f) do
-    
+
     # check how much it takes to do 10 tail recursive loops of f.()
     {usec, :ok} = :timer.tc(fn -> f.(10) end,[])
-    
+
     # estimate how many calls we can do in 1ms
     calls_1ms = 1000*10/(usec+1)
-    
+
     # check the timing for our estimate
     {usec_1ms, :ok} = :timer.tc(fn -> f.(calls_1ms) end,[])
 
@@ -103,7 +103,7 @@ defmodule Testme do
   #
   # measure() does a local and remote function call measurement
   #
-  
+
   def measure() do
     measure_f( "local", fn(a) -> Testme.local_fun(a) end )
     remote_pid = spawn_link(__MODULE__, :remote_loop, [])

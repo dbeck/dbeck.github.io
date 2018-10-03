@@ -14,7 +14,7 @@ description: Chatter extracted from ScaleSmall
 keywords: "Elixir, Distributed, Erlang, Scalable, Broadcast, Multicast, UDP"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/DSCF6941.JPG
-woopra: chatter_extracted
+pageid: chatter_extracted
 scalesmall_subscribe: false
 ---
 

@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - performance
   - TCP
@@ -11,7 +11,7 @@ description: Four times speedup gained by simple redesign of how I communicate w
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/TripleClient.png
-woopra: throttlemsgex
+pageid: throttlemsgex
 ---
 
 In my [previous naive experiment](/simple-TCP-message-performance-in-Elixir/) I realized 22k small messages per second to my Elixir based small message TCP server. I treat the old post as a baseline and, in my new posts I will experiment with different factors to make this faster.
@@ -48,7 +48,7 @@ In the original protocol I only sent back the 8 byte ID I received in the reques
 
 I allow the server to send back ACKs whenever it wants, the only thing I require is to tell how many ACKs it has omitted. The ID field is the latest ID that is not skipped.
 
-Using this ACK throttling I let the client decide how much it wants to continue without acknowledgement and decide what to do if the ACKs are not to its taste. If the client detects an error it can close the connection and resend the unacknowledged messages. 
+Using this ACK throttling I let the client decide how much it wants to continue without acknowledgement and decide what to do if the ACKs are not to its taste. If the client detects an error it can close the connection and resend the unacknowledged messages.
 
 On the server side I periodically collect the messages waiting for acknowledgement, pick the latest's ID and count the other messages. I send this every 5 milliseconds.
 
@@ -83,7 +83,7 @@ It is roughly 4x more than it was [previously](http://dbeck.github.io/simple-TCP
 
 Unfortunately, no. Check the figures below. The aggregate performance slightly increases with a second parallel client and starts dropping at the thrird client.
 
-My purpose is not to measure the maximum Elixir performance, neither to squeeze as much from my PC as possible. I want to understand what practices lead to a feasible solution if I want to my server code to use Elixir. 
+My purpose is not to measure the maximum Elixir performance, neither to squeeze as much from my PC as possible. I want to understand what practices lead to a feasible solution if I want to my server code to use Elixir.
 
 #### Single client stats
 
@@ -118,7 +118,7 @@ And the statistics:
  1. If I don't send any ACKs back to the client and neither do any processing on the Elixir side the numbers are roughly the same. Around 110k messages per second. Again, without sending back data to the client.
  2. When I am sending back the periodic ACKs, the Elixir server takes a whole CPU core (100%) and the C++ client takes around 15% of another core.
  3. Both the Elixir server and the C++ client calls the OS for every single message in my code. In fact the Elixir server reads every message in two parts, the {ID, Size} first and the Data second. This puts too much and unnecessary pressure on the OS.
- 4. The C++ side should also batch the writes at least to reach the IP packet size, so the IP and TCP packet wrapping, checksum, context switch, OS costs ... would be amortized over multiple messages. 
+ 4. The C++ side should also batch the writes at least to reach the IP packet size, so the IP and TCP packet wrapping, checksum, context switch, OS costs ... would be amortized over multiple messages.
 
 ### The code
 
@@ -127,43 +127,43 @@ The code is roughly the same as in the [previous experiment](http://dbeck.github
  - mix.exs
  - lib/throttle_perf.ex
  - lib/throttle_worker.ex
- 
+
 #### ThrottlePerf.Container
 
 I added a ThrottlePerf.Container module in ```lib/throttle_perf_container.ex```:
 
 ``` elixir
 defmodule ThrottlePerf.Container do
-  
+
   def start_link do
     Agent.start_link(fn -> [] end)
   end
-  
+
   def stop(container) do
     Agent.stop(container)
   end
-  
+
   def flush(container) do
     Agent.get_and_update(container, fn list -> {list, []} end)
   end
-  
+
   def push(container, id, data) do
     Agent.update(container, fn list -> [{id, data}| list] end)
   end
-  
+
   defp generate([]) do
     {}
   end
-  
+
   defp generate( [{id, _}] ) do
     {id, 0}
   end
-  
+
   defp generate( [{id, _} | tail] ) do
     tail_len = List.foldl(tail, 0, fn (_, acc) -> 1 + acc end)
     {id, tail_len}
   end
-  
+
   def generate_ack(list) do
     generate(list)
   end
@@ -190,10 +190,10 @@ defmodule ThrottlePerf.Handler do
     timer_pid = spawn_link(__MODULE__, :timer, [socket, transport, container])
     loop(socket, transport, container, timer_pid)
   end
-  
+
   def flush(socket, transport, container) do
     list = ThrottlePerf.Container.flush(container)
-    case ThrottlePerf.Container.generate_ack(list) do  
+    case ThrottlePerf.Container.generate_ack(list) do
       {id, skipped} ->
         packet = << id :: binary-size(8), skipped :: little-size(32) >>
         transport.send(socket, packet)
@@ -201,7 +201,7 @@ defmodule ThrottlePerf.Handler do
         IO.puts "empty data, everything flushed already"
     end
   end
-  
+
   def timer(socket, transport, container) do
     flush(socket, transport, container)
     receive do
@@ -213,13 +213,13 @@ defmodule ThrottlePerf.Handler do
         timer(socket, transport, container)
     end
   end
-  
+
   def shutdown(socket, transport, container, timer_pid) do
     ThrottlePerf.Container.stop(container)
     :ok = transport.close(socket)
     send timer_pid, {:stop}
   end
-  
+
   def loop(socket, transport, container, timer_pid) do
     case transport.recv(socket, 12, 5000) do
       {:ok, id_sz_bin} ->
@@ -281,7 +281,7 @@ namespace
   {
     typedef std::chrono::high_resolution_clock      highres_clock;
     typedef std::chrono::time_point<highres_clock>  timepoint;
-    
+
     timepoint  start_;
     uint64_t   iteration_;
 
@@ -298,7 +298,7 @@ namespace
     {
       using namespace std::chrono;
       timepoint now{highres_clock::now()};
-      
+
       uint64_t  usec_diff     = duration_cast<microseconds>(now-start_).count();
       double    call_per_ms   = iteration_*1000.0     / ((double)usec_diff);
       double    call_per_sec  = iteration_*1000000.0  / ((double)usec_diff);
@@ -332,7 +332,7 @@ int main(int argc, char ** argv)
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    server_addr.sin_port = htons(8000);  
+    server_addr.sin_port = htons(8000);
 
     // connect to server
     if( connect(sockfd, (struct sockaddr *)&server_addr, sizeof(struct sockaddr)) == -1 )
@@ -364,7 +364,7 @@ int main(int argc, char ** argv)
       fd_set fdset;
       FD_ZERO(&fdset);
       FD_SET(sockfd, &fdset);
-      
+
       // give 1 ms to the acks to arrive
       struct timeval tv { 0, 1000 };
       int select_ret = select( sockfd+1, &fdset, NULL, NULL, &tv );
@@ -397,7 +397,7 @@ int main(int argc, char ** argv)
             // copy the data to the variables above
             memcpy(&id, ack_data.get()+pos, sizeof(id) );
             memcpy(&skipped, ack_data.get()+pos+sizeof(id), sizeof(skipped) );
-            
+
             // check the ACKs
             if( (ret_ack + skipped + 1) != id )
             {
@@ -409,13 +409,13 @@ int main(int argc, char ** argv)
       }
       return ret_ack;
     };
-    
+
     for( int i=0; i<20; ++i )
     {
       size_t iter = 100000;
       timer t(iter);
       int64_t checked_at_usec = 0;
-      
+
       // send data in a loop
       for( size_t kk=0; kk<iter; ++kk )
       {
@@ -423,7 +423,7 @@ int main(int argc, char ** argv)
         {
           throw "failed to send data";
         }
-        
+
         //
         // check time after every 1000 send so I reduce
         // OS calls by not querying time too often
@@ -439,16 +439,16 @@ int main(int argc, char ** argv)
           {
             last_ack = check_ack(last_ack);
             checked_at_usec = spent_usec;
-          }          
+          }
         }
         ++id;
       }
-      
+
       // wait for all outstanding ACKs
       while( last_ack < (id-1) )
         last_ack = check_ack(last_ack);
     }
-    
+
     while( last_ack < (id-1) )
     {
       last_ack = check_ack(last_ack);

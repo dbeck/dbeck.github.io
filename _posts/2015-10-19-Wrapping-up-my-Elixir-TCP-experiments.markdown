@@ -2,7 +2,7 @@
 published: true
 layout: post
 category: Elixir
-tags: 
+tags:
   - elixir
   - performance
   - TCP
@@ -11,7 +11,7 @@ description: Wrapping up my Elixir TCP experiments
 keywords: "Elixir, TCP, Network, Performance, socket"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/observer-wrap-single-client.png
-woopra: asyncmsgex
+pageid: asyncmsgex
 ---
 
 In this post I close my TCP small message experiment series in Elixir. Since my last post I further improved the small message server both in terms of performance and it became more Elixir-ish.
@@ -23,7 +23,7 @@ If you haven't followed the previous experiments then here are the links:
 3. By further improving the Elixir server I got [250k messages per second](/Over-Two-Times-Speedup-By-Better-Elixir-Code/).
 4. The big speedup came when I stopped passing each message to a separate Elixir process. By calculating and sending the ACKs synchronously I achieved over [two million messages](/Passing-Millions-Of-Small-TCP-Messages-in-Elixir/).
 
-In this post I recap what caused performance loss in my code and what made possible these improvements. The current version is doing over 3M messages per second. 
+In this post I recap what caused performance loss in my code and what made possible these improvements. The current version is doing over 3M messages per second.
 
 ### Github repo
 
@@ -183,9 +183,9 @@ I couldn't resist to do another experiment on a c4.large EC2 instance, running F
 <p>
 <table>
   <tr>
-    <th>&nbsp;</th>                   
-    <th>RequestReply</th> 
-    <th>Throttle</th> 
+    <th>&nbsp;</th>
+    <th>RequestReply</th>
+    <th>Throttle</th>
     <th>HeadRest</th>
     <th>SyncAck</th>
     <th>AsyncAck</th>
@@ -193,7 +193,7 @@ I couldn't resist to do another experiment on a c4.large EC2 instance, running F
   <tr>
     <td>Deafult Settings</td>
     <td>26k</td>
-    <td>150k</td>   
+    <td>150k</td>
     <td>302k</td>
     <td>2600k</td>
     <td>2400k</td>

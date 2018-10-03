@@ -11,7 +11,7 @@ description: Fourth part of my Igep V2 advanture on Gentoo
 keywords: "IGEPv2, IoT, ARM, Gentoo, Linux"
 twcardtype: summary_large_image
 twimage: http://dbeck.github.io/images/989/P1010895-large.JPG
-woopra: igep4
+pageid: igep4
 ---
 
 Gentoo has very compelling features and I already have good experiences with it on x86\. I plan to compile the whole Linux distribution from source. This is very time consuming, but rewarding at the same time. My feeling so far is setting the right optimization flags for IGEP makes a big difference. This post is going to be long. This is not a concise howto guide, but rather a collection of information that is not available in the [official Gentoo installation guide.](http://www.gentoo.org/doc/en/handbook/handbook-arm.xml?style=printable&full=1) That document is a good starting point but one needs to know more to decide whether Gentoo would be the one to go with.
@@ -103,7 +103,7 @@ I was also interested in the list of preinstalled packages in the tarball:
  pax-utils-0.1.19       perl-5.8.8-r8             perl-cleaner-1.05           popt-1.15
  portage-2.1.7.16       procps-3.2.8              psmisc-22.10                python-2.6.4
  readline-6.0_p4        rsync-3.0.6               sandbox-1.6-r2              sed-4.2
- shadow-4.1.2.2         timezone-data-2009u       zlib-1.2.3-r1     
+ shadow-4.1.2.2         timezone-data-2009u       zlib-1.2.3-r1
  sysvinit-2.86-r10      tar-1.20                  tcp-wrappers-7.6-r8         texinfo-4.13
  udev-146-r1            util-linux-2.16.2         wget-1.12                   which-2.20
 ```
