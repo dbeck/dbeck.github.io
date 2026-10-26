@@ -1,6 +1,12 @@
 # Name of your site (displayed in the header)
 name: David Beck
 
+# Site title and tagline (used by the lanyon layout)
+title: dbeck blog
+tagline: Software Developer
+
+paginate: 5
+
 # Short bio or description (displayed in the header)
 description: Software Developer
 
