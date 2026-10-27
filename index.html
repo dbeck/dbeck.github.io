@@ -1,99 +1,46 @@
 ---
 layout: default
 title: Home
-pageid: mainpage
 ---
 
-<div id="about">
-  <span><!-- 
-    <p>
-      This is my personal blog. All views are mine and none of them are associated with my previous,
-      present and future employers/jobs.
-    </p>
-    <p>
-      This blog is for my random thoughts about different topics, mostly about programming.
-    </p>-->
-    <p>
-    Under construction.
-    </p>
-  </span>
+<div class="posts">
+  {% for post in paginator.posts %}
+  <div class="post">
+    <h1 class="post-title">
+      <a href="{{ post.url | relative_url }}">
+        {{ post.title }}
+      </a>
+    </h1>
+
+    <span class="post-date">{{ post.date | date_to_string }}</span>
+    {% if post.tags.size > 0 %}
+    <span class="post-tags">
+      &middot; [
+      {% for tag in post.tags %}
+        <a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+      ]
+    </span>
+    {% endif %}
+
+    {{ post.content }}
+  </div>
+  {% endfor %}
 </div>
 
-<div id="home">
-
-  <!-- <h1>Rust Actor Library</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'ActorRS' %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>-->
-
-  <!-- <h1>Rust experiments</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'Rust' %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>-->
-
-  <!-- <h1>Elixir experiments</h1>
-  <h2>Chatter for Elixir</h2>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'Chatter for Elixir' %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>-->
-
-  <!-- <h2>ScaleSmall for Elixir</h2>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'ScaleSmall for Elixir' %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>-->
-
-  <!-- <h2>Other Elixir posts</h2>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'Elixir' %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>-->
-
-  <!--
-  <h1>IoT</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'IoT' %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-
-  <h1>Startup</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category == 'Startup' %}
-        <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-  -->
-
-  <!-- <h1>Other</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% if post.category != 'ActorRS' and post.category != 'Rust' and post.category != 'Elixir' and post.category != 'IoT' and post.category != 'Startup' and post.category != 'ScaleSmall for Elixir' and post.category != 'Chatter for Elixir' %}
-        <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endif %}
-    {% endfor %}
-  </ul>-->
-
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="{{ paginator.next_page_path | relative_url }}">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+    {% if paginator.page == 2 %}
+      <a class="pagination-item newer" href="{{ '/' | relative_url }}">Newer</a>
+    {% else %}
+      <a class="pagination-item newer" href="{{ paginator.previous_page_path | relative_url }}">Newer</a>
+    {% endif %}
+  {% else %}
+    <span class="pagination-item newer">Newer</span>
+  {% endif %}
 </div>

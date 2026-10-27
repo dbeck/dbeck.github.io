@@ -556,3 +556,36 @@ a.pagination-item:hover {
 .layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
+
+/* Keep post date and tags on one line; tags match the muted date style */
+.post-date,
+.post-tags {
+  display: inline;
+}
+.post-tags,
+.post-tags a {
+  color: #9a9a9a;
+}
+.post-tags a:hover {
+  color: #268bd2;
+}
+
+/* Sidebar category links: distinct accent color */
+.sidebar a.sidebar-nav-category {
+  color: #2aa198;
+}
+
+/* Widen content pane by ~15% over the theme defaults */
+.container {
+  max-width: 32.2rem;
+}
+@media (min-width: 38em) {
+  .container {
+    max-width: 36.8rem;
+  }
+}
+@media (min-width: 56em) {
+  .container {
+    max-width: 43.7rem;
+  }
+}

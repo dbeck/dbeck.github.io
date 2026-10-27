@@ -3,12 +3,12 @@ name: David Beck
 
 # Site title and tagline (used by the lanyon layout)
 title: dbeck blog
-tagline: Software Developer
+tagline: Thoughts
 
 paginate: 5
 
 # Short bio or description (displayed in the header)
-description: Software Developer
+description: David Beck
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars0.githubusercontent.com/u/57785?v=3&s=460
@@ -25,10 +25,10 @@ footer-links:
   flickr:
   github: 
   instagram:
-  # linkedin: https://uk.linkedin.com/in/davidbeckhungary
+  linkedin: https://uk.linkedin.com/in/davidbeckhungary
   pinterest:
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
-  twitter: dbeck74
+  twitter: 
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/&lt;your_long_string&gt; or user/&lt;user-name&gt;
   googleplus: # anything in your profile username that comes after plus.google.com/
@@ -38,7 +38,7 @@ footer-links:
 disqus:
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics: UA-63922309-1
+google_analytics: # UA-63922309-1
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
@@ -73,8 +73,8 @@ sass:
   style: :expanded # You might prefer to minify using :compressed
 
 # for seo
-twitter:
-  username: dbeck74
+#twitter:
+#  username: dbeck74
 
 # Use the following plug-ins
 gems:
