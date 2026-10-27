@@ -589,3 +589,11 @@ a.pagination-item:hover {
     max-width: 43.7rem;
   }
 }
+
+/* Justify body text in posts and pages */
+.post p,
+.post li,
+.page p,
+.page li {
+  text-align: justify;
+}
